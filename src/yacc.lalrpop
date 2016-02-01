@@ -1,0 +1,92 @@
+grammar;
+
+use bison::*;
+
+pub Yacc: Yacc<'input> = CDeclarations <d:BisonDeclarations> "%%" <r:GrammarRule*> => Yacc {
+    declarations: d,
+    rules: r
+};
+
+CDeclarations: () = "%{" AnyToken* "%}" => ();
+
+BisonDeclarations: Vec<BisonDecl<'input>> = {
+    BisonDeclaration* => <>.into_iter().filter_map(|e| e).collect()
+};
+
+BisonDeclaration: Option<BisonDecl<'input>> = {
+    "%debug" => None,
+    "%token" <Ident> => Some(BisonDecl::Token(<>)),
+    "%expect" Integer => None,
+    "%precedence" Symbol+ => None,
+    "%right" Symbol+ => None,
+    "%left" Symbol+ => None,
+    "%nonassoc" Symbol+ => None,
+    "%start" <Ident> => Some(BisonDecl::Start(<>)),
+};
+
+Symbol: Symbol<'input> = {
+    Ident => Symbol::Ident(<>),
+    r"'.'" => Symbol::Character(<>),
+};
+
+Ident: Ident<'input> = r"[_a-zA-Z][_a-zA-Z0-9]*" => Ident { text: <> };
+
+Integer: &'input str = r"[0-9]+";
+
+GrammarRule: GrammarRule<'input> = {
+    <n:Ident> ":" <a:Alternatives> ";" => GrammarRule {
+        nonterminal: n,
+        alternatives: a
+    }
+};
+
+Alternatives: Vec<Alternative<'input>> = {
+    Alternative => vec![<>],
+    <v:Alternatives> "|" <e:Alternative> => { let mut v = v; v.push(e); v }
+};
+
+Alternative: Alternative<'input> = {
+    GrammarRhs+ => Alternative { symbols: <>.into_iter().filter_map(|x| x).collect() },
+};
+
+GrammarRhs: Option<Symbol<'input>> = {
+    Symbol => Some(<>),
+    ActionCode => None,
+    "%prec" Symbol => None,
+    "%empty" => None,
+};
+
+ActionCode: () = {
+    "{" TokenTree* "}" => ()
+};
+
+TokenTree: () = {
+    "{" TokenTree* "}" => (),
+    "(" TokenTree* ")" => (),
+    "[" TokenTree* "]" => (),
+    UnpairedToken,
+};
+
+AnyToken: () = {
+    "{" => (),
+    "}" => (),
+    "[" => (),
+    "]" => (),
+    "(" => (),
+    ")" => (),
+    UnpairedToken,
+};
+
+UnpairedToken: () = {
+    Ident => (),
+    Integer => (),
+    r#""[^"]*""# => (),
+    "." => (),
+    "," => (),
+    "=" => (),
+    ";" => (),
+    r#"$[$0-9]+"# => (),
+    r#"#[_a-zA-Z][_a-zA-Z0-9]*"# => (),
+    "*" => (),
+    r"'.'" => (),
+};
