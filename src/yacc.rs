@@ -41,17 +41,19 @@ mod __parse__Yacc {
         AnyToken(()),
         AnyToken_2a(::std::vec::Vec<()>),
         AnyToken_2b(::std::vec::Vec<()>),
-        BisonDeclaration(Option<BisonDecl<'input>>),
-        BisonDeclaration_2a(::std::vec::Vec<Option<BisonDecl<'input>>>),
-        BisonDeclaration_2b(::std::vec::Vec<Option<BisonDecl<'input>>>),
+        BisonDeclaration(Vec<BisonDecl<'input>>),
+        BisonDeclaration_2a(::std::vec::Vec<Vec<BisonDecl<'input>>>),
+        BisonDeclaration_2b(::std::vec::Vec<Vec<BisonDecl<'input>>>),
         BisonDeclarations(Vec<BisonDecl<'input>>),
         CDeclarations(()),
         GrammarRhs(Option<Symbol<'input>>),
+        GrammarRhs_2a(::std::vec::Vec<Option<Symbol<'input>>>),
         GrammarRhs_2b(::std::vec::Vec<Option<Symbol<'input>>>),
         GrammarRule(GrammarRule<'input>),
         GrammarRule_2a(::std::vec::Vec<GrammarRule<'input>>),
         GrammarRule_2b(::std::vec::Vec<GrammarRule<'input>>),
         Ident(Ident<'input>),
+        Ident_2b(::std::vec::Vec<Ident<'input>>),
         Integer(&'input str),
         Symbol(Symbol<'input>),
         Symbol_2b(::std::vec::Vec<Symbol<'input>>),
@@ -196,15 +198,15 @@ mod __parse__Yacc {
     //   BisonDeclaration = (*) "%start" Ident ["%right"]
     //   BisonDeclaration = (*) "%start" Ident ["%start"]
     //   BisonDeclaration = (*) "%start" Ident ["%token"]
-    //   BisonDeclaration = (*) "%token" Ident ["%%"]
-    //   BisonDeclaration = (*) "%token" Ident ["%debug"]
-    //   BisonDeclaration = (*) "%token" Ident ["%expect"]
-    //   BisonDeclaration = (*) "%token" Ident ["%left"]
-    //   BisonDeclaration = (*) "%token" Ident ["%nonassoc"]
-    //   BisonDeclaration = (*) "%token" Ident ["%precedence"]
-    //   BisonDeclaration = (*) "%token" Ident ["%right"]
-    //   BisonDeclaration = (*) "%token" Ident ["%start"]
-    //   BisonDeclaration = (*) "%token" Ident ["%token"]
+    //   BisonDeclaration = (*) "%token" Ident+ ["%%"]
+    //   BisonDeclaration = (*) "%token" Ident+ ["%debug"]
+    //   BisonDeclaration = (*) "%token" Ident+ ["%expect"]
+    //   BisonDeclaration = (*) "%token" Ident+ ["%left"]
+    //   BisonDeclaration = (*) "%token" Ident+ ["%nonassoc"]
+    //   BisonDeclaration = (*) "%token" Ident+ ["%precedence"]
+    //   BisonDeclaration = (*) "%token" Ident+ ["%right"]
+    //   BisonDeclaration = (*) "%token" Ident+ ["%start"]
+    //   BisonDeclaration = (*) "%token" Ident+ ["%token"]
     //   BisonDeclaration+ = (*) BisonDeclaration ["%%"]
     //   BisonDeclaration+ = (*) BisonDeclaration ["%debug"]
     //   BisonDeclaration+ = (*) BisonDeclaration ["%expect"]
@@ -228,7 +230,7 @@ mod __parse__Yacc {
     //   Yacc = CDeclarations (*) BisonDeclarations "%%" [EOF]
     //   Yacc = CDeclarations (*) BisonDeclarations "%%" GrammarRule+ [EOF]
     //
-    //   "%%" -> Reduce(BisonDeclarations =  => ActionFn(69);)
+    //   "%%" -> Reduce(BisonDeclarations =  => ActionFn(73);)
     //   "%debug" -> Shift(S7)
     //   "%expect" -> Shift(S8)
     //   "%left" -> Shift(S9)
@@ -295,7 +297,7 @@ mod __parse__Yacc {
                 __result = try!(__state14(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (0, _), _)) => {
-                let __nt = super::__action69(input, &__lookbehind, &__lookahead);
+                let __nt = super::__action73(input, &__lookbehind, &__lookahead);
                 __result = (__lookbehind, __lookahead, __Nonterminal::BisonDeclarations(__nt));
             }
             _ => {
@@ -956,15 +958,15 @@ mod __parse__Yacc {
     //   BisonDeclaration+ = BisonDeclaration (*) ["%start"]
     //   BisonDeclaration+ = BisonDeclaration (*) ["%token"]
     //
-    //   "%%" -> Reduce(BisonDeclaration+ = BisonDeclaration => ActionFn(63);)
-    //   "%debug" -> Reduce(BisonDeclaration+ = BisonDeclaration => ActionFn(63);)
-    //   "%expect" -> Reduce(BisonDeclaration+ = BisonDeclaration => ActionFn(63);)
-    //   "%left" -> Reduce(BisonDeclaration+ = BisonDeclaration => ActionFn(63);)
-    //   "%nonassoc" -> Reduce(BisonDeclaration+ = BisonDeclaration => ActionFn(63);)
-    //   "%precedence" -> Reduce(BisonDeclaration+ = BisonDeclaration => ActionFn(63);)
-    //   "%right" -> Reduce(BisonDeclaration+ = BisonDeclaration => ActionFn(63);)
-    //   "%start" -> Reduce(BisonDeclaration+ = BisonDeclaration => ActionFn(63);)
-    //   "%token" -> Reduce(BisonDeclaration+ = BisonDeclaration => ActionFn(63);)
+    //   "%%" -> Reduce(BisonDeclaration+ = BisonDeclaration => ActionFn(65);)
+    //   "%debug" -> Reduce(BisonDeclaration+ = BisonDeclaration => ActionFn(65);)
+    //   "%expect" -> Reduce(BisonDeclaration+ = BisonDeclaration => ActionFn(65);)
+    //   "%left" -> Reduce(BisonDeclaration+ = BisonDeclaration => ActionFn(65);)
+    //   "%nonassoc" -> Reduce(BisonDeclaration+ = BisonDeclaration => ActionFn(65);)
+    //   "%precedence" -> Reduce(BisonDeclaration+ = BisonDeclaration => ActionFn(65);)
+    //   "%right" -> Reduce(BisonDeclaration+ = BisonDeclaration => ActionFn(65);)
+    //   "%start" -> Reduce(BisonDeclaration+ = BisonDeclaration => ActionFn(65);)
+    //   "%token" -> Reduce(BisonDeclaration+ = BisonDeclaration => ActionFn(65);)
     //
     pub fn __state4<
         'input,
@@ -974,7 +976,7 @@ mod __parse__Yacc {
         __lookbehind: Option<usize>,
         __tokens: &mut __TOKENS,
         __lookahead: Option<(usize, (usize, &'input str), usize)>,
-        __sym0: &mut Option<Option<BisonDecl<'input>>>,
+        __sym0: &mut Option<Vec<BisonDecl<'input>>>,
     ) -> Result<(Option<usize>, Option<(usize, (usize, &'input str), usize)>, __Nonterminal<'input>), __ParseError<usize,(usize, &'input str),()>>
     {
         let mut __result: (Option<usize>, Option<(usize, (usize, &'input str), usize)>, __Nonterminal<'input>);
@@ -989,7 +991,7 @@ mod __parse__Yacc {
             Some((_, (9, _), _)) |
             Some((_, (10, _), _)) => {
                 let __sym0 = __sym0.take().unwrap();
-                let __nt = super::__action63(input, __sym0, &__lookbehind, &__lookahead);
+                let __nt = super::__action65(input, __sym0, &__lookbehind, &__lookahead);
                 return Ok((__lookbehind, __lookahead, __Nonterminal::BisonDeclaration_2b(__nt)));
             }
             _ => {
@@ -1065,15 +1067,15 @@ mod __parse__Yacc {
     //   BisonDeclaration = (*) "%start" Ident ["%right"]
     //   BisonDeclaration = (*) "%start" Ident ["%start"]
     //   BisonDeclaration = (*) "%start" Ident ["%token"]
-    //   BisonDeclaration = (*) "%token" Ident ["%%"]
-    //   BisonDeclaration = (*) "%token" Ident ["%debug"]
-    //   BisonDeclaration = (*) "%token" Ident ["%expect"]
-    //   BisonDeclaration = (*) "%token" Ident ["%left"]
-    //   BisonDeclaration = (*) "%token" Ident ["%nonassoc"]
-    //   BisonDeclaration = (*) "%token" Ident ["%precedence"]
-    //   BisonDeclaration = (*) "%token" Ident ["%right"]
-    //   BisonDeclaration = (*) "%token" Ident ["%start"]
-    //   BisonDeclaration = (*) "%token" Ident ["%token"]
+    //   BisonDeclaration = (*) "%token" Ident+ ["%%"]
+    //   BisonDeclaration = (*) "%token" Ident+ ["%debug"]
+    //   BisonDeclaration = (*) "%token" Ident+ ["%expect"]
+    //   BisonDeclaration = (*) "%token" Ident+ ["%left"]
+    //   BisonDeclaration = (*) "%token" Ident+ ["%nonassoc"]
+    //   BisonDeclaration = (*) "%token" Ident+ ["%precedence"]
+    //   BisonDeclaration = (*) "%token" Ident+ ["%right"]
+    //   BisonDeclaration = (*) "%token" Ident+ ["%start"]
+    //   BisonDeclaration = (*) "%token" Ident+ ["%token"]
     //   BisonDeclaration+ = BisonDeclaration+ (*) BisonDeclaration ["%%"]
     //   BisonDeclaration+ = BisonDeclaration+ (*) BisonDeclaration ["%debug"]
     //   BisonDeclaration+ = BisonDeclaration+ (*) BisonDeclaration ["%expect"]
@@ -1085,7 +1087,7 @@ mod __parse__Yacc {
     //   BisonDeclaration+ = BisonDeclaration+ (*) BisonDeclaration ["%token"]
     //   BisonDeclarations = BisonDeclaration+ (*) ["%%"]
     //
-    //   "%%" -> Reduce(BisonDeclarations = BisonDeclaration+ => ActionFn(70);)
+    //   "%%" -> Reduce(BisonDeclarations = BisonDeclaration+ => ActionFn(74);)
     //   "%debug" -> Shift(S7)
     //   "%expect" -> Shift(S8)
     //   "%left" -> Shift(S9)
@@ -1104,7 +1106,7 @@ mod __parse__Yacc {
         __lookbehind: Option<usize>,
         __tokens: &mut __TOKENS,
         __lookahead: Option<(usize, (usize, &'input str), usize)>,
-        __sym0: &mut Option<::std::vec::Vec<Option<BisonDecl<'input>>>>,
+        __sym0: &mut Option<::std::vec::Vec<Vec<BisonDecl<'input>>>>,
     ) -> Result<(Option<usize>, Option<(usize, (usize, &'input str), usize)>, __Nonterminal<'input>), __ParseError<usize,(usize, &'input str),()>>
     {
         let mut __result: (Option<usize>, Option<(usize, (usize, &'input str), usize)>, __Nonterminal<'input>);
@@ -1151,7 +1153,7 @@ mod __parse__Yacc {
             }
             Some((_, (0, _), _)) => {
                 let __sym0 = __sym0.take().unwrap();
-                let __nt = super::__action70(input, __sym0, &__lookbehind, &__lookahead);
+                let __nt = super::__action74(input, __sym0, &__lookbehind, &__lookahead);
                 return Ok((__lookbehind, __lookahead, __Nonterminal::BisonDeclarations(__nt)));
             }
             _ => {
@@ -1922,15 +1924,15 @@ mod __parse__Yacc {
     }
 
     // State 14
-    //   BisonDeclaration = "%token" (*) Ident ["%%"]
-    //   BisonDeclaration = "%token" (*) Ident ["%debug"]
-    //   BisonDeclaration = "%token" (*) Ident ["%expect"]
-    //   BisonDeclaration = "%token" (*) Ident ["%left"]
-    //   BisonDeclaration = "%token" (*) Ident ["%nonassoc"]
-    //   BisonDeclaration = "%token" (*) Ident ["%precedence"]
-    //   BisonDeclaration = "%token" (*) Ident ["%right"]
-    //   BisonDeclaration = "%token" (*) Ident ["%start"]
-    //   BisonDeclaration = "%token" (*) Ident ["%token"]
+    //   BisonDeclaration = "%token" (*) Ident+ ["%%"]
+    //   BisonDeclaration = "%token" (*) Ident+ ["%debug"]
+    //   BisonDeclaration = "%token" (*) Ident+ ["%expect"]
+    //   BisonDeclaration = "%token" (*) Ident+ ["%left"]
+    //   BisonDeclaration = "%token" (*) Ident+ ["%nonassoc"]
+    //   BisonDeclaration = "%token" (*) Ident+ ["%precedence"]
+    //   BisonDeclaration = "%token" (*) Ident+ ["%right"]
+    //   BisonDeclaration = "%token" (*) Ident+ ["%start"]
+    //   BisonDeclaration = "%token" (*) Ident+ ["%token"]
     //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# ["%%"]
     //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# ["%debug"]
     //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# ["%expect"]
@@ -1940,10 +1942,32 @@ mod __parse__Yacc {
     //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# ["%right"]
     //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# ["%start"]
     //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# ["%token"]
+    //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
+    //   Ident+ = (*) Ident ["%%"]
+    //   Ident+ = (*) Ident ["%debug"]
+    //   Ident+ = (*) Ident ["%expect"]
+    //   Ident+ = (*) Ident ["%left"]
+    //   Ident+ = (*) Ident ["%nonassoc"]
+    //   Ident+ = (*) Ident ["%precedence"]
+    //   Ident+ = (*) Ident ["%right"]
+    //   Ident+ = (*) Ident ["%start"]
+    //   Ident+ = (*) Ident ["%token"]
+    //   Ident+ = (*) Ident [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
+    //   Ident+ = (*) Ident+ Ident ["%%"]
+    //   Ident+ = (*) Ident+ Ident ["%debug"]
+    //   Ident+ = (*) Ident+ Ident ["%expect"]
+    //   Ident+ = (*) Ident+ Ident ["%left"]
+    //   Ident+ = (*) Ident+ Ident ["%nonassoc"]
+    //   Ident+ = (*) Ident+ Ident ["%precedence"]
+    //   Ident+ = (*) Ident+ Ident ["%right"]
+    //   Ident+ = (*) Ident+ Ident ["%start"]
+    //   Ident+ = (*) Ident+ Ident ["%token"]
+    //   Ident+ = (*) Ident+ Ident [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
     //
-    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S51)
+    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S54)
     //
     //   Ident -> S52
+    //   Ident+ -> S53
     pub fn __state14<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
@@ -1964,7 +1988,7 @@ mod __parse__Yacc {
             Some((_, (31, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state51(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state54(input, __lookbehind, __tokens, __sym1));
             }
             _ => {
                 return Err(__ParseError::UnrecognizedToken {
@@ -1978,7 +2002,11 @@ mod __parse__Yacc {
             match __nt {
                 __Nonterminal::Ident(__nt) => {
                     let __sym1 = &mut Some(__nt);
-                    __result = try!(__state52(input, __lookbehind, __tokens, __lookahead, __sym0, __sym1));
+                    __result = try!(__state52(input, __lookbehind, __tokens, __lookahead, __sym1));
+                }
+                __Nonterminal::Ident_2b(__nt) => {
+                    let __sym1 = &mut Some(__nt);
+                    __result = try!(__state53(input, __lookbehind, __tokens, __lookahead, __sym0, __sym1));
                 }
                 _ => {
                     return Ok((__lookbehind, __lookahead, __nt));
@@ -2008,24 +2036,24 @@ mod __parse__Yacc {
     //   AnyToken+ = AnyToken (*) [r#"[0-9]+"#]
     //   AnyToken+ = AnyToken (*) [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
     //
-    //   "%}" -> Reduce(AnyToken+ = AnyToken => ActionFn(61);)
-    //   "(" -> Reduce(AnyToken+ = AnyToken => ActionFn(61);)
-    //   ")" -> Reduce(AnyToken+ = AnyToken => ActionFn(61);)
-    //   "*" -> Reduce(AnyToken+ = AnyToken => ActionFn(61);)
-    //   "," -> Reduce(AnyToken+ = AnyToken => ActionFn(61);)
-    //   "." -> Reduce(AnyToken+ = AnyToken => ActionFn(61);)
-    //   ";" -> Reduce(AnyToken+ = AnyToken => ActionFn(61);)
-    //   "=" -> Reduce(AnyToken+ = AnyToken => ActionFn(61);)
-    //   "[" -> Reduce(AnyToken+ = AnyToken => ActionFn(61);)
-    //   "]" -> Reduce(AnyToken+ = AnyToken => ActionFn(61);)
-    //   "{" -> Reduce(AnyToken+ = AnyToken => ActionFn(61);)
-    //   "}" -> Reduce(AnyToken+ = AnyToken => ActionFn(61);)
-    //   r#"\"[^\"]*\""# -> Reduce(AnyToken+ = AnyToken => ActionFn(61);)
-    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(AnyToken+ = AnyToken => ActionFn(61);)
-    //   r#"$[$0-9]+"# -> Reduce(AnyToken+ = AnyToken => ActionFn(61);)
-    //   r#"\'.\'"# -> Reduce(AnyToken+ = AnyToken => ActionFn(61);)
-    //   r#"[0-9]+"# -> Reduce(AnyToken+ = AnyToken => ActionFn(61);)
-    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(AnyToken+ = AnyToken => ActionFn(61);)
+    //   "%}" -> Reduce(AnyToken+ = AnyToken => ActionFn(63);)
+    //   "(" -> Reduce(AnyToken+ = AnyToken => ActionFn(63);)
+    //   ")" -> Reduce(AnyToken+ = AnyToken => ActionFn(63);)
+    //   "*" -> Reduce(AnyToken+ = AnyToken => ActionFn(63);)
+    //   "," -> Reduce(AnyToken+ = AnyToken => ActionFn(63);)
+    //   "." -> Reduce(AnyToken+ = AnyToken => ActionFn(63);)
+    //   ";" -> Reduce(AnyToken+ = AnyToken => ActionFn(63);)
+    //   "=" -> Reduce(AnyToken+ = AnyToken => ActionFn(63);)
+    //   "[" -> Reduce(AnyToken+ = AnyToken => ActionFn(63);)
+    //   "]" -> Reduce(AnyToken+ = AnyToken => ActionFn(63);)
+    //   "{" -> Reduce(AnyToken+ = AnyToken => ActionFn(63);)
+    //   "}" -> Reduce(AnyToken+ = AnyToken => ActionFn(63);)
+    //   r#"\"[^\"]*\""# -> Reduce(AnyToken+ = AnyToken => ActionFn(63);)
+    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(AnyToken+ = AnyToken => ActionFn(63);)
+    //   r#"$[$0-9]+"# -> Reduce(AnyToken+ = AnyToken => ActionFn(63);)
+    //   r#"\'.\'"# -> Reduce(AnyToken+ = AnyToken => ActionFn(63);)
+    //   r#"[0-9]+"# -> Reduce(AnyToken+ = AnyToken => ActionFn(63);)
+    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(AnyToken+ = AnyToken => ActionFn(63);)
     //
     pub fn __state15<
         'input,
@@ -2059,7 +2087,7 @@ mod __parse__Yacc {
             Some((_, (30, _), _)) |
             Some((_, (31, _), _)) => {
                 let __sym0 = __sym0.take().unwrap();
-                let __nt = super::__action61(input, __sym0, &__lookbehind, &__lookahead);
+                let __nt = super::__action63(input, __sym0, &__lookbehind, &__lookahead);
                 return Ok((__lookbehind, __lookahead, __Nonterminal::AnyToken_2b(__nt)));
             }
             _ => {
@@ -2460,7 +2488,7 @@ mod __parse__Yacc {
     //   UnpairedToken = (*) r#"\'.\'"# [r#"[0-9]+"#]
     //   UnpairedToken = (*) r#"\'.\'"# [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
     //
-    //   "%}" -> Shift(S54)
+    //   "%}" -> Shift(S56)
     //   "(" -> Shift(S21)
     //   ")" -> Shift(S22)
     //   "*" -> Shift(S23)
@@ -2479,7 +2507,7 @@ mod __parse__Yacc {
     //   r#"[0-9]+"# -> Shift(S36)
     //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S37)
     //
-    //   AnyToken -> S53
+    //   AnyToken -> S55
     //   Ident -> S17
     //   Integer -> S18
     //   UnpairedToken -> S19
@@ -2500,7 +2528,7 @@ mod __parse__Yacc {
             Some((_, (12, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state54(input, __lookbehind, __tokens, __sym0, __sym1, __sym2));
+                __result = try!(__state56(input, __lookbehind, __tokens, __sym0, __sym1, __sym2));
             }
             Some((_, (13, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
@@ -2599,7 +2627,7 @@ mod __parse__Yacc {
             match __nt {
                 __Nonterminal::AnyToken(__nt) => {
                     let __sym2 = &mut Some(__nt);
-                    __result = try!(__state53(input, __lookbehind, __tokens, __lookahead, __sym1, __sym2));
+                    __result = try!(__state55(input, __lookbehind, __tokens, __lookahead, __sym1, __sym2));
                 }
                 __Nonterminal::Ident(__nt) => {
                     let __sym2 = &mut Some(__nt);
@@ -2881,15 +2909,15 @@ mod __parse__Yacc {
     //   CDeclarations = "%{" "%}" (*) ["%start"]
     //   CDeclarations = "%{" "%}" (*) ["%token"]
     //
-    //   "%%" -> Reduce(CDeclarations = "%{", "%}" => ActionFn(67);)
-    //   "%debug" -> Reduce(CDeclarations = "%{", "%}" => ActionFn(67);)
-    //   "%expect" -> Reduce(CDeclarations = "%{", "%}" => ActionFn(67);)
-    //   "%left" -> Reduce(CDeclarations = "%{", "%}" => ActionFn(67);)
-    //   "%nonassoc" -> Reduce(CDeclarations = "%{", "%}" => ActionFn(67);)
-    //   "%precedence" -> Reduce(CDeclarations = "%{", "%}" => ActionFn(67);)
-    //   "%right" -> Reduce(CDeclarations = "%{", "%}" => ActionFn(67);)
-    //   "%start" -> Reduce(CDeclarations = "%{", "%}" => ActionFn(67);)
-    //   "%token" -> Reduce(CDeclarations = "%{", "%}" => ActionFn(67);)
+    //   "%%" -> Reduce(CDeclarations = "%{", "%}" => ActionFn(71);)
+    //   "%debug" -> Reduce(CDeclarations = "%{", "%}" => ActionFn(71);)
+    //   "%expect" -> Reduce(CDeclarations = "%{", "%}" => ActionFn(71);)
+    //   "%left" -> Reduce(CDeclarations = "%{", "%}" => ActionFn(71);)
+    //   "%nonassoc" -> Reduce(CDeclarations = "%{", "%}" => ActionFn(71);)
+    //   "%precedence" -> Reduce(CDeclarations = "%{", "%}" => ActionFn(71);)
+    //   "%right" -> Reduce(CDeclarations = "%{", "%}" => ActionFn(71);)
+    //   "%start" -> Reduce(CDeclarations = "%{", "%}" => ActionFn(71);)
+    //   "%token" -> Reduce(CDeclarations = "%{", "%}" => ActionFn(71);)
     //
     pub fn __state20<
         'input,
@@ -2920,7 +2948,7 @@ mod __parse__Yacc {
             Some((_, (10, _), _)) => {
                 let __sym0 = __sym0.take().unwrap();
                 let __sym1 = __sym1.take().unwrap();
-                let __nt = super::__action67(input, __sym0, __sym1, &__lookbehind, &__lookahead);
+                let __nt = super::__action71(input, __sym0, __sym1, &__lookbehind, &__lookahead);
                 return Ok((__lookbehind, __lookahead, __Nonterminal::CDeclarations(__nt)));
             }
             _ => {
@@ -4422,15 +4450,15 @@ mod __parse__Yacc {
     //   BisonDeclaration+ = BisonDeclaration+ BisonDeclaration (*) ["%start"]
     //   BisonDeclaration+ = BisonDeclaration+ BisonDeclaration (*) ["%token"]
     //
-    //   "%%" -> Reduce(BisonDeclaration+ = BisonDeclaration+, BisonDeclaration => ActionFn(64);)
-    //   "%debug" -> Reduce(BisonDeclaration+ = BisonDeclaration+, BisonDeclaration => ActionFn(64);)
-    //   "%expect" -> Reduce(BisonDeclaration+ = BisonDeclaration+, BisonDeclaration => ActionFn(64);)
-    //   "%left" -> Reduce(BisonDeclaration+ = BisonDeclaration+, BisonDeclaration => ActionFn(64);)
-    //   "%nonassoc" -> Reduce(BisonDeclaration+ = BisonDeclaration+, BisonDeclaration => ActionFn(64);)
-    //   "%precedence" -> Reduce(BisonDeclaration+ = BisonDeclaration+, BisonDeclaration => ActionFn(64);)
-    //   "%right" -> Reduce(BisonDeclaration+ = BisonDeclaration+, BisonDeclaration => ActionFn(64);)
-    //   "%start" -> Reduce(BisonDeclaration+ = BisonDeclaration+, BisonDeclaration => ActionFn(64);)
-    //   "%token" -> Reduce(BisonDeclaration+ = BisonDeclaration+, BisonDeclaration => ActionFn(64);)
+    //   "%%" -> Reduce(BisonDeclaration+ = BisonDeclaration+, BisonDeclaration => ActionFn(66);)
+    //   "%debug" -> Reduce(BisonDeclaration+ = BisonDeclaration+, BisonDeclaration => ActionFn(66);)
+    //   "%expect" -> Reduce(BisonDeclaration+ = BisonDeclaration+, BisonDeclaration => ActionFn(66);)
+    //   "%left" -> Reduce(BisonDeclaration+ = BisonDeclaration+, BisonDeclaration => ActionFn(66);)
+    //   "%nonassoc" -> Reduce(BisonDeclaration+ = BisonDeclaration+, BisonDeclaration => ActionFn(66);)
+    //   "%precedence" -> Reduce(BisonDeclaration+ = BisonDeclaration+, BisonDeclaration => ActionFn(66);)
+    //   "%right" -> Reduce(BisonDeclaration+ = BisonDeclaration+, BisonDeclaration => ActionFn(66);)
+    //   "%start" -> Reduce(BisonDeclaration+ = BisonDeclaration+, BisonDeclaration => ActionFn(66);)
+    //   "%token" -> Reduce(BisonDeclaration+ = BisonDeclaration+, BisonDeclaration => ActionFn(66);)
     //
     pub fn __state38<
         'input,
@@ -4440,8 +4468,8 @@ mod __parse__Yacc {
         __lookbehind: Option<usize>,
         __tokens: &mut __TOKENS,
         __lookahead: Option<(usize, (usize, &'input str), usize)>,
-        __sym0: &mut Option<::std::vec::Vec<Option<BisonDecl<'input>>>>,
-        __sym1: &mut Option<Option<BisonDecl<'input>>>,
+        __sym0: &mut Option<::std::vec::Vec<Vec<BisonDecl<'input>>>>,
+        __sym1: &mut Option<Vec<BisonDecl<'input>>>,
     ) -> Result<(Option<usize>, Option<(usize, (usize, &'input str), usize)>, __Nonterminal<'input>), __ParseError<usize,(usize, &'input str),()>>
     {
         let mut __result: (Option<usize>, Option<(usize, (usize, &'input str), usize)>, __Nonterminal<'input>);
@@ -4457,7 +4485,7 @@ mod __parse__Yacc {
             Some((_, (10, _), _)) => {
                 let __sym0 = __sym0.take().unwrap();
                 let __sym1 = __sym1.take().unwrap();
-                let __nt = super::__action64(input, __sym0, __sym1, &__lookbehind, &__lookahead);
+                let __nt = super::__action66(input, __sym0, __sym1, &__lookbehind, &__lookahead);
                 return Ok((__lookbehind, __lookahead, __Nonterminal::BisonDeclaration_2b(__nt)));
             }
             _ => {
@@ -4480,12 +4508,12 @@ mod __parse__Yacc {
     //   Yacc = CDeclarations BisonDeclarations "%%" (*) [EOF]
     //   Yacc = CDeclarations BisonDeclarations "%%" (*) GrammarRule+ [EOF]
     //
-    //   EOF -> Reduce(Yacc = CDeclarations, BisonDeclarations, "%%" => ActionFn(71);)
-    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S58)
+    //   EOF -> Reduce(Yacc = CDeclarations, BisonDeclarations, "%%" => ActionFn(77);)
+    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S60)
     //
-    //   GrammarRule -> S55
-    //   GrammarRule+ -> S56
-    //   Ident -> S57
+    //   GrammarRule -> S57
+    //   GrammarRule+ -> S58
+    //   Ident -> S59
     pub fn __state39<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
@@ -4508,13 +4536,13 @@ mod __parse__Yacc {
             Some((_, (31, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym3 = &mut Some((__tok0));
-                __result = try!(__state58(input, __lookbehind, __tokens, __sym3));
+                __result = try!(__state60(input, __lookbehind, __tokens, __sym3));
             }
             None => {
                 let __sym0 = __sym0.take().unwrap();
                 let __sym1 = __sym1.take().unwrap();
                 let __sym2 = __sym2.take().unwrap();
-                let __nt = super::__action71(input, __sym0, __sym1, __sym2, &__lookbehind, &__lookahead);
+                let __nt = super::__action77(input, __sym0, __sym1, __sym2, &__lookbehind, &__lookahead);
                 return Ok((__lookbehind, __lookahead, __Nonterminal::Yacc(__nt)));
             }
             _ => {
@@ -4529,15 +4557,15 @@ mod __parse__Yacc {
             match __nt {
                 __Nonterminal::GrammarRule(__nt) => {
                     let __sym3 = &mut Some(__nt);
-                    __result = try!(__state55(input, __lookbehind, __tokens, __lookahead, __sym3));
+                    __result = try!(__state57(input, __lookbehind, __tokens, __lookahead, __sym3));
                 }
                 __Nonterminal::GrammarRule_2b(__nt) => {
                     let __sym3 = &mut Some(__nt);
-                    __result = try!(__state56(input, __lookbehind, __tokens, __lookahead, __sym0, __sym1, __sym2, __sym3));
+                    __result = try!(__state58(input, __lookbehind, __tokens, __lookahead, __sym0, __sym1, __sym2, __sym3));
                 }
                 __Nonterminal::Ident(__nt) => {
                     let __sym3 = &mut Some(__nt);
-                    __result = try!(__state57(input, __lookbehind, __tokens, __lookahead, __sym3));
+                    __result = try!(__state59(input, __lookbehind, __tokens, __lookahead, __sym3));
                 }
                 _ => {
                     return Ok((__lookbehind, __lookahead, __nt));
@@ -4857,7 +4885,7 @@ mod __parse__Yacc {
     //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S46)
     //
     //   Ident -> S42
-    //   Symbol -> S59
+    //   Symbol -> S61
     pub fn __state44<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
@@ -4912,7 +4940,7 @@ mod __parse__Yacc {
                 }
                 __Nonterminal::Symbol(__nt) => {
                     let __sym2 = &mut Some(__nt);
-                    __result = try!(__state59(input, __lookbehind, __tokens, __lookahead, __sym1, __sym2));
+                    __result = try!(__state61(input, __lookbehind, __tokens, __lookahead, __sym1, __sym2));
                 }
                 _ => {
                     return Ok((__lookbehind, __lookahead, __nt));
@@ -5122,7 +5150,7 @@ mod __parse__Yacc {
     //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S46)
     //
     //   Ident -> S42
-    //   Symbol -> S59
+    //   Symbol -> S61
     pub fn __state47<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
@@ -5177,7 +5205,7 @@ mod __parse__Yacc {
                 }
                 __Nonterminal::Symbol(__nt) => {
                     let __sym2 = &mut Some(__nt);
-                    __result = try!(__state59(input, __lookbehind, __tokens, __lookahead, __sym1, __sym2));
+                    __result = try!(__state61(input, __lookbehind, __tokens, __lookahead, __sym1, __sym2));
                 }
                 _ => {
                     return Ok((__lookbehind, __lookahead, __nt));
@@ -5255,7 +5283,7 @@ mod __parse__Yacc {
     //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S46)
     //
     //   Ident -> S42
-    //   Symbol -> S59
+    //   Symbol -> S61
     pub fn __state48<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
@@ -5310,7 +5338,7 @@ mod __parse__Yacc {
                 }
                 __Nonterminal::Symbol(__nt) => {
                     let __sym2 = &mut Some(__nt);
-                    __result = try!(__state59(input, __lookbehind, __tokens, __lookahead, __sym1, __sym2));
+                    __result = try!(__state61(input, __lookbehind, __tokens, __lookahead, __sym1, __sym2));
                 }
                 _ => {
                     return Ok((__lookbehind, __lookahead, __nt));
@@ -5388,7 +5416,7 @@ mod __parse__Yacc {
     //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S46)
     //
     //   Ident -> S42
-    //   Symbol -> S59
+    //   Symbol -> S61
     pub fn __state49<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
@@ -5443,7 +5471,7 @@ mod __parse__Yacc {
                 }
                 __Nonterminal::Symbol(__nt) => {
                     let __sym2 = &mut Some(__nt);
-                    __result = try!(__state59(input, __lookbehind, __tokens, __lookahead, __sym1, __sym2));
+                    __result = try!(__state61(input, __lookbehind, __tokens, __lookahead, __sym1, __sym2));
                 }
                 _ => {
                     return Ok((__lookbehind, __lookahead, __nt));
@@ -5572,25 +5600,27 @@ mod __parse__Yacc {
     }
 
     // State 52
-    //   BisonDeclaration = "%token" Ident (*) ["%%"]
-    //   BisonDeclaration = "%token" Ident (*) ["%debug"]
-    //   BisonDeclaration = "%token" Ident (*) ["%expect"]
-    //   BisonDeclaration = "%token" Ident (*) ["%left"]
-    //   BisonDeclaration = "%token" Ident (*) ["%nonassoc"]
-    //   BisonDeclaration = "%token" Ident (*) ["%precedence"]
-    //   BisonDeclaration = "%token" Ident (*) ["%right"]
-    //   BisonDeclaration = "%token" Ident (*) ["%start"]
-    //   BisonDeclaration = "%token" Ident (*) ["%token"]
+    //   Ident+ = Ident (*) ["%%"]
+    //   Ident+ = Ident (*) ["%debug"]
+    //   Ident+ = Ident (*) ["%expect"]
+    //   Ident+ = Ident (*) ["%left"]
+    //   Ident+ = Ident (*) ["%nonassoc"]
+    //   Ident+ = Ident (*) ["%precedence"]
+    //   Ident+ = Ident (*) ["%right"]
+    //   Ident+ = Ident (*) ["%start"]
+    //   Ident+ = Ident (*) ["%token"]
+    //   Ident+ = Ident (*) [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
     //
-    //   "%%" -> Reduce(BisonDeclaration = "%token", Ident => ActionFn(5);)
-    //   "%debug" -> Reduce(BisonDeclaration = "%token", Ident => ActionFn(5);)
-    //   "%expect" -> Reduce(BisonDeclaration = "%token", Ident => ActionFn(5);)
-    //   "%left" -> Reduce(BisonDeclaration = "%token", Ident => ActionFn(5);)
-    //   "%nonassoc" -> Reduce(BisonDeclaration = "%token", Ident => ActionFn(5);)
-    //   "%precedence" -> Reduce(BisonDeclaration = "%token", Ident => ActionFn(5);)
-    //   "%right" -> Reduce(BisonDeclaration = "%token", Ident => ActionFn(5);)
-    //   "%start" -> Reduce(BisonDeclaration = "%token", Ident => ActionFn(5);)
-    //   "%token" -> Reduce(BisonDeclaration = "%token", Ident => ActionFn(5);)
+    //   "%%" -> Reduce(Ident+ = Ident => ActionFn(53);)
+    //   "%debug" -> Reduce(Ident+ = Ident => ActionFn(53);)
+    //   "%expect" -> Reduce(Ident+ = Ident => ActionFn(53);)
+    //   "%left" -> Reduce(Ident+ = Ident => ActionFn(53);)
+    //   "%nonassoc" -> Reduce(Ident+ = Ident => ActionFn(53);)
+    //   "%precedence" -> Reduce(Ident+ = Ident => ActionFn(53);)
+    //   "%right" -> Reduce(Ident+ = Ident => ActionFn(53);)
+    //   "%start" -> Reduce(Ident+ = Ident => ActionFn(53);)
+    //   "%token" -> Reduce(Ident+ = Ident => ActionFn(53);)
+    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(Ident+ = Ident => ActionFn(53);)
     //
     pub fn __state52<
         'input,
@@ -5600,12 +5630,96 @@ mod __parse__Yacc {
         __lookbehind: Option<usize>,
         __tokens: &mut __TOKENS,
         __lookahead: Option<(usize, (usize, &'input str), usize)>,
-        __sym0: &mut Option<&'input str>,
-        __sym1: &mut Option<Ident<'input>>,
+        __sym0: &mut Option<Ident<'input>>,
     ) -> Result<(Option<usize>, Option<(usize, (usize, &'input str), usize)>, __Nonterminal<'input>), __ParseError<usize,(usize, &'input str),()>>
     {
         let mut __result: (Option<usize>, Option<(usize, (usize, &'input str), usize)>, __Nonterminal<'input>);
         match __lookahead {
+            Some((_, (0, _), _)) |
+            Some((_, (1, _), _)) |
+            Some((_, (3, _), _)) |
+            Some((_, (4, _), _)) |
+            Some((_, (5, _), _)) |
+            Some((_, (7, _), _)) |
+            Some((_, (8, _), _)) |
+            Some((_, (9, _), _)) |
+            Some((_, (10, _), _)) |
+            Some((_, (31, _), _)) => {
+                let __sym0 = __sym0.take().unwrap();
+                let __nt = super::__action53(input, __sym0, &__lookbehind, &__lookahead);
+                return Ok((__lookbehind, __lookahead, __Nonterminal::Ident_2b(__nt)));
+            }
+            _ => {
+                return Err(__ParseError::UnrecognizedToken {
+                    token: __lookahead,
+                    expected: vec![],
+                });
+            }
+        }
+    }
+
+    // State 53
+    //   BisonDeclaration = "%token" Ident+ (*) ["%%"]
+    //   BisonDeclaration = "%token" Ident+ (*) ["%debug"]
+    //   BisonDeclaration = "%token" Ident+ (*) ["%expect"]
+    //   BisonDeclaration = "%token" Ident+ (*) ["%left"]
+    //   BisonDeclaration = "%token" Ident+ (*) ["%nonassoc"]
+    //   BisonDeclaration = "%token" Ident+ (*) ["%precedence"]
+    //   BisonDeclaration = "%token" Ident+ (*) ["%right"]
+    //   BisonDeclaration = "%token" Ident+ (*) ["%start"]
+    //   BisonDeclaration = "%token" Ident+ (*) ["%token"]
+    //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# ["%%"]
+    //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# ["%debug"]
+    //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# ["%expect"]
+    //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# ["%left"]
+    //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# ["%nonassoc"]
+    //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# ["%precedence"]
+    //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# ["%right"]
+    //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# ["%start"]
+    //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# ["%token"]
+    //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
+    //   Ident+ = Ident+ (*) Ident ["%%"]
+    //   Ident+ = Ident+ (*) Ident ["%debug"]
+    //   Ident+ = Ident+ (*) Ident ["%expect"]
+    //   Ident+ = Ident+ (*) Ident ["%left"]
+    //   Ident+ = Ident+ (*) Ident ["%nonassoc"]
+    //   Ident+ = Ident+ (*) Ident ["%precedence"]
+    //   Ident+ = Ident+ (*) Ident ["%right"]
+    //   Ident+ = Ident+ (*) Ident ["%start"]
+    //   Ident+ = Ident+ (*) Ident ["%token"]
+    //   Ident+ = Ident+ (*) Ident [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
+    //
+    //   "%%" -> Reduce(BisonDeclaration = "%token", Ident+ => ActionFn(5);)
+    //   "%debug" -> Reduce(BisonDeclaration = "%token", Ident+ => ActionFn(5);)
+    //   "%expect" -> Reduce(BisonDeclaration = "%token", Ident+ => ActionFn(5);)
+    //   "%left" -> Reduce(BisonDeclaration = "%token", Ident+ => ActionFn(5);)
+    //   "%nonassoc" -> Reduce(BisonDeclaration = "%token", Ident+ => ActionFn(5);)
+    //   "%precedence" -> Reduce(BisonDeclaration = "%token", Ident+ => ActionFn(5);)
+    //   "%right" -> Reduce(BisonDeclaration = "%token", Ident+ => ActionFn(5);)
+    //   "%start" -> Reduce(BisonDeclaration = "%token", Ident+ => ActionFn(5);)
+    //   "%token" -> Reduce(BisonDeclaration = "%token", Ident+ => ActionFn(5);)
+    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S54)
+    //
+    //   Ident -> S62
+    pub fn __state53<
+        'input,
+        __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
+    >(
+        input: &'input str,
+        __lookbehind: Option<usize>,
+        __tokens: &mut __TOKENS,
+        __lookahead: Option<(usize, (usize, &'input str), usize)>,
+        __sym0: &mut Option<&'input str>,
+        __sym1: &mut Option<::std::vec::Vec<Ident<'input>>>,
+    ) -> Result<(Option<usize>, Option<(usize, (usize, &'input str), usize)>, __Nonterminal<'input>), __ParseError<usize,(usize, &'input str),()>>
+    {
+        let mut __result: (Option<usize>, Option<(usize, (usize, &'input str), usize)>, __Nonterminal<'input>);
+        match __lookahead {
+            Some((_, (31, __tok0), __loc)) => {
+                let mut __lookbehind = Some(__loc);
+                let mut __sym2 = &mut Some((__tok0));
+                __result = try!(__state54(input, __lookbehind, __tokens, __sym2));
+            }
             Some((_, (0, _), _)) |
             Some((_, (1, _), _)) |
             Some((_, (3, _), _)) |
@@ -5627,9 +5741,85 @@ mod __parse__Yacc {
                 });
             }
         }
+        while __sym1.is_some() {
+            let (__lookbehind, __lookahead, __nt) = __result;
+            match __nt {
+                __Nonterminal::Ident(__nt) => {
+                    let __sym2 = &mut Some(__nt);
+                    __result = try!(__state62(input, __lookbehind, __tokens, __lookahead, __sym1, __sym2));
+                }
+                _ => {
+                    return Ok((__lookbehind, __lookahead, __nt));
+                }
+            }
+        }
+        return Ok(__result);
     }
 
-    // State 53
+    // State 54
+    //   Ident = r#"[_a-zA-Z][_a-zA-Z0-9]*"# (*) ["%%"]
+    //   Ident = r#"[_a-zA-Z][_a-zA-Z0-9]*"# (*) ["%debug"]
+    //   Ident = r#"[_a-zA-Z][_a-zA-Z0-9]*"# (*) ["%expect"]
+    //   Ident = r#"[_a-zA-Z][_a-zA-Z0-9]*"# (*) ["%left"]
+    //   Ident = r#"[_a-zA-Z][_a-zA-Z0-9]*"# (*) ["%nonassoc"]
+    //   Ident = r#"[_a-zA-Z][_a-zA-Z0-9]*"# (*) ["%precedence"]
+    //   Ident = r#"[_a-zA-Z][_a-zA-Z0-9]*"# (*) ["%right"]
+    //   Ident = r#"[_a-zA-Z][_a-zA-Z0-9]*"# (*) ["%start"]
+    //   Ident = r#"[_a-zA-Z][_a-zA-Z0-9]*"# (*) ["%token"]
+    //   Ident = r#"[_a-zA-Z][_a-zA-Z0-9]*"# (*) [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
+    //
+    //   "%%" -> Reduce(Ident = r#"[_a-zA-Z][_a-zA-Z0-9]*"# => ActionFn(14);)
+    //   "%debug" -> Reduce(Ident = r#"[_a-zA-Z][_a-zA-Z0-9]*"# => ActionFn(14);)
+    //   "%expect" -> Reduce(Ident = r#"[_a-zA-Z][_a-zA-Z0-9]*"# => ActionFn(14);)
+    //   "%left" -> Reduce(Ident = r#"[_a-zA-Z][_a-zA-Z0-9]*"# => ActionFn(14);)
+    //   "%nonassoc" -> Reduce(Ident = r#"[_a-zA-Z][_a-zA-Z0-9]*"# => ActionFn(14);)
+    //   "%precedence" -> Reduce(Ident = r#"[_a-zA-Z][_a-zA-Z0-9]*"# => ActionFn(14);)
+    //   "%right" -> Reduce(Ident = r#"[_a-zA-Z][_a-zA-Z0-9]*"# => ActionFn(14);)
+    //   "%start" -> Reduce(Ident = r#"[_a-zA-Z][_a-zA-Z0-9]*"# => ActionFn(14);)
+    //   "%token" -> Reduce(Ident = r#"[_a-zA-Z][_a-zA-Z0-9]*"# => ActionFn(14);)
+    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(Ident = r#"[_a-zA-Z][_a-zA-Z0-9]*"# => ActionFn(14);)
+    //
+    pub fn __state54<
+        'input,
+        __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
+    >(
+        input: &'input str,
+        __lookbehind: Option<usize>,
+        __tokens: &mut __TOKENS,
+        __sym0: &mut Option<&'input str>,
+    ) -> Result<(Option<usize>, Option<(usize, (usize, &'input str), usize)>, __Nonterminal<'input>), __ParseError<usize,(usize, &'input str),()>>
+    {
+        let mut __result: (Option<usize>, Option<(usize, (usize, &'input str), usize)>, __Nonterminal<'input>);
+        let __lookahead = match __tokens.next() {
+            Some(Ok(v)) => Some(v),
+            None => None,
+            Some(Err(e)) => return Err(e),
+        };
+        match __lookahead {
+            Some((_, (0, _), _)) |
+            Some((_, (1, _), _)) |
+            Some((_, (3, _), _)) |
+            Some((_, (4, _), _)) |
+            Some((_, (5, _), _)) |
+            Some((_, (7, _), _)) |
+            Some((_, (8, _), _)) |
+            Some((_, (9, _), _)) |
+            Some((_, (10, _), _)) |
+            Some((_, (31, _), _)) => {
+                let __sym0 = __sym0.take().unwrap();
+                let __nt = super::__action14(input, __sym0, &__lookbehind, &__lookahead);
+                return Ok((__lookbehind, __lookahead, __Nonterminal::Ident(__nt)));
+            }
+            _ => {
+                return Err(__ParseError::UnrecognizedToken {
+                    token: __lookahead,
+                    expected: vec![],
+                });
+            }
+        }
+    }
+
+    // State 55
     //   AnyToken+ = AnyToken+ AnyToken (*) ["%}"]
     //   AnyToken+ = AnyToken+ AnyToken (*) ["("]
     //   AnyToken+ = AnyToken+ AnyToken (*) [")"]
@@ -5649,26 +5839,26 @@ mod __parse__Yacc {
     //   AnyToken+ = AnyToken+ AnyToken (*) [r#"[0-9]+"#]
     //   AnyToken+ = AnyToken+ AnyToken (*) [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
     //
-    //   "%}" -> Reduce(AnyToken+ = AnyToken+, AnyToken => ActionFn(62);)
-    //   "(" -> Reduce(AnyToken+ = AnyToken+, AnyToken => ActionFn(62);)
-    //   ")" -> Reduce(AnyToken+ = AnyToken+, AnyToken => ActionFn(62);)
-    //   "*" -> Reduce(AnyToken+ = AnyToken+, AnyToken => ActionFn(62);)
-    //   "," -> Reduce(AnyToken+ = AnyToken+, AnyToken => ActionFn(62);)
-    //   "." -> Reduce(AnyToken+ = AnyToken+, AnyToken => ActionFn(62);)
-    //   ";" -> Reduce(AnyToken+ = AnyToken+, AnyToken => ActionFn(62);)
-    //   "=" -> Reduce(AnyToken+ = AnyToken+, AnyToken => ActionFn(62);)
-    //   "[" -> Reduce(AnyToken+ = AnyToken+, AnyToken => ActionFn(62);)
-    //   "]" -> Reduce(AnyToken+ = AnyToken+, AnyToken => ActionFn(62);)
-    //   "{" -> Reduce(AnyToken+ = AnyToken+, AnyToken => ActionFn(62);)
-    //   "}" -> Reduce(AnyToken+ = AnyToken+, AnyToken => ActionFn(62);)
-    //   r#"\"[^\"]*\""# -> Reduce(AnyToken+ = AnyToken+, AnyToken => ActionFn(62);)
-    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(AnyToken+ = AnyToken+, AnyToken => ActionFn(62);)
-    //   r#"$[$0-9]+"# -> Reduce(AnyToken+ = AnyToken+, AnyToken => ActionFn(62);)
-    //   r#"\'.\'"# -> Reduce(AnyToken+ = AnyToken+, AnyToken => ActionFn(62);)
-    //   r#"[0-9]+"# -> Reduce(AnyToken+ = AnyToken+, AnyToken => ActionFn(62);)
-    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(AnyToken+ = AnyToken+, AnyToken => ActionFn(62);)
+    //   "%}" -> Reduce(AnyToken+ = AnyToken+, AnyToken => ActionFn(64);)
+    //   "(" -> Reduce(AnyToken+ = AnyToken+, AnyToken => ActionFn(64);)
+    //   ")" -> Reduce(AnyToken+ = AnyToken+, AnyToken => ActionFn(64);)
+    //   "*" -> Reduce(AnyToken+ = AnyToken+, AnyToken => ActionFn(64);)
+    //   "," -> Reduce(AnyToken+ = AnyToken+, AnyToken => ActionFn(64);)
+    //   "." -> Reduce(AnyToken+ = AnyToken+, AnyToken => ActionFn(64);)
+    //   ";" -> Reduce(AnyToken+ = AnyToken+, AnyToken => ActionFn(64);)
+    //   "=" -> Reduce(AnyToken+ = AnyToken+, AnyToken => ActionFn(64);)
+    //   "[" -> Reduce(AnyToken+ = AnyToken+, AnyToken => ActionFn(64);)
+    //   "]" -> Reduce(AnyToken+ = AnyToken+, AnyToken => ActionFn(64);)
+    //   "{" -> Reduce(AnyToken+ = AnyToken+, AnyToken => ActionFn(64);)
+    //   "}" -> Reduce(AnyToken+ = AnyToken+, AnyToken => ActionFn(64);)
+    //   r#"\"[^\"]*\""# -> Reduce(AnyToken+ = AnyToken+, AnyToken => ActionFn(64);)
+    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(AnyToken+ = AnyToken+, AnyToken => ActionFn(64);)
+    //   r#"$[$0-9]+"# -> Reduce(AnyToken+ = AnyToken+, AnyToken => ActionFn(64);)
+    //   r#"\'.\'"# -> Reduce(AnyToken+ = AnyToken+, AnyToken => ActionFn(64);)
+    //   r#"[0-9]+"# -> Reduce(AnyToken+ = AnyToken+, AnyToken => ActionFn(64);)
+    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(AnyToken+ = AnyToken+, AnyToken => ActionFn(64);)
     //
-    pub fn __state53<
+    pub fn __state55<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -5702,7 +5892,7 @@ mod __parse__Yacc {
             Some((_, (31, _), _)) => {
                 let __sym0 = __sym0.take().unwrap();
                 let __sym1 = __sym1.take().unwrap();
-                let __nt = super::__action62(input, __sym0, __sym1, &__lookbehind, &__lookahead);
+                let __nt = super::__action64(input, __sym0, __sym1, &__lookbehind, &__lookahead);
                 return Ok((__lookbehind, __lookahead, __Nonterminal::AnyToken_2b(__nt)));
             }
             _ => {
@@ -5714,7 +5904,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 54
+    // State 56
     //   CDeclarations = "%{" AnyToken+ "%}" (*) ["%%"]
     //   CDeclarations = "%{" AnyToken+ "%}" (*) ["%debug"]
     //   CDeclarations = "%{" AnyToken+ "%}" (*) ["%expect"]
@@ -5725,17 +5915,17 @@ mod __parse__Yacc {
     //   CDeclarations = "%{" AnyToken+ "%}" (*) ["%start"]
     //   CDeclarations = "%{" AnyToken+ "%}" (*) ["%token"]
     //
-    //   "%%" -> Reduce(CDeclarations = "%{", AnyToken+, "%}" => ActionFn(68);)
-    //   "%debug" -> Reduce(CDeclarations = "%{", AnyToken+, "%}" => ActionFn(68);)
-    //   "%expect" -> Reduce(CDeclarations = "%{", AnyToken+, "%}" => ActionFn(68);)
-    //   "%left" -> Reduce(CDeclarations = "%{", AnyToken+, "%}" => ActionFn(68);)
-    //   "%nonassoc" -> Reduce(CDeclarations = "%{", AnyToken+, "%}" => ActionFn(68);)
-    //   "%precedence" -> Reduce(CDeclarations = "%{", AnyToken+, "%}" => ActionFn(68);)
-    //   "%right" -> Reduce(CDeclarations = "%{", AnyToken+, "%}" => ActionFn(68);)
-    //   "%start" -> Reduce(CDeclarations = "%{", AnyToken+, "%}" => ActionFn(68);)
-    //   "%token" -> Reduce(CDeclarations = "%{", AnyToken+, "%}" => ActionFn(68);)
+    //   "%%" -> Reduce(CDeclarations = "%{", AnyToken+, "%}" => ActionFn(72);)
+    //   "%debug" -> Reduce(CDeclarations = "%{", AnyToken+, "%}" => ActionFn(72);)
+    //   "%expect" -> Reduce(CDeclarations = "%{", AnyToken+, "%}" => ActionFn(72);)
+    //   "%left" -> Reduce(CDeclarations = "%{", AnyToken+, "%}" => ActionFn(72);)
+    //   "%nonassoc" -> Reduce(CDeclarations = "%{", AnyToken+, "%}" => ActionFn(72);)
+    //   "%precedence" -> Reduce(CDeclarations = "%{", AnyToken+, "%}" => ActionFn(72);)
+    //   "%right" -> Reduce(CDeclarations = "%{", AnyToken+, "%}" => ActionFn(72);)
+    //   "%start" -> Reduce(CDeclarations = "%{", AnyToken+, "%}" => ActionFn(72);)
+    //   "%token" -> Reduce(CDeclarations = "%{", AnyToken+, "%}" => ActionFn(72);)
     //
-    pub fn __state54<
+    pub fn __state56<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -5766,7 +5956,7 @@ mod __parse__Yacc {
                 let __sym0 = __sym0.take().unwrap();
                 let __sym1 = __sym1.take().unwrap();
                 let __sym2 = __sym2.take().unwrap();
-                let __nt = super::__action68(input, __sym0, __sym1, __sym2, &__lookbehind, &__lookahead);
+                let __nt = super::__action72(input, __sym0, __sym1, __sym2, &__lookbehind, &__lookahead);
                 return Ok((__lookbehind, __lookahead, __Nonterminal::CDeclarations(__nt)));
             }
             _ => {
@@ -5778,14 +5968,14 @@ mod __parse__Yacc {
         }
     }
 
-    // State 55
+    // State 57
     //   GrammarRule+ = GrammarRule (*) [EOF]
     //   GrammarRule+ = GrammarRule (*) [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
     //
-    //   EOF -> Reduce(GrammarRule+ = GrammarRule => ActionFn(59);)
-    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(GrammarRule+ = GrammarRule => ActionFn(59);)
+    //   EOF -> Reduce(GrammarRule+ = GrammarRule => ActionFn(61);)
+    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(GrammarRule+ = GrammarRule => ActionFn(61);)
     //
-    pub fn __state55<
+    pub fn __state57<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -5801,7 +5991,7 @@ mod __parse__Yacc {
             None |
             Some((_, (31, _), _)) => {
                 let __sym0 = __sym0.take().unwrap();
-                let __nt = super::__action59(input, __sym0, &__lookbehind, &__lookahead);
+                let __nt = super::__action61(input, __sym0, &__lookbehind, &__lookahead);
                 return Ok((__lookbehind, __lookahead, __Nonterminal::GrammarRule_2b(__nt)));
             }
             _ => {
@@ -5813,7 +6003,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 56
+    // State 58
     //   GrammarRule = (*) Ident ":" Alternatives ";" [EOF]
     //   GrammarRule = (*) Ident ":" Alternatives ";" [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
     //   GrammarRule+ = GrammarRule+ (*) GrammarRule [EOF]
@@ -5821,12 +6011,12 @@ mod __parse__Yacc {
     //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# [":"]
     //   Yacc = CDeclarations BisonDeclarations "%%" GrammarRule+ (*) [EOF]
     //
-    //   EOF -> Reduce(Yacc = CDeclarations, BisonDeclarations, "%%", GrammarRule+ => ActionFn(72);)
-    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S58)
+    //   EOF -> Reduce(Yacc = CDeclarations, BisonDeclarations, "%%", GrammarRule+ => ActionFn(78);)
+    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S60)
     //
-    //   GrammarRule -> S60
-    //   Ident -> S57
-    pub fn __state56<
+    //   GrammarRule -> S63
+    //   Ident -> S59
+    pub fn __state58<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -5845,14 +6035,14 @@ mod __parse__Yacc {
             Some((_, (31, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym4 = &mut Some((__tok0));
-                __result = try!(__state58(input, __lookbehind, __tokens, __sym4));
+                __result = try!(__state60(input, __lookbehind, __tokens, __sym4));
             }
             None => {
                 let __sym0 = __sym0.take().unwrap();
                 let __sym1 = __sym1.take().unwrap();
                 let __sym2 = __sym2.take().unwrap();
                 let __sym3 = __sym3.take().unwrap();
-                let __nt = super::__action72(input, __sym0, __sym1, __sym2, __sym3, &__lookbehind, &__lookahead);
+                let __nt = super::__action78(input, __sym0, __sym1, __sym2, __sym3, &__lookbehind, &__lookahead);
                 return Ok((__lookbehind, __lookahead, __Nonterminal::Yacc(__nt)));
             }
             _ => {
@@ -5867,11 +6057,11 @@ mod __parse__Yacc {
             match __nt {
                 __Nonterminal::GrammarRule(__nt) => {
                     let __sym4 = &mut Some(__nt);
-                    __result = try!(__state60(input, __lookbehind, __tokens, __lookahead, __sym3, __sym4));
+                    __result = try!(__state63(input, __lookbehind, __tokens, __lookahead, __sym3, __sym4));
                 }
                 __Nonterminal::Ident(__nt) => {
                     let __sym4 = &mut Some(__nt);
-                    __result = try!(__state57(input, __lookbehind, __tokens, __lookahead, __sym4));
+                    __result = try!(__state59(input, __lookbehind, __tokens, __lookahead, __sym4));
                 }
                 _ => {
                     return Ok((__lookbehind, __lookahead, __nt));
@@ -5881,13 +6071,13 @@ mod __parse__Yacc {
         return Ok(__result);
     }
 
-    // State 57
+    // State 59
     //   GrammarRule = Ident (*) ":" Alternatives ";" [EOF]
     //   GrammarRule = Ident (*) ":" Alternatives ";" [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
     //
-    //   ":" -> Shift(S61)
+    //   ":" -> Shift(S64)
     //
-    pub fn __state57<
+    pub fn __state59<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -5903,7 +6093,7 @@ mod __parse__Yacc {
             Some((_, (18, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state61(input, __lookbehind, __tokens, __sym0, __sym1));
+                __result = try!(__state64(input, __lookbehind, __tokens, __sym0, __sym1));
             }
             _ => {
                 return Err(__ParseError::UnrecognizedToken {
@@ -5915,12 +6105,12 @@ mod __parse__Yacc {
         return Ok(__result);
     }
 
-    // State 58
+    // State 60
     //   Ident = r#"[_a-zA-Z][_a-zA-Z0-9]*"# (*) [":"]
     //
     //   ":" -> Reduce(Ident = r#"[_a-zA-Z][_a-zA-Z0-9]*"# => ActionFn(14);)
     //
-    pub fn __state58<
+    pub fn __state60<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -5951,7 +6141,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 59
+    // State 61
     //   Symbol+ = Symbol+ Symbol (*) ["%%"]
     //   Symbol+ = Symbol+ Symbol (*) ["%debug"]
     //   Symbol+ = Symbol+ Symbol (*) ["%expect"]
@@ -5976,7 +6166,7 @@ mod __parse__Yacc {
     //   r#"\'.\'"# -> Reduce(Symbol+ = Symbol+, Symbol => ActionFn(52);)
     //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(Symbol+ = Symbol+, Symbol => ActionFn(52);)
     //
-    pub fn __state59<
+    pub fn __state61<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -6015,14 +6205,75 @@ mod __parse__Yacc {
         }
     }
 
-    // State 60
+    // State 62
+    //   Ident+ = Ident+ Ident (*) ["%%"]
+    //   Ident+ = Ident+ Ident (*) ["%debug"]
+    //   Ident+ = Ident+ Ident (*) ["%expect"]
+    //   Ident+ = Ident+ Ident (*) ["%left"]
+    //   Ident+ = Ident+ Ident (*) ["%nonassoc"]
+    //   Ident+ = Ident+ Ident (*) ["%precedence"]
+    //   Ident+ = Ident+ Ident (*) ["%right"]
+    //   Ident+ = Ident+ Ident (*) ["%start"]
+    //   Ident+ = Ident+ Ident (*) ["%token"]
+    //   Ident+ = Ident+ Ident (*) [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
+    //
+    //   "%%" -> Reduce(Ident+ = Ident+, Ident => ActionFn(54);)
+    //   "%debug" -> Reduce(Ident+ = Ident+, Ident => ActionFn(54);)
+    //   "%expect" -> Reduce(Ident+ = Ident+, Ident => ActionFn(54);)
+    //   "%left" -> Reduce(Ident+ = Ident+, Ident => ActionFn(54);)
+    //   "%nonassoc" -> Reduce(Ident+ = Ident+, Ident => ActionFn(54);)
+    //   "%precedence" -> Reduce(Ident+ = Ident+, Ident => ActionFn(54);)
+    //   "%right" -> Reduce(Ident+ = Ident+, Ident => ActionFn(54);)
+    //   "%start" -> Reduce(Ident+ = Ident+, Ident => ActionFn(54);)
+    //   "%token" -> Reduce(Ident+ = Ident+, Ident => ActionFn(54);)
+    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(Ident+ = Ident+, Ident => ActionFn(54);)
+    //
+    pub fn __state62<
+        'input,
+        __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
+    >(
+        input: &'input str,
+        __lookbehind: Option<usize>,
+        __tokens: &mut __TOKENS,
+        __lookahead: Option<(usize, (usize, &'input str), usize)>,
+        __sym0: &mut Option<::std::vec::Vec<Ident<'input>>>,
+        __sym1: &mut Option<Ident<'input>>,
+    ) -> Result<(Option<usize>, Option<(usize, (usize, &'input str), usize)>, __Nonterminal<'input>), __ParseError<usize,(usize, &'input str),()>>
+    {
+        let mut __result: (Option<usize>, Option<(usize, (usize, &'input str), usize)>, __Nonterminal<'input>);
+        match __lookahead {
+            Some((_, (0, _), _)) |
+            Some((_, (1, _), _)) |
+            Some((_, (3, _), _)) |
+            Some((_, (4, _), _)) |
+            Some((_, (5, _), _)) |
+            Some((_, (7, _), _)) |
+            Some((_, (8, _), _)) |
+            Some((_, (9, _), _)) |
+            Some((_, (10, _), _)) |
+            Some((_, (31, _), _)) => {
+                let __sym0 = __sym0.take().unwrap();
+                let __sym1 = __sym1.take().unwrap();
+                let __nt = super::__action54(input, __sym0, __sym1, &__lookbehind, &__lookahead);
+                return Ok((__lookbehind, __lookahead, __Nonterminal::Ident_2b(__nt)));
+            }
+            _ => {
+                return Err(__ParseError::UnrecognizedToken {
+                    token: __lookahead,
+                    expected: vec![],
+                });
+            }
+        }
+    }
+
+    // State 63
     //   GrammarRule+ = GrammarRule+ GrammarRule (*) [EOF]
     //   GrammarRule+ = GrammarRule+ GrammarRule (*) [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
     //
-    //   EOF -> Reduce(GrammarRule+ = GrammarRule+, GrammarRule => ActionFn(60);)
-    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(GrammarRule+ = GrammarRule+, GrammarRule => ActionFn(60);)
+    //   EOF -> Reduce(GrammarRule+ = GrammarRule+, GrammarRule => ActionFn(62);)
+    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(GrammarRule+ = GrammarRule+, GrammarRule => ActionFn(62);)
     //
-    pub fn __state60<
+    pub fn __state63<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -6040,7 +6291,7 @@ mod __parse__Yacc {
             Some((_, (31, _), _)) => {
                 let __sym0 = __sym0.take().unwrap();
                 let __sym1 = __sym1.take().unwrap();
-                let __nt = super::__action60(input, __sym0, __sym1, &__lookbehind, &__lookahead);
+                let __nt = super::__action62(input, __sym0, __sym1, &__lookbehind, &__lookahead);
                 return Ok((__lookbehind, __lookahead, __Nonterminal::GrammarRule_2b(__nt)));
             }
             _ => {
@@ -6052,7 +6303,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 61
+    // State 64
     //   ActionCode = (*) "{" TokenTree+ "}" ["%empty"]
     //   ActionCode = (*) "{" TokenTree+ "}" ["%prec"]
     //   ActionCode = (*) "{" TokenTree+ "}" [";"]
@@ -6067,6 +6318,8 @@ mod __parse__Yacc {
     //   ActionCode = (*) "{" "}" ["|"]
     //   ActionCode = (*) "{" "}" [r#"\'.\'"#]
     //   ActionCode = (*) "{" "}" [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
+    //   Alternative = (*) [";"]
+    //   Alternative = (*) ["|"]
     //   Alternative = (*) GrammarRhs+ [";"]
     //   Alternative = (*) GrammarRhs+ ["|"]
     //   Alternatives = (*) Alternative [";"]
@@ -6139,20 +6392,22 @@ mod __parse__Yacc {
     //   Symbol = (*) r#"\'.\'"# [r#"\'.\'"#]
     //   Symbol = (*) r#"\'.\'"# [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
     //
-    //   "%empty" -> Shift(S69)
-    //   "%prec" -> Shift(S70)
-    //   "{" -> Shift(S71)
-    //   r#"\'.\'"# -> Shift(S72)
-    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S73)
+    //   "%empty" -> Shift(S72)
+    //   "%prec" -> Shift(S73)
+    //   ";" -> Reduce(Alternative =  => ActionFn(75);)
+    //   "{" -> Shift(S74)
+    //   "|" -> Reduce(Alternative =  => ActionFn(75);)
+    //   r#"\'.\'"# -> Shift(S75)
+    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S76)
     //
-    //   ActionCode -> S62
-    //   Alternative -> S63
-    //   Alternatives -> S64
-    //   GrammarRhs -> S65
-    //   GrammarRhs+ -> S66
-    //   Ident -> S67
-    //   Symbol -> S68
-    pub fn __state61<
+    //   ActionCode -> S65
+    //   Alternative -> S66
+    //   Alternatives -> S67
+    //   GrammarRhs -> S68
+    //   GrammarRhs+ -> S69
+    //   Ident -> S70
+    //   Symbol -> S71
+    pub fn __state64<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -6173,27 +6428,32 @@ mod __parse__Yacc {
             Some((_, (2, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state69(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state72(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (6, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state70(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state73(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (23, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state71(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state74(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (29, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state72(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state75(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (31, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state73(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state76(input, __lookbehind, __tokens, __sym2));
+            }
+            Some((_, (19, _), _)) |
+            Some((_, (24, _), _)) => {
+                let __nt = super::__action75(input, &__lookbehind, &__lookahead);
+                __result = (__lookbehind, __lookahead, __Nonterminal::Alternative(__nt));
             }
             _ => {
                 return Err(__ParseError::UnrecognizedToken {
@@ -6207,31 +6467,31 @@ mod __parse__Yacc {
             match __nt {
                 __Nonterminal::ActionCode(__nt) => {
                     let __sym2 = &mut Some(__nt);
-                    __result = try!(__state62(input, __lookbehind, __tokens, __lookahead, __sym2));
+                    __result = try!(__state65(input, __lookbehind, __tokens, __lookahead, __sym2));
                 }
                 __Nonterminal::Alternative(__nt) => {
                     let __sym2 = &mut Some(__nt);
-                    __result = try!(__state63(input, __lookbehind, __tokens, __lookahead, __sym2));
+                    __result = try!(__state66(input, __lookbehind, __tokens, __lookahead, __sym2));
                 }
                 __Nonterminal::Alternatives(__nt) => {
                     let __sym2 = &mut Some(__nt);
-                    __result = try!(__state64(input, __lookbehind, __tokens, __lookahead, __sym0, __sym1, __sym2));
+                    __result = try!(__state67(input, __lookbehind, __tokens, __lookahead, __sym0, __sym1, __sym2));
                 }
                 __Nonterminal::GrammarRhs(__nt) => {
                     let __sym2 = &mut Some(__nt);
-                    __result = try!(__state65(input, __lookbehind, __tokens, __lookahead, __sym2));
+                    __result = try!(__state68(input, __lookbehind, __tokens, __lookahead, __sym2));
                 }
                 __Nonterminal::GrammarRhs_2b(__nt) => {
                     let __sym2 = &mut Some(__nt);
-                    __result = try!(__state66(input, __lookbehind, __tokens, __lookahead, __sym2));
+                    __result = try!(__state69(input, __lookbehind, __tokens, __lookahead, __sym2));
                 }
                 __Nonterminal::Ident(__nt) => {
                     let __sym2 = &mut Some(__nt);
-                    __result = try!(__state67(input, __lookbehind, __tokens, __lookahead, __sym2));
+                    __result = try!(__state70(input, __lookbehind, __tokens, __lookahead, __sym2));
                 }
                 __Nonterminal::Symbol(__nt) => {
                     let __sym2 = &mut Some(__nt);
-                    __result = try!(__state68(input, __lookbehind, __tokens, __lookahead, __sym2));
+                    __result = try!(__state71(input, __lookbehind, __tokens, __lookahead, __sym2));
                 }
                 _ => {
                     return Ok((__lookbehind, __lookahead, __nt));
@@ -6241,7 +6501,7 @@ mod __parse__Yacc {
         return Ok(__result);
     }
 
-    // State 62
+    // State 65
     //   GrammarRhs = ActionCode (*) ["%empty"]
     //   GrammarRhs = ActionCode (*) ["%prec"]
     //   GrammarRhs = ActionCode (*) [";"]
@@ -6258,7 +6518,7 @@ mod __parse__Yacc {
     //   r#"\'.\'"# -> Reduce(GrammarRhs = ActionCode => ActionFn(21);)
     //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(GrammarRhs = ActionCode => ActionFn(21);)
     //
-    pub fn __state62<
+    pub fn __state65<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -6291,14 +6551,14 @@ mod __parse__Yacc {
         }
     }
 
-    // State 63
+    // State 66
     //   Alternatives = Alternative (*) [";"]
     //   Alternatives = Alternative (*) ["|"]
     //
     //   ";" -> Reduce(Alternatives = Alternative => ActionFn(17);)
     //   "|" -> Reduce(Alternatives = Alternative => ActionFn(17);)
     //
-    pub fn __state63<
+    pub fn __state66<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -6326,16 +6586,16 @@ mod __parse__Yacc {
         }
     }
 
-    // State 64
+    // State 67
     //   Alternatives = Alternatives (*) "|" Alternative [";"]
     //   Alternatives = Alternatives (*) "|" Alternative ["|"]
     //   GrammarRule = Ident ":" Alternatives (*) ";" [EOF]
     //   GrammarRule = Ident ":" Alternatives (*) ";" [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
     //
-    //   ";" -> Shift(S74)
-    //   "|" -> Shift(S75)
+    //   ";" -> Shift(S77)
+    //   "|" -> Shift(S78)
     //
-    pub fn __state64<
+    pub fn __state67<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -6353,12 +6613,12 @@ mod __parse__Yacc {
             Some((_, (19, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym3 = &mut Some((__tok0));
-                __result = try!(__state74(input, __lookbehind, __tokens, __sym0, __sym1, __sym2, __sym3));
+                __result = try!(__state77(input, __lookbehind, __tokens, __sym0, __sym1, __sym2, __sym3));
             }
             Some((_, (24, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym3 = &mut Some((__tok0));
-                __result = try!(__state75(input, __lookbehind, __tokens, __sym2, __sym3));
+                __result = try!(__state78(input, __lookbehind, __tokens, __sym2, __sym3));
             }
             _ => {
                 return Err(__ParseError::UnrecognizedToken {
@@ -6370,7 +6630,7 @@ mod __parse__Yacc {
         return Ok(__result);
     }
 
-    // State 65
+    // State 68
     //   GrammarRhs+ = GrammarRhs (*) ["%empty"]
     //   GrammarRhs+ = GrammarRhs (*) ["%prec"]
     //   GrammarRhs+ = GrammarRhs (*) [";"]
@@ -6379,15 +6639,15 @@ mod __parse__Yacc {
     //   GrammarRhs+ = GrammarRhs (*) [r#"\'.\'"#]
     //   GrammarRhs+ = GrammarRhs (*) [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
     //
-    //   "%empty" -> Reduce(GrammarRhs+ = GrammarRhs => ActionFn(49);)
-    //   "%prec" -> Reduce(GrammarRhs+ = GrammarRhs => ActionFn(49);)
-    //   ";" -> Reduce(GrammarRhs+ = GrammarRhs => ActionFn(49);)
-    //   "{" -> Reduce(GrammarRhs+ = GrammarRhs => ActionFn(49);)
-    //   "|" -> Reduce(GrammarRhs+ = GrammarRhs => ActionFn(49);)
-    //   r#"\'.\'"# -> Reduce(GrammarRhs+ = GrammarRhs => ActionFn(49);)
-    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(GrammarRhs+ = GrammarRhs => ActionFn(49);)
+    //   "%empty" -> Reduce(GrammarRhs+ = GrammarRhs => ActionFn(67);)
+    //   "%prec" -> Reduce(GrammarRhs+ = GrammarRhs => ActionFn(67);)
+    //   ";" -> Reduce(GrammarRhs+ = GrammarRhs => ActionFn(67);)
+    //   "{" -> Reduce(GrammarRhs+ = GrammarRhs => ActionFn(67);)
+    //   "|" -> Reduce(GrammarRhs+ = GrammarRhs => ActionFn(67);)
+    //   r#"\'.\'"# -> Reduce(GrammarRhs+ = GrammarRhs => ActionFn(67);)
+    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(GrammarRhs+ = GrammarRhs => ActionFn(67);)
     //
-    pub fn __state65<
+    pub fn __state68<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -6408,7 +6668,7 @@ mod __parse__Yacc {
             Some((_, (29, _), _)) |
             Some((_, (31, _), _)) => {
                 let __sym0 = __sym0.take().unwrap();
-                let __nt = super::__action49(input, __sym0, &__lookbehind, &__lookahead);
+                let __nt = super::__action67(input, __sym0, &__lookbehind, &__lookahead);
                 return Ok((__lookbehind, __lookahead, __Nonterminal::GrammarRhs_2b(__nt)));
             }
             _ => {
@@ -6420,7 +6680,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 66
+    // State 69
     //   ActionCode = (*) "{" TokenTree+ "}" ["%empty"]
     //   ActionCode = (*) "{" TokenTree+ "}" ["%prec"]
     //   ActionCode = (*) "{" TokenTree+ "}" [";"]
@@ -6494,19 +6754,19 @@ mod __parse__Yacc {
     //   Symbol = (*) r#"\'.\'"# [r#"\'.\'"#]
     //   Symbol = (*) r#"\'.\'"# [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
     //
-    //   "%empty" -> Shift(S69)
-    //   "%prec" -> Shift(S70)
-    //   ";" -> Reduce(Alternative = GrammarRhs+ => ActionFn(19);)
-    //   "{" -> Shift(S71)
-    //   "|" -> Reduce(Alternative = GrammarRhs+ => ActionFn(19);)
-    //   r#"\'.\'"# -> Shift(S72)
-    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S73)
+    //   "%empty" -> Shift(S72)
+    //   "%prec" -> Shift(S73)
+    //   ";" -> Reduce(Alternative = GrammarRhs+ => ActionFn(76);)
+    //   "{" -> Shift(S74)
+    //   "|" -> Reduce(Alternative = GrammarRhs+ => ActionFn(76);)
+    //   r#"\'.\'"# -> Shift(S75)
+    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S76)
     //
-    //   ActionCode -> S62
-    //   GrammarRhs -> S76
-    //   Ident -> S67
-    //   Symbol -> S68
-    pub fn __state66<
+    //   ActionCode -> S65
+    //   GrammarRhs -> S79
+    //   Ident -> S70
+    //   Symbol -> S71
+    pub fn __state69<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -6522,32 +6782,32 @@ mod __parse__Yacc {
             Some((_, (2, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state69(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state72(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (6, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state70(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state73(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (23, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state71(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state74(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (29, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state72(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state75(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (31, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state73(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state76(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (19, _), _)) |
             Some((_, (24, _), _)) => {
                 let __sym0 = __sym0.take().unwrap();
-                let __nt = super::__action19(input, __sym0, &__lookbehind, &__lookahead);
+                let __nt = super::__action76(input, __sym0, &__lookbehind, &__lookahead);
                 return Ok((__lookbehind, __lookahead, __Nonterminal::Alternative(__nt)));
             }
             _ => {
@@ -6562,19 +6822,19 @@ mod __parse__Yacc {
             match __nt {
                 __Nonterminal::ActionCode(__nt) => {
                     let __sym1 = &mut Some(__nt);
-                    __result = try!(__state62(input, __lookbehind, __tokens, __lookahead, __sym1));
+                    __result = try!(__state65(input, __lookbehind, __tokens, __lookahead, __sym1));
                 }
                 __Nonterminal::GrammarRhs(__nt) => {
                     let __sym1 = &mut Some(__nt);
-                    __result = try!(__state76(input, __lookbehind, __tokens, __lookahead, __sym0, __sym1));
+                    __result = try!(__state79(input, __lookbehind, __tokens, __lookahead, __sym0, __sym1));
                 }
                 __Nonterminal::Ident(__nt) => {
                     let __sym1 = &mut Some(__nt);
-                    __result = try!(__state67(input, __lookbehind, __tokens, __lookahead, __sym1));
+                    __result = try!(__state70(input, __lookbehind, __tokens, __lookahead, __sym1));
                 }
                 __Nonterminal::Symbol(__nt) => {
                     let __sym1 = &mut Some(__nt);
-                    __result = try!(__state68(input, __lookbehind, __tokens, __lookahead, __sym1));
+                    __result = try!(__state71(input, __lookbehind, __tokens, __lookahead, __sym1));
                 }
                 _ => {
                     return Ok((__lookbehind, __lookahead, __nt));
@@ -6584,7 +6844,7 @@ mod __parse__Yacc {
         return Ok(__result);
     }
 
-    // State 67
+    // State 70
     //   Symbol = Ident (*) ["%empty"]
     //   Symbol = Ident (*) ["%prec"]
     //   Symbol = Ident (*) [";"]
@@ -6601,7 +6861,7 @@ mod __parse__Yacc {
     //   r#"\'.\'"# -> Reduce(Symbol = Ident => ActionFn(12);)
     //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(Symbol = Ident => ActionFn(12);)
     //
-    pub fn __state67<
+    pub fn __state70<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -6634,7 +6894,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 68
+    // State 71
     //   GrammarRhs = Symbol (*) ["%empty"]
     //   GrammarRhs = Symbol (*) ["%prec"]
     //   GrammarRhs = Symbol (*) [";"]
@@ -6651,7 +6911,7 @@ mod __parse__Yacc {
     //   r#"\'.\'"# -> Reduce(GrammarRhs = Symbol => ActionFn(20);)
     //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(GrammarRhs = Symbol => ActionFn(20);)
     //
-    pub fn __state68<
+    pub fn __state71<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -6684,7 +6944,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 69
+    // State 72
     //   GrammarRhs = "%empty" (*) ["%empty"]
     //   GrammarRhs = "%empty" (*) ["%prec"]
     //   GrammarRhs = "%empty" (*) [";"]
@@ -6701,7 +6961,7 @@ mod __parse__Yacc {
     //   r#"\'.\'"# -> Reduce(GrammarRhs = "%empty" => ActionFn(23);)
     //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(GrammarRhs = "%empty" => ActionFn(23);)
     //
-    pub fn __state69<
+    pub fn __state72<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -6738,7 +6998,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 70
+    // State 73
     //   GrammarRhs = "%prec" (*) Symbol ["%empty"]
     //   GrammarRhs = "%prec" (*) Symbol ["%prec"]
     //   GrammarRhs = "%prec" (*) Symbol [";"]
@@ -6768,12 +7028,12 @@ mod __parse__Yacc {
     //   Symbol = (*) r#"\'.\'"# [r#"\'.\'"#]
     //   Symbol = (*) r#"\'.\'"# [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
     //
-    //   r#"\'.\'"# -> Shift(S72)
-    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S73)
+    //   r#"\'.\'"# -> Shift(S75)
+    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S76)
     //
-    //   Ident -> S67
-    //   Symbol -> S77
-    pub fn __state70<
+    //   Ident -> S70
+    //   Symbol -> S80
+    pub fn __state73<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -6793,12 +7053,12 @@ mod __parse__Yacc {
             Some((_, (29, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state72(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state75(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (31, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state73(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state76(input, __lookbehind, __tokens, __sym1));
             }
             _ => {
                 return Err(__ParseError::UnrecognizedToken {
@@ -6812,11 +7072,11 @@ mod __parse__Yacc {
             match __nt {
                 __Nonterminal::Ident(__nt) => {
                     let __sym1 = &mut Some(__nt);
-                    __result = try!(__state67(input, __lookbehind, __tokens, __lookahead, __sym1));
+                    __result = try!(__state70(input, __lookbehind, __tokens, __lookahead, __sym1));
                 }
                 __Nonterminal::Symbol(__nt) => {
                     let __sym1 = &mut Some(__nt);
-                    __result = try!(__state77(input, __lookbehind, __tokens, __lookahead, __sym0, __sym1));
+                    __result = try!(__state80(input, __lookbehind, __tokens, __lookahead, __sym0, __sym1));
                 }
                 _ => {
                     return Ok((__lookbehind, __lookahead, __nt));
@@ -6826,7 +7086,7 @@ mod __parse__Yacc {
         return Ok(__result);
     }
 
-    // State 71
+    // State 74
     //   ActionCode = "{" (*) TokenTree+ "}" ["%empty"]
     //   ActionCode = "{" (*) TokenTree+ "}" ["%prec"]
     //   ActionCode = "{" (*) TokenTree+ "}" [";"]
@@ -7172,28 +7432,28 @@ mod __parse__Yacc {
     //   UnpairedToken = (*) r#"\'.\'"# [r#"[0-9]+"#]
     //   UnpairedToken = (*) r#"\'.\'"# [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
     //
-    //   "(" -> Shift(S83)
-    //   "*" -> Shift(S84)
-    //   "," -> Shift(S85)
-    //   "." -> Shift(S86)
-    //   ";" -> Shift(S87)
-    //   "=" -> Shift(S88)
-    //   "[" -> Shift(S89)
-    //   "{" -> Shift(S90)
-    //   "}" -> Shift(S91)
-    //   r#"\"[^\"]*\""# -> Shift(S92)
-    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S93)
-    //   r#"$[$0-9]+"# -> Shift(S94)
-    //   r#"\'.\'"# -> Shift(S95)
-    //   r#"[0-9]+"# -> Shift(S96)
-    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S97)
+    //   "(" -> Shift(S86)
+    //   "*" -> Shift(S87)
+    //   "," -> Shift(S88)
+    //   "." -> Shift(S89)
+    //   ";" -> Shift(S90)
+    //   "=" -> Shift(S91)
+    //   "[" -> Shift(S92)
+    //   "{" -> Shift(S93)
+    //   "}" -> Shift(S94)
+    //   r#"\"[^\"]*\""# -> Shift(S95)
+    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S96)
+    //   r#"$[$0-9]+"# -> Shift(S97)
+    //   r#"\'.\'"# -> Shift(S98)
+    //   r#"[0-9]+"# -> Shift(S99)
+    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S100)
     //
-    //   Ident -> S78
-    //   Integer -> S79
-    //   TokenTree -> S80
-    //   TokenTree+ -> S81
-    //   UnpairedToken -> S82
-    pub fn __state71<
+    //   Ident -> S81
+    //   Integer -> S82
+    //   TokenTree -> S83
+    //   TokenTree+ -> S84
+    //   UnpairedToken -> S85
+    pub fn __state74<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -7213,77 +7473,77 @@ mod __parse__Yacc {
             Some((_, (13, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state83(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state86(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (15, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state84(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state87(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (16, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state85(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state88(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (17, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state86(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state89(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (19, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state87(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state90(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (20, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state88(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state91(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (21, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state89(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state92(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (23, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state90(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state93(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (25, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state91(input, __lookbehind, __tokens, __sym0, __sym1));
+                __result = try!(__state94(input, __lookbehind, __tokens, __sym0, __sym1));
             }
             Some((_, (26, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state92(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state95(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (27, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state93(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state96(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (28, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state94(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state97(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (29, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state95(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state98(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (30, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state96(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state99(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (31, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state97(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state100(input, __lookbehind, __tokens, __sym1));
             }
             _ => {
                 return Err(__ParseError::UnrecognizedToken {
@@ -7297,23 +7557,23 @@ mod __parse__Yacc {
             match __nt {
                 __Nonterminal::Ident(__nt) => {
                     let __sym1 = &mut Some(__nt);
-                    __result = try!(__state78(input, __lookbehind, __tokens, __lookahead, __sym1));
+                    __result = try!(__state81(input, __lookbehind, __tokens, __lookahead, __sym1));
                 }
                 __Nonterminal::Integer(__nt) => {
                     let __sym1 = &mut Some(__nt);
-                    __result = try!(__state79(input, __lookbehind, __tokens, __lookahead, __sym1));
+                    __result = try!(__state82(input, __lookbehind, __tokens, __lookahead, __sym1));
                 }
                 __Nonterminal::TokenTree(__nt) => {
                     let __sym1 = &mut Some(__nt);
-                    __result = try!(__state80(input, __lookbehind, __tokens, __lookahead, __sym1));
+                    __result = try!(__state83(input, __lookbehind, __tokens, __lookahead, __sym1));
                 }
                 __Nonterminal::TokenTree_2b(__nt) => {
                     let __sym1 = &mut Some(__nt);
-                    __result = try!(__state81(input, __lookbehind, __tokens, __lookahead, __sym0, __sym1));
+                    __result = try!(__state84(input, __lookbehind, __tokens, __lookahead, __sym0, __sym1));
                 }
                 __Nonterminal::UnpairedToken(__nt) => {
                     let __sym1 = &mut Some(__nt);
-                    __result = try!(__state82(input, __lookbehind, __tokens, __lookahead, __sym1));
+                    __result = try!(__state85(input, __lookbehind, __tokens, __lookahead, __sym1));
                 }
                 _ => {
                     return Ok((__lookbehind, __lookahead, __nt));
@@ -7323,7 +7583,7 @@ mod __parse__Yacc {
         return Ok(__result);
     }
 
-    // State 72
+    // State 75
     //   Symbol = r#"\'.\'"# (*) ["%empty"]
     //   Symbol = r#"\'.\'"# (*) ["%prec"]
     //   Symbol = r#"\'.\'"# (*) [";"]
@@ -7340,7 +7600,7 @@ mod __parse__Yacc {
     //   r#"\'.\'"# -> Reduce(Symbol = r#"\'.\'"# => ActionFn(13);)
     //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(Symbol = r#"\'.\'"# => ActionFn(13);)
     //
-    pub fn __state72<
+    pub fn __state75<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -7377,7 +7637,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 73
+    // State 76
     //   Ident = r#"[_a-zA-Z][_a-zA-Z0-9]*"# (*) ["%empty"]
     //   Ident = r#"[_a-zA-Z][_a-zA-Z0-9]*"# (*) ["%prec"]
     //   Ident = r#"[_a-zA-Z][_a-zA-Z0-9]*"# (*) [";"]
@@ -7394,7 +7654,7 @@ mod __parse__Yacc {
     //   r#"\'.\'"# -> Reduce(Ident = r#"[_a-zA-Z][_a-zA-Z0-9]*"# => ActionFn(14);)
     //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(Ident = r#"[_a-zA-Z][_a-zA-Z0-9]*"# => ActionFn(14);)
     //
-    pub fn __state73<
+    pub fn __state76<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -7431,14 +7691,14 @@ mod __parse__Yacc {
         }
     }
 
-    // State 74
+    // State 77
     //   GrammarRule = Ident ":" Alternatives ";" (*) [EOF]
     //   GrammarRule = Ident ":" Alternatives ";" (*) [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
     //
     //   EOF -> Reduce(GrammarRule = Ident, ":", Alternatives, ";" => ActionFn(16);)
     //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(GrammarRule = Ident, ":", Alternatives, ";" => ActionFn(16);)
     //
-    pub fn __state74<
+    pub fn __state77<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -7476,7 +7736,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 75
+    // State 78
     //   ActionCode = (*) "{" TokenTree+ "}" ["%empty"]
     //   ActionCode = (*) "{" TokenTree+ "}" ["%prec"]
     //   ActionCode = (*) "{" TokenTree+ "}" [";"]
@@ -7491,6 +7751,8 @@ mod __parse__Yacc {
     //   ActionCode = (*) "{" "}" ["|"]
     //   ActionCode = (*) "{" "}" [r#"\'.\'"#]
     //   ActionCode = (*) "{" "}" [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
+    //   Alternative = (*) [";"]
+    //   Alternative = (*) ["|"]
     //   Alternative = (*) GrammarRhs+ [";"]
     //   Alternative = (*) GrammarRhs+ ["|"]
     //   Alternatives = Alternatives "|" (*) Alternative [";"]
@@ -7559,19 +7821,21 @@ mod __parse__Yacc {
     //   Symbol = (*) r#"\'.\'"# [r#"\'.\'"#]
     //   Symbol = (*) r#"\'.\'"# [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
     //
-    //   "%empty" -> Shift(S69)
-    //   "%prec" -> Shift(S70)
-    //   "{" -> Shift(S71)
-    //   r#"\'.\'"# -> Shift(S72)
-    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S73)
+    //   "%empty" -> Shift(S72)
+    //   "%prec" -> Shift(S73)
+    //   ";" -> Reduce(Alternative =  => ActionFn(75);)
+    //   "{" -> Shift(S74)
+    //   "|" -> Reduce(Alternative =  => ActionFn(75);)
+    //   r#"\'.\'"# -> Shift(S75)
+    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S76)
     //
-    //   ActionCode -> S62
-    //   Alternative -> S98
-    //   GrammarRhs -> S65
-    //   GrammarRhs+ -> S66
-    //   Ident -> S67
-    //   Symbol -> S68
-    pub fn __state75<
+    //   ActionCode -> S65
+    //   Alternative -> S101
+    //   GrammarRhs -> S68
+    //   GrammarRhs+ -> S69
+    //   Ident -> S70
+    //   Symbol -> S71
+    pub fn __state78<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -7592,27 +7856,32 @@ mod __parse__Yacc {
             Some((_, (2, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state69(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state72(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (6, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state70(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state73(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (23, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state71(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state74(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (29, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state72(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state75(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (31, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state73(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state76(input, __lookbehind, __tokens, __sym2));
+            }
+            Some((_, (19, _), _)) |
+            Some((_, (24, _), _)) => {
+                let __nt = super::__action75(input, &__lookbehind, &__lookahead);
+                __result = (__lookbehind, __lookahead, __Nonterminal::Alternative(__nt));
             }
             _ => {
                 return Err(__ParseError::UnrecognizedToken {
@@ -7626,27 +7895,27 @@ mod __parse__Yacc {
             match __nt {
                 __Nonterminal::ActionCode(__nt) => {
                     let __sym2 = &mut Some(__nt);
-                    __result = try!(__state62(input, __lookbehind, __tokens, __lookahead, __sym2));
+                    __result = try!(__state65(input, __lookbehind, __tokens, __lookahead, __sym2));
                 }
                 __Nonterminal::Alternative(__nt) => {
                     let __sym2 = &mut Some(__nt);
-                    __result = try!(__state98(input, __lookbehind, __tokens, __lookahead, __sym0, __sym1, __sym2));
+                    __result = try!(__state101(input, __lookbehind, __tokens, __lookahead, __sym0, __sym1, __sym2));
                 }
                 __Nonterminal::GrammarRhs(__nt) => {
                     let __sym2 = &mut Some(__nt);
-                    __result = try!(__state65(input, __lookbehind, __tokens, __lookahead, __sym2));
+                    __result = try!(__state68(input, __lookbehind, __tokens, __lookahead, __sym2));
                 }
                 __Nonterminal::GrammarRhs_2b(__nt) => {
                     let __sym2 = &mut Some(__nt);
-                    __result = try!(__state66(input, __lookbehind, __tokens, __lookahead, __sym2));
+                    __result = try!(__state69(input, __lookbehind, __tokens, __lookahead, __sym2));
                 }
                 __Nonterminal::Ident(__nt) => {
                     let __sym2 = &mut Some(__nt);
-                    __result = try!(__state67(input, __lookbehind, __tokens, __lookahead, __sym2));
+                    __result = try!(__state70(input, __lookbehind, __tokens, __lookahead, __sym2));
                 }
                 __Nonterminal::Symbol(__nt) => {
                     let __sym2 = &mut Some(__nt);
-                    __result = try!(__state68(input, __lookbehind, __tokens, __lookahead, __sym2));
+                    __result = try!(__state71(input, __lookbehind, __tokens, __lookahead, __sym2));
                 }
                 _ => {
                     return Ok((__lookbehind, __lookahead, __nt));
@@ -7656,7 +7925,7 @@ mod __parse__Yacc {
         return Ok(__result);
     }
 
-    // State 76
+    // State 79
     //   GrammarRhs+ = GrammarRhs+ GrammarRhs (*) ["%empty"]
     //   GrammarRhs+ = GrammarRhs+ GrammarRhs (*) ["%prec"]
     //   GrammarRhs+ = GrammarRhs+ GrammarRhs (*) [";"]
@@ -7665,15 +7934,15 @@ mod __parse__Yacc {
     //   GrammarRhs+ = GrammarRhs+ GrammarRhs (*) [r#"\'.\'"#]
     //   GrammarRhs+ = GrammarRhs+ GrammarRhs (*) [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
     //
-    //   "%empty" -> Reduce(GrammarRhs+ = GrammarRhs+, GrammarRhs => ActionFn(50);)
-    //   "%prec" -> Reduce(GrammarRhs+ = GrammarRhs+, GrammarRhs => ActionFn(50);)
-    //   ";" -> Reduce(GrammarRhs+ = GrammarRhs+, GrammarRhs => ActionFn(50);)
-    //   "{" -> Reduce(GrammarRhs+ = GrammarRhs+, GrammarRhs => ActionFn(50);)
-    //   "|" -> Reduce(GrammarRhs+ = GrammarRhs+, GrammarRhs => ActionFn(50);)
-    //   r#"\'.\'"# -> Reduce(GrammarRhs+ = GrammarRhs+, GrammarRhs => ActionFn(50);)
-    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(GrammarRhs+ = GrammarRhs+, GrammarRhs => ActionFn(50);)
+    //   "%empty" -> Reduce(GrammarRhs+ = GrammarRhs+, GrammarRhs => ActionFn(68);)
+    //   "%prec" -> Reduce(GrammarRhs+ = GrammarRhs+, GrammarRhs => ActionFn(68);)
+    //   ";" -> Reduce(GrammarRhs+ = GrammarRhs+, GrammarRhs => ActionFn(68);)
+    //   "{" -> Reduce(GrammarRhs+ = GrammarRhs+, GrammarRhs => ActionFn(68);)
+    //   "|" -> Reduce(GrammarRhs+ = GrammarRhs+, GrammarRhs => ActionFn(68);)
+    //   r#"\'.\'"# -> Reduce(GrammarRhs+ = GrammarRhs+, GrammarRhs => ActionFn(68);)
+    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(GrammarRhs+ = GrammarRhs+, GrammarRhs => ActionFn(68);)
     //
-    pub fn __state76<
+    pub fn __state79<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -7696,7 +7965,7 @@ mod __parse__Yacc {
             Some((_, (31, _), _)) => {
                 let __sym0 = __sym0.take().unwrap();
                 let __sym1 = __sym1.take().unwrap();
-                let __nt = super::__action50(input, __sym0, __sym1, &__lookbehind, &__lookahead);
+                let __nt = super::__action68(input, __sym0, __sym1, &__lookbehind, &__lookahead);
                 return Ok((__lookbehind, __lookahead, __Nonterminal::GrammarRhs_2b(__nt)));
             }
             _ => {
@@ -7708,7 +7977,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 77
+    // State 80
     //   GrammarRhs = "%prec" Symbol (*) ["%empty"]
     //   GrammarRhs = "%prec" Symbol (*) ["%prec"]
     //   GrammarRhs = "%prec" Symbol (*) [";"]
@@ -7725,7 +7994,7 @@ mod __parse__Yacc {
     //   r#"\'.\'"# -> Reduce(GrammarRhs = "%prec", Symbol => ActionFn(22);)
     //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(GrammarRhs = "%prec", Symbol => ActionFn(22);)
     //
-    pub fn __state77<
+    pub fn __state80<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -7760,7 +8029,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 78
+    // State 81
     //   UnpairedToken = Ident (*) ["("]
     //   UnpairedToken = Ident (*) ["*"]
     //   UnpairedToken = Ident (*) [","]
@@ -7793,7 +8062,7 @@ mod __parse__Yacc {
     //   r#"[0-9]+"# -> Reduce(UnpairedToken = Ident => ActionFn(36);)
     //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(UnpairedToken = Ident => ActionFn(36);)
     //
-    pub fn __state78<
+    pub fn __state81<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -7834,7 +8103,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 79
+    // State 82
     //   UnpairedToken = Integer (*) ["("]
     //   UnpairedToken = Integer (*) ["*"]
     //   UnpairedToken = Integer (*) [","]
@@ -7867,7 +8136,7 @@ mod __parse__Yacc {
     //   r#"[0-9]+"# -> Reduce(UnpairedToken = Integer => ActionFn(37);)
     //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(UnpairedToken = Integer => ActionFn(37);)
     //
-    pub fn __state79<
+    pub fn __state82<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -7908,7 +8177,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 80
+    // State 83
     //   TokenTree+ = TokenTree (*) ["("]
     //   TokenTree+ = TokenTree (*) ["*"]
     //   TokenTree+ = TokenTree (*) [","]
@@ -7925,23 +8194,23 @@ mod __parse__Yacc {
     //   TokenTree+ = TokenTree (*) [r#"[0-9]+"#]
     //   TokenTree+ = TokenTree (*) [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
     //
-    //   "(" -> Reduce(TokenTree+ = TokenTree => ActionFn(65);)
-    //   "*" -> Reduce(TokenTree+ = TokenTree => ActionFn(65);)
-    //   "," -> Reduce(TokenTree+ = TokenTree => ActionFn(65);)
-    //   "." -> Reduce(TokenTree+ = TokenTree => ActionFn(65);)
-    //   ";" -> Reduce(TokenTree+ = TokenTree => ActionFn(65);)
-    //   "=" -> Reduce(TokenTree+ = TokenTree => ActionFn(65);)
-    //   "[" -> Reduce(TokenTree+ = TokenTree => ActionFn(65);)
-    //   "{" -> Reduce(TokenTree+ = TokenTree => ActionFn(65);)
-    //   "}" -> Reduce(TokenTree+ = TokenTree => ActionFn(65);)
-    //   r#"\"[^\"]*\""# -> Reduce(TokenTree+ = TokenTree => ActionFn(65);)
-    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree+ = TokenTree => ActionFn(65);)
-    //   r#"$[$0-9]+"# -> Reduce(TokenTree+ = TokenTree => ActionFn(65);)
-    //   r#"\'.\'"# -> Reduce(TokenTree+ = TokenTree => ActionFn(65);)
-    //   r#"[0-9]+"# -> Reduce(TokenTree+ = TokenTree => ActionFn(65);)
-    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree+ = TokenTree => ActionFn(65);)
+    //   "(" -> Reduce(TokenTree+ = TokenTree => ActionFn(69);)
+    //   "*" -> Reduce(TokenTree+ = TokenTree => ActionFn(69);)
+    //   "," -> Reduce(TokenTree+ = TokenTree => ActionFn(69);)
+    //   "." -> Reduce(TokenTree+ = TokenTree => ActionFn(69);)
+    //   ";" -> Reduce(TokenTree+ = TokenTree => ActionFn(69);)
+    //   "=" -> Reduce(TokenTree+ = TokenTree => ActionFn(69);)
+    //   "[" -> Reduce(TokenTree+ = TokenTree => ActionFn(69);)
+    //   "{" -> Reduce(TokenTree+ = TokenTree => ActionFn(69);)
+    //   "}" -> Reduce(TokenTree+ = TokenTree => ActionFn(69);)
+    //   r#"\"[^\"]*\""# -> Reduce(TokenTree+ = TokenTree => ActionFn(69);)
+    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree+ = TokenTree => ActionFn(69);)
+    //   r#"$[$0-9]+"# -> Reduce(TokenTree+ = TokenTree => ActionFn(69);)
+    //   r#"\'.\'"# -> Reduce(TokenTree+ = TokenTree => ActionFn(69);)
+    //   r#"[0-9]+"# -> Reduce(TokenTree+ = TokenTree => ActionFn(69);)
+    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree+ = TokenTree => ActionFn(69);)
     //
-    pub fn __state80<
+    pub fn __state83<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -7970,7 +8239,7 @@ mod __parse__Yacc {
             Some((_, (30, _), _)) |
             Some((_, (31, _), _)) => {
                 let __sym0 = __sym0.take().unwrap();
-                let __nt = super::__action65(input, __sym0, &__lookbehind, &__lookahead);
+                let __nt = super::__action69(input, __sym0, &__lookbehind, &__lookahead);
                 return Ok((__lookbehind, __lookahead, __Nonterminal::TokenTree_2b(__nt)));
             }
             _ => {
@@ -7982,7 +8251,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 81
+    // State 84
     //   ActionCode = "{" TokenTree+ (*) "}" ["%empty"]
     //   ActionCode = "{" TokenTree+ (*) "}" ["%prec"]
     //   ActionCode = "{" TokenTree+ (*) "}" [";"]
@@ -8306,27 +8575,27 @@ mod __parse__Yacc {
     //   UnpairedToken = (*) r#"\'.\'"# [r#"[0-9]+"#]
     //   UnpairedToken = (*) r#"\'.\'"# [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
     //
-    //   "(" -> Shift(S83)
-    //   "*" -> Shift(S84)
-    //   "," -> Shift(S85)
-    //   "." -> Shift(S86)
-    //   ";" -> Shift(S87)
-    //   "=" -> Shift(S88)
-    //   "[" -> Shift(S89)
-    //   "{" -> Shift(S90)
-    //   "}" -> Shift(S100)
-    //   r#"\"[^\"]*\""# -> Shift(S92)
-    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S93)
-    //   r#"$[$0-9]+"# -> Shift(S94)
-    //   r#"\'.\'"# -> Shift(S95)
-    //   r#"[0-9]+"# -> Shift(S96)
-    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S97)
+    //   "(" -> Shift(S86)
+    //   "*" -> Shift(S87)
+    //   "," -> Shift(S88)
+    //   "." -> Shift(S89)
+    //   ";" -> Shift(S90)
+    //   "=" -> Shift(S91)
+    //   "[" -> Shift(S92)
+    //   "{" -> Shift(S93)
+    //   "}" -> Shift(S103)
+    //   r#"\"[^\"]*\""# -> Shift(S95)
+    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S96)
+    //   r#"$[$0-9]+"# -> Shift(S97)
+    //   r#"\'.\'"# -> Shift(S98)
+    //   r#"[0-9]+"# -> Shift(S99)
+    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S100)
     //
-    //   Ident -> S78
-    //   Integer -> S79
-    //   TokenTree -> S99
-    //   UnpairedToken -> S82
-    pub fn __state81<
+    //   Ident -> S81
+    //   Integer -> S82
+    //   TokenTree -> S102
+    //   UnpairedToken -> S85
+    pub fn __state84<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -8343,77 +8612,77 @@ mod __parse__Yacc {
             Some((_, (13, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state83(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state86(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (15, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state84(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state87(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (16, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state85(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state88(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (17, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state86(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state89(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (19, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state87(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state90(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (20, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state88(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state91(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (21, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state89(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state92(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (23, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state90(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state93(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (25, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state100(input, __lookbehind, __tokens, __sym0, __sym1, __sym2));
+                __result = try!(__state103(input, __lookbehind, __tokens, __sym0, __sym1, __sym2));
             }
             Some((_, (26, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state92(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state95(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (27, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state93(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state96(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (28, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state94(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state97(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (29, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state95(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state98(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (30, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state96(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state99(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (31, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state97(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state100(input, __lookbehind, __tokens, __sym2));
             }
             _ => {
                 return Err(__ParseError::UnrecognizedToken {
@@ -8427,19 +8696,19 @@ mod __parse__Yacc {
             match __nt {
                 __Nonterminal::Ident(__nt) => {
                     let __sym2 = &mut Some(__nt);
-                    __result = try!(__state78(input, __lookbehind, __tokens, __lookahead, __sym2));
+                    __result = try!(__state81(input, __lookbehind, __tokens, __lookahead, __sym2));
                 }
                 __Nonterminal::Integer(__nt) => {
                     let __sym2 = &mut Some(__nt);
-                    __result = try!(__state79(input, __lookbehind, __tokens, __lookahead, __sym2));
+                    __result = try!(__state82(input, __lookbehind, __tokens, __lookahead, __sym2));
                 }
                 __Nonterminal::TokenTree(__nt) => {
                     let __sym2 = &mut Some(__nt);
-                    __result = try!(__state99(input, __lookbehind, __tokens, __lookahead, __sym1, __sym2));
+                    __result = try!(__state102(input, __lookbehind, __tokens, __lookahead, __sym1, __sym2));
                 }
                 __Nonterminal::UnpairedToken(__nt) => {
                     let __sym2 = &mut Some(__nt);
-                    __result = try!(__state82(input, __lookbehind, __tokens, __lookahead, __sym2));
+                    __result = try!(__state85(input, __lookbehind, __tokens, __lookahead, __sym2));
                 }
                 _ => {
                     return Ok((__lookbehind, __lookahead, __nt));
@@ -8449,7 +8718,7 @@ mod __parse__Yacc {
         return Ok(__result);
     }
 
-    // State 82
+    // State 85
     //   TokenTree = UnpairedToken (*) ["("]
     //   TokenTree = UnpairedToken (*) ["*"]
     //   TokenTree = UnpairedToken (*) [","]
@@ -8482,7 +8751,7 @@ mod __parse__Yacc {
     //   r#"[0-9]+"# -> Reduce(TokenTree = UnpairedToken => ActionFn(28);)
     //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = UnpairedToken => ActionFn(28);)
     //
-    pub fn __state82<
+    pub fn __state85<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -8523,7 +8792,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 83
+    // State 86
     //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# ["("]
     //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# [")"]
     //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# ["*"]
@@ -8885,28 +9154,28 @@ mod __parse__Yacc {
     //   UnpairedToken = (*) r#"\'.\'"# [r#"[0-9]+"#]
     //   UnpairedToken = (*) r#"\'.\'"# [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
     //
-    //   "(" -> Shift(S106)
-    //   ")" -> Shift(S107)
-    //   "*" -> Shift(S108)
-    //   "," -> Shift(S109)
-    //   "." -> Shift(S110)
-    //   ";" -> Shift(S111)
-    //   "=" -> Shift(S112)
-    //   "[" -> Shift(S113)
-    //   "{" -> Shift(S114)
-    //   r#"\"[^\"]*\""# -> Shift(S115)
-    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S116)
-    //   r#"$[$0-9]+"# -> Shift(S117)
-    //   r#"\'.\'"# -> Shift(S118)
-    //   r#"[0-9]+"# -> Shift(S119)
-    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S120)
+    //   "(" -> Shift(S109)
+    //   ")" -> Shift(S110)
+    //   "*" -> Shift(S111)
+    //   "," -> Shift(S112)
+    //   "." -> Shift(S113)
+    //   ";" -> Shift(S114)
+    //   "=" -> Shift(S115)
+    //   "[" -> Shift(S116)
+    //   "{" -> Shift(S117)
+    //   r#"\"[^\"]*\""# -> Shift(S118)
+    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S119)
+    //   r#"$[$0-9]+"# -> Shift(S120)
+    //   r#"\'.\'"# -> Shift(S121)
+    //   r#"[0-9]+"# -> Shift(S122)
+    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S123)
     //
-    //   Ident -> S101
-    //   Integer -> S102
-    //   TokenTree -> S103
-    //   TokenTree+ -> S104
-    //   UnpairedToken -> S105
-    pub fn __state83<
+    //   Ident -> S104
+    //   Integer -> S105
+    //   TokenTree -> S106
+    //   TokenTree+ -> S107
+    //   UnpairedToken -> S108
+    pub fn __state86<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -8926,77 +9195,77 @@ mod __parse__Yacc {
             Some((_, (13, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state106(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state109(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (14, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state107(input, __lookbehind, __tokens, __sym0, __sym1));
+                __result = try!(__state110(input, __lookbehind, __tokens, __sym0, __sym1));
             }
             Some((_, (15, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state108(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state111(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (16, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state109(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state112(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (17, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state110(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state113(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (19, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state111(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state114(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (20, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state112(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state115(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (21, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state113(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state116(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (23, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state114(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state117(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (26, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state115(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state118(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (27, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state116(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state119(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (28, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state117(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state120(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (29, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state118(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state121(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (30, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state119(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state122(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (31, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state120(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state123(input, __lookbehind, __tokens, __sym1));
             }
             _ => {
                 return Err(__ParseError::UnrecognizedToken {
@@ -9010,23 +9279,23 @@ mod __parse__Yacc {
             match __nt {
                 __Nonterminal::Ident(__nt) => {
                     let __sym1 = &mut Some(__nt);
-                    __result = try!(__state101(input, __lookbehind, __tokens, __lookahead, __sym1));
+                    __result = try!(__state104(input, __lookbehind, __tokens, __lookahead, __sym1));
                 }
                 __Nonterminal::Integer(__nt) => {
                     let __sym1 = &mut Some(__nt);
-                    __result = try!(__state102(input, __lookbehind, __tokens, __lookahead, __sym1));
+                    __result = try!(__state105(input, __lookbehind, __tokens, __lookahead, __sym1));
                 }
                 __Nonterminal::TokenTree(__nt) => {
                     let __sym1 = &mut Some(__nt);
-                    __result = try!(__state103(input, __lookbehind, __tokens, __lookahead, __sym1));
+                    __result = try!(__state106(input, __lookbehind, __tokens, __lookahead, __sym1));
                 }
                 __Nonterminal::TokenTree_2b(__nt) => {
                     let __sym1 = &mut Some(__nt);
-                    __result = try!(__state104(input, __lookbehind, __tokens, __lookahead, __sym0, __sym1));
+                    __result = try!(__state107(input, __lookbehind, __tokens, __lookahead, __sym0, __sym1));
                 }
                 __Nonterminal::UnpairedToken(__nt) => {
                     let __sym1 = &mut Some(__nt);
-                    __result = try!(__state105(input, __lookbehind, __tokens, __lookahead, __sym1));
+                    __result = try!(__state108(input, __lookbehind, __tokens, __lookahead, __sym1));
                 }
                 _ => {
                     return Ok((__lookbehind, __lookahead, __nt));
@@ -9036,7 +9305,7 @@ mod __parse__Yacc {
         return Ok(__result);
     }
 
-    // State 84
+    // State 87
     //   UnpairedToken = "*" (*) ["("]
     //   UnpairedToken = "*" (*) ["*"]
     //   UnpairedToken = "*" (*) [","]
@@ -9069,7 +9338,7 @@ mod __parse__Yacc {
     //   r#"[0-9]+"# -> Reduce(UnpairedToken = "*" => ActionFn(45);)
     //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(UnpairedToken = "*" => ActionFn(45);)
     //
-    pub fn __state84<
+    pub fn __state87<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -9114,7 +9383,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 85
+    // State 88
     //   UnpairedToken = "," (*) ["("]
     //   UnpairedToken = "," (*) ["*"]
     //   UnpairedToken = "," (*) [","]
@@ -9147,7 +9416,7 @@ mod __parse__Yacc {
     //   r#"[0-9]+"# -> Reduce(UnpairedToken = "," => ActionFn(40);)
     //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(UnpairedToken = "," => ActionFn(40);)
     //
-    pub fn __state85<
+    pub fn __state88<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -9192,7 +9461,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 86
+    // State 89
     //   UnpairedToken = "." (*) ["("]
     //   UnpairedToken = "." (*) ["*"]
     //   UnpairedToken = "." (*) [","]
@@ -9225,7 +9494,7 @@ mod __parse__Yacc {
     //   r#"[0-9]+"# -> Reduce(UnpairedToken = "." => ActionFn(39);)
     //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(UnpairedToken = "." => ActionFn(39);)
     //
-    pub fn __state86<
+    pub fn __state89<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -9270,7 +9539,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 87
+    // State 90
     //   UnpairedToken = ";" (*) ["("]
     //   UnpairedToken = ";" (*) ["*"]
     //   UnpairedToken = ";" (*) [","]
@@ -9303,7 +9572,7 @@ mod __parse__Yacc {
     //   r#"[0-9]+"# -> Reduce(UnpairedToken = ";" => ActionFn(42);)
     //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(UnpairedToken = ";" => ActionFn(42);)
     //
-    pub fn __state87<
+    pub fn __state90<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -9348,7 +9617,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 88
+    // State 91
     //   UnpairedToken = "=" (*) ["("]
     //   UnpairedToken = "=" (*) ["*"]
     //   UnpairedToken = "=" (*) [","]
@@ -9381,7 +9650,7 @@ mod __parse__Yacc {
     //   r#"[0-9]+"# -> Reduce(UnpairedToken = "=" => ActionFn(41);)
     //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(UnpairedToken = "=" => ActionFn(41);)
     //
-    pub fn __state88<
+    pub fn __state91<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -9426,7 +9695,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 89
+    // State 92
     //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# ["("]
     //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# ["*"]
     //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# [","]
@@ -9788,28 +10057,28 @@ mod __parse__Yacc {
     //   UnpairedToken = (*) r#"\'.\'"# [r#"[0-9]+"#]
     //   UnpairedToken = (*) r#"\'.\'"# [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
     //
-    //   "(" -> Shift(S126)
-    //   "*" -> Shift(S127)
-    //   "," -> Shift(S128)
-    //   "." -> Shift(S129)
-    //   ";" -> Shift(S130)
-    //   "=" -> Shift(S131)
-    //   "[" -> Shift(S132)
-    //   "]" -> Shift(S133)
-    //   "{" -> Shift(S134)
-    //   r#"\"[^\"]*\""# -> Shift(S135)
-    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S136)
-    //   r#"$[$0-9]+"# -> Shift(S137)
-    //   r#"\'.\'"# -> Shift(S138)
-    //   r#"[0-9]+"# -> Shift(S139)
-    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S140)
+    //   "(" -> Shift(S129)
+    //   "*" -> Shift(S130)
+    //   "," -> Shift(S131)
+    //   "." -> Shift(S132)
+    //   ";" -> Shift(S133)
+    //   "=" -> Shift(S134)
+    //   "[" -> Shift(S135)
+    //   "]" -> Shift(S136)
+    //   "{" -> Shift(S137)
+    //   r#"\"[^\"]*\""# -> Shift(S138)
+    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S139)
+    //   r#"$[$0-9]+"# -> Shift(S140)
+    //   r#"\'.\'"# -> Shift(S141)
+    //   r#"[0-9]+"# -> Shift(S142)
+    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S143)
     //
-    //   Ident -> S121
-    //   Integer -> S122
-    //   TokenTree -> S123
-    //   TokenTree+ -> S124
-    //   UnpairedToken -> S125
-    pub fn __state89<
+    //   Ident -> S124
+    //   Integer -> S125
+    //   TokenTree -> S126
+    //   TokenTree+ -> S127
+    //   UnpairedToken -> S128
+    pub fn __state92<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -9829,77 +10098,77 @@ mod __parse__Yacc {
             Some((_, (13, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state126(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state129(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (15, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state127(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state130(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (16, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state128(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state131(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (17, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state129(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state132(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (19, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state130(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state133(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (20, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state131(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state134(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (21, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state132(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state135(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (22, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state133(input, __lookbehind, __tokens, __sym0, __sym1));
+                __result = try!(__state136(input, __lookbehind, __tokens, __sym0, __sym1));
             }
             Some((_, (23, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state134(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state137(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (26, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state135(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state138(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (27, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state136(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state139(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (28, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state137(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state140(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (29, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state138(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state141(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (30, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state139(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state142(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (31, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state140(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state143(input, __lookbehind, __tokens, __sym1));
             }
             _ => {
                 return Err(__ParseError::UnrecognizedToken {
@@ -9913,23 +10182,23 @@ mod __parse__Yacc {
             match __nt {
                 __Nonterminal::Ident(__nt) => {
                     let __sym1 = &mut Some(__nt);
-                    __result = try!(__state121(input, __lookbehind, __tokens, __lookahead, __sym1));
+                    __result = try!(__state124(input, __lookbehind, __tokens, __lookahead, __sym1));
                 }
                 __Nonterminal::Integer(__nt) => {
                     let __sym1 = &mut Some(__nt);
-                    __result = try!(__state122(input, __lookbehind, __tokens, __lookahead, __sym1));
+                    __result = try!(__state125(input, __lookbehind, __tokens, __lookahead, __sym1));
                 }
                 __Nonterminal::TokenTree(__nt) => {
                     let __sym1 = &mut Some(__nt);
-                    __result = try!(__state123(input, __lookbehind, __tokens, __lookahead, __sym1));
+                    __result = try!(__state126(input, __lookbehind, __tokens, __lookahead, __sym1));
                 }
                 __Nonterminal::TokenTree_2b(__nt) => {
                     let __sym1 = &mut Some(__nt);
-                    __result = try!(__state124(input, __lookbehind, __tokens, __lookahead, __sym0, __sym1));
+                    __result = try!(__state127(input, __lookbehind, __tokens, __lookahead, __sym0, __sym1));
                 }
                 __Nonterminal::UnpairedToken(__nt) => {
                     let __sym1 = &mut Some(__nt);
-                    __result = try!(__state125(input, __lookbehind, __tokens, __lookahead, __sym1));
+                    __result = try!(__state128(input, __lookbehind, __tokens, __lookahead, __sym1));
                 }
                 _ => {
                     return Ok((__lookbehind, __lookahead, __nt));
@@ -9939,7 +10208,7 @@ mod __parse__Yacc {
         return Ok(__result);
     }
 
-    // State 90
+    // State 93
     //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# ["("]
     //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# ["*"]
     //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# [","]
@@ -10301,28 +10570,28 @@ mod __parse__Yacc {
     //   UnpairedToken = (*) r#"\'.\'"# [r#"[0-9]+"#]
     //   UnpairedToken = (*) r#"\'.\'"# [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
     //
-    //   "(" -> Shift(S83)
-    //   "*" -> Shift(S84)
-    //   "," -> Shift(S85)
-    //   "." -> Shift(S86)
-    //   ";" -> Shift(S87)
-    //   "=" -> Shift(S88)
-    //   "[" -> Shift(S89)
-    //   "{" -> Shift(S90)
-    //   "}" -> Shift(S142)
-    //   r#"\"[^\"]*\""# -> Shift(S92)
-    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S93)
-    //   r#"$[$0-9]+"# -> Shift(S94)
-    //   r#"\'.\'"# -> Shift(S95)
-    //   r#"[0-9]+"# -> Shift(S96)
-    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S97)
+    //   "(" -> Shift(S86)
+    //   "*" -> Shift(S87)
+    //   "," -> Shift(S88)
+    //   "." -> Shift(S89)
+    //   ";" -> Shift(S90)
+    //   "=" -> Shift(S91)
+    //   "[" -> Shift(S92)
+    //   "{" -> Shift(S93)
+    //   "}" -> Shift(S145)
+    //   r#"\"[^\"]*\""# -> Shift(S95)
+    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S96)
+    //   r#"$[$0-9]+"# -> Shift(S97)
+    //   r#"\'.\'"# -> Shift(S98)
+    //   r#"[0-9]+"# -> Shift(S99)
+    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S100)
     //
-    //   Ident -> S78
-    //   Integer -> S79
-    //   TokenTree -> S80
-    //   TokenTree+ -> S141
-    //   UnpairedToken -> S82
-    pub fn __state90<
+    //   Ident -> S81
+    //   Integer -> S82
+    //   TokenTree -> S83
+    //   TokenTree+ -> S144
+    //   UnpairedToken -> S85
+    pub fn __state93<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -10342,77 +10611,77 @@ mod __parse__Yacc {
             Some((_, (13, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state83(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state86(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (15, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state84(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state87(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (16, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state85(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state88(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (17, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state86(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state89(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (19, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state87(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state90(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (20, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state88(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state91(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (21, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state89(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state92(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (23, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state90(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state93(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (25, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state142(input, __lookbehind, __tokens, __sym0, __sym1));
+                __result = try!(__state145(input, __lookbehind, __tokens, __sym0, __sym1));
             }
             Some((_, (26, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state92(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state95(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (27, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state93(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state96(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (28, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state94(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state97(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (29, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state95(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state98(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (30, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state96(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state99(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (31, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state97(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state100(input, __lookbehind, __tokens, __sym1));
             }
             _ => {
                 return Err(__ParseError::UnrecognizedToken {
@@ -10426,23 +10695,23 @@ mod __parse__Yacc {
             match __nt {
                 __Nonterminal::Ident(__nt) => {
                     let __sym1 = &mut Some(__nt);
-                    __result = try!(__state78(input, __lookbehind, __tokens, __lookahead, __sym1));
+                    __result = try!(__state81(input, __lookbehind, __tokens, __lookahead, __sym1));
                 }
                 __Nonterminal::Integer(__nt) => {
                     let __sym1 = &mut Some(__nt);
-                    __result = try!(__state79(input, __lookbehind, __tokens, __lookahead, __sym1));
+                    __result = try!(__state82(input, __lookbehind, __tokens, __lookahead, __sym1));
                 }
                 __Nonterminal::TokenTree(__nt) => {
                     let __sym1 = &mut Some(__nt);
-                    __result = try!(__state80(input, __lookbehind, __tokens, __lookahead, __sym1));
+                    __result = try!(__state83(input, __lookbehind, __tokens, __lookahead, __sym1));
                 }
                 __Nonterminal::TokenTree_2b(__nt) => {
                     let __sym1 = &mut Some(__nt);
-                    __result = try!(__state141(input, __lookbehind, __tokens, __lookahead, __sym0, __sym1));
+                    __result = try!(__state144(input, __lookbehind, __tokens, __lookahead, __sym0, __sym1));
                 }
                 __Nonterminal::UnpairedToken(__nt) => {
                     let __sym1 = &mut Some(__nt);
-                    __result = try!(__state82(input, __lookbehind, __tokens, __lookahead, __sym1));
+                    __result = try!(__state85(input, __lookbehind, __tokens, __lookahead, __sym1));
                 }
                 _ => {
                     return Ok((__lookbehind, __lookahead, __nt));
@@ -10452,7 +10721,7 @@ mod __parse__Yacc {
         return Ok(__result);
     }
 
-    // State 91
+    // State 94
     //   ActionCode = "{" "}" (*) ["%empty"]
     //   ActionCode = "{" "}" (*) ["%prec"]
     //   ActionCode = "{" "}" (*) [";"]
@@ -10461,15 +10730,15 @@ mod __parse__Yacc {
     //   ActionCode = "{" "}" (*) [r#"\'.\'"#]
     //   ActionCode = "{" "}" (*) [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
     //
-    //   "%empty" -> Reduce(ActionCode = "{", "}" => ActionFn(73);)
-    //   "%prec" -> Reduce(ActionCode = "{", "}" => ActionFn(73);)
-    //   ";" -> Reduce(ActionCode = "{", "}" => ActionFn(73);)
-    //   "{" -> Reduce(ActionCode = "{", "}" => ActionFn(73);)
-    //   "|" -> Reduce(ActionCode = "{", "}" => ActionFn(73);)
-    //   r#"\'.\'"# -> Reduce(ActionCode = "{", "}" => ActionFn(73);)
-    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(ActionCode = "{", "}" => ActionFn(73);)
+    //   "%empty" -> Reduce(ActionCode = "{", "}" => ActionFn(79);)
+    //   "%prec" -> Reduce(ActionCode = "{", "}" => ActionFn(79);)
+    //   ";" -> Reduce(ActionCode = "{", "}" => ActionFn(79);)
+    //   "{" -> Reduce(ActionCode = "{", "}" => ActionFn(79);)
+    //   "|" -> Reduce(ActionCode = "{", "}" => ActionFn(79);)
+    //   r#"\'.\'"# -> Reduce(ActionCode = "{", "}" => ActionFn(79);)
+    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(ActionCode = "{", "}" => ActionFn(79);)
     //
-    pub fn __state91<
+    pub fn __state94<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -10496,7 +10765,7 @@ mod __parse__Yacc {
             Some((_, (31, _), _)) => {
                 let __sym0 = __sym0.take().unwrap();
                 let __sym1 = __sym1.take().unwrap();
-                let __nt = super::__action73(input, __sym0, __sym1, &__lookbehind, &__lookahead);
+                let __nt = super::__action79(input, __sym0, __sym1, &__lookbehind, &__lookahead);
                 return Ok((__lookbehind, __lookahead, __Nonterminal::ActionCode(__nt)));
             }
             _ => {
@@ -10508,7 +10777,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 92
+    // State 95
     //   UnpairedToken = r#"\"[^\"]*\""# (*) ["("]
     //   UnpairedToken = r#"\"[^\"]*\""# (*) ["*"]
     //   UnpairedToken = r#"\"[^\"]*\""# (*) [","]
@@ -10541,7 +10810,7 @@ mod __parse__Yacc {
     //   r#"[0-9]+"# -> Reduce(UnpairedToken = r#"\"[^\"]*\""# => ActionFn(38);)
     //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(UnpairedToken = r#"\"[^\"]*\""# => ActionFn(38);)
     //
-    pub fn __state92<
+    pub fn __state95<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -10586,7 +10855,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 93
+    // State 96
     //   UnpairedToken = r#"#[_a-zA-Z][_a-zA-Z0-9]*"# (*) ["("]
     //   UnpairedToken = r#"#[_a-zA-Z][_a-zA-Z0-9]*"# (*) ["*"]
     //   UnpairedToken = r#"#[_a-zA-Z][_a-zA-Z0-9]*"# (*) [","]
@@ -10619,7 +10888,7 @@ mod __parse__Yacc {
     //   r#"[0-9]+"# -> Reduce(UnpairedToken = r#"#[_a-zA-Z][_a-zA-Z0-9]*"# => ActionFn(44);)
     //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(UnpairedToken = r#"#[_a-zA-Z][_a-zA-Z0-9]*"# => ActionFn(44);)
     //
-    pub fn __state93<
+    pub fn __state96<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -10664,7 +10933,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 94
+    // State 97
     //   UnpairedToken = r#"$[$0-9]+"# (*) ["("]
     //   UnpairedToken = r#"$[$0-9]+"# (*) ["*"]
     //   UnpairedToken = r#"$[$0-9]+"# (*) [","]
@@ -10697,7 +10966,7 @@ mod __parse__Yacc {
     //   r#"[0-9]+"# -> Reduce(UnpairedToken = r#"$[$0-9]+"# => ActionFn(43);)
     //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(UnpairedToken = r#"$[$0-9]+"# => ActionFn(43);)
     //
-    pub fn __state94<
+    pub fn __state97<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -10742,7 +11011,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 95
+    // State 98
     //   UnpairedToken = r#"\'.\'"# (*) ["("]
     //   UnpairedToken = r#"\'.\'"# (*) ["*"]
     //   UnpairedToken = r#"\'.\'"# (*) [","]
@@ -10775,7 +11044,7 @@ mod __parse__Yacc {
     //   r#"[0-9]+"# -> Reduce(UnpairedToken = r#"\'.\'"# => ActionFn(46);)
     //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(UnpairedToken = r#"\'.\'"# => ActionFn(46);)
     //
-    pub fn __state95<
+    pub fn __state98<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -10820,7 +11089,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 96
+    // State 99
     //   Integer = r#"[0-9]+"# (*) ["("]
     //   Integer = r#"[0-9]+"# (*) ["*"]
     //   Integer = r#"[0-9]+"# (*) [","]
@@ -10853,7 +11122,7 @@ mod __parse__Yacc {
     //   r#"[0-9]+"# -> Reduce(Integer = r#"[0-9]+"# => ActionFn(15);)
     //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(Integer = r#"[0-9]+"# => ActionFn(15);)
     //
-    pub fn __state96<
+    pub fn __state99<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -10898,7 +11167,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 97
+    // State 100
     //   Ident = r#"[_a-zA-Z][_a-zA-Z0-9]*"# (*) ["("]
     //   Ident = r#"[_a-zA-Z][_a-zA-Z0-9]*"# (*) ["*"]
     //   Ident = r#"[_a-zA-Z][_a-zA-Z0-9]*"# (*) [","]
@@ -10931,7 +11200,7 @@ mod __parse__Yacc {
     //   r#"[0-9]+"# -> Reduce(Ident = r#"[_a-zA-Z][_a-zA-Z0-9]*"# => ActionFn(14);)
     //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(Ident = r#"[_a-zA-Z][_a-zA-Z0-9]*"# => ActionFn(14);)
     //
-    pub fn __state97<
+    pub fn __state100<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -10976,14 +11245,14 @@ mod __parse__Yacc {
         }
     }
 
-    // State 98
+    // State 101
     //   Alternatives = Alternatives "|" Alternative (*) [";"]
     //   Alternatives = Alternatives "|" Alternative (*) ["|"]
     //
     //   ";" -> Reduce(Alternatives = Alternatives, "|", Alternative => ActionFn(18);)
     //   "|" -> Reduce(Alternatives = Alternatives, "|", Alternative => ActionFn(18);)
     //
-    pub fn __state98<
+    pub fn __state101<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -11015,7 +11284,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 99
+    // State 102
     //   TokenTree+ = TokenTree+ TokenTree (*) ["("]
     //   TokenTree+ = TokenTree+ TokenTree (*) ["*"]
     //   TokenTree+ = TokenTree+ TokenTree (*) [","]
@@ -11032,23 +11301,23 @@ mod __parse__Yacc {
     //   TokenTree+ = TokenTree+ TokenTree (*) [r#"[0-9]+"#]
     //   TokenTree+ = TokenTree+ TokenTree (*) [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
     //
-    //   "(" -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(66);)
-    //   "*" -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(66);)
-    //   "," -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(66);)
-    //   "." -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(66);)
-    //   ";" -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(66);)
-    //   "=" -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(66);)
-    //   "[" -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(66);)
-    //   "{" -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(66);)
-    //   "}" -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(66);)
-    //   r#"\"[^\"]*\""# -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(66);)
-    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(66);)
-    //   r#"$[$0-9]+"# -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(66);)
-    //   r#"\'.\'"# -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(66);)
-    //   r#"[0-9]+"# -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(66);)
-    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(66);)
+    //   "(" -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(70);)
+    //   "*" -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(70);)
+    //   "," -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(70);)
+    //   "." -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(70);)
+    //   ";" -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(70);)
+    //   "=" -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(70);)
+    //   "[" -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(70);)
+    //   "{" -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(70);)
+    //   "}" -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(70);)
+    //   r#"\"[^\"]*\""# -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(70);)
+    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(70);)
+    //   r#"$[$0-9]+"# -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(70);)
+    //   r#"\'.\'"# -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(70);)
+    //   r#"[0-9]+"# -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(70);)
+    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(70);)
     //
-    pub fn __state99<
+    pub fn __state102<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -11079,7 +11348,7 @@ mod __parse__Yacc {
             Some((_, (31, _), _)) => {
                 let __sym0 = __sym0.take().unwrap();
                 let __sym1 = __sym1.take().unwrap();
-                let __nt = super::__action66(input, __sym0, __sym1, &__lookbehind, &__lookahead);
+                let __nt = super::__action70(input, __sym0, __sym1, &__lookbehind, &__lookahead);
                 return Ok((__lookbehind, __lookahead, __Nonterminal::TokenTree_2b(__nt)));
             }
             _ => {
@@ -11091,7 +11360,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 100
+    // State 103
     //   ActionCode = "{" TokenTree+ "}" (*) ["%empty"]
     //   ActionCode = "{" TokenTree+ "}" (*) ["%prec"]
     //   ActionCode = "{" TokenTree+ "}" (*) [";"]
@@ -11100,15 +11369,15 @@ mod __parse__Yacc {
     //   ActionCode = "{" TokenTree+ "}" (*) [r#"\'.\'"#]
     //   ActionCode = "{" TokenTree+ "}" (*) [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
     //
-    //   "%empty" -> Reduce(ActionCode = "{", TokenTree+, "}" => ActionFn(74);)
-    //   "%prec" -> Reduce(ActionCode = "{", TokenTree+, "}" => ActionFn(74);)
-    //   ";" -> Reduce(ActionCode = "{", TokenTree+, "}" => ActionFn(74);)
-    //   "{" -> Reduce(ActionCode = "{", TokenTree+, "}" => ActionFn(74);)
-    //   "|" -> Reduce(ActionCode = "{", TokenTree+, "}" => ActionFn(74);)
-    //   r#"\'.\'"# -> Reduce(ActionCode = "{", TokenTree+, "}" => ActionFn(74);)
-    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(ActionCode = "{", TokenTree+, "}" => ActionFn(74);)
+    //   "%empty" -> Reduce(ActionCode = "{", TokenTree+, "}" => ActionFn(80);)
+    //   "%prec" -> Reduce(ActionCode = "{", TokenTree+, "}" => ActionFn(80);)
+    //   ";" -> Reduce(ActionCode = "{", TokenTree+, "}" => ActionFn(80);)
+    //   "{" -> Reduce(ActionCode = "{", TokenTree+, "}" => ActionFn(80);)
+    //   "|" -> Reduce(ActionCode = "{", TokenTree+, "}" => ActionFn(80);)
+    //   r#"\'.\'"# -> Reduce(ActionCode = "{", TokenTree+, "}" => ActionFn(80);)
+    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(ActionCode = "{", TokenTree+, "}" => ActionFn(80);)
     //
-    pub fn __state100<
+    pub fn __state103<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -11137,7 +11406,7 @@ mod __parse__Yacc {
                 let __sym0 = __sym0.take().unwrap();
                 let __sym1 = __sym1.take().unwrap();
                 let __sym2 = __sym2.take().unwrap();
-                let __nt = super::__action74(input, __sym0, __sym1, __sym2, &__lookbehind, &__lookahead);
+                let __nt = super::__action80(input, __sym0, __sym1, __sym2, &__lookbehind, &__lookahead);
                 return Ok((__lookbehind, __lookahead, __Nonterminal::ActionCode(__nt)));
             }
             _ => {
@@ -11149,7 +11418,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 101
+    // State 104
     //   UnpairedToken = Ident (*) ["("]
     //   UnpairedToken = Ident (*) [")"]
     //   UnpairedToken = Ident (*) ["*"]
@@ -11182,7 +11451,7 @@ mod __parse__Yacc {
     //   r#"[0-9]+"# -> Reduce(UnpairedToken = Ident => ActionFn(36);)
     //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(UnpairedToken = Ident => ActionFn(36);)
     //
-    pub fn __state101<
+    pub fn __state104<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -11223,7 +11492,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 102
+    // State 105
     //   UnpairedToken = Integer (*) ["("]
     //   UnpairedToken = Integer (*) [")"]
     //   UnpairedToken = Integer (*) ["*"]
@@ -11256,7 +11525,7 @@ mod __parse__Yacc {
     //   r#"[0-9]+"# -> Reduce(UnpairedToken = Integer => ActionFn(37);)
     //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(UnpairedToken = Integer => ActionFn(37);)
     //
-    pub fn __state102<
+    pub fn __state105<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -11297,7 +11566,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 103
+    // State 106
     //   TokenTree+ = TokenTree (*) ["("]
     //   TokenTree+ = TokenTree (*) [")"]
     //   TokenTree+ = TokenTree (*) ["*"]
@@ -11314,23 +11583,23 @@ mod __parse__Yacc {
     //   TokenTree+ = TokenTree (*) [r#"[0-9]+"#]
     //   TokenTree+ = TokenTree (*) [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
     //
-    //   "(" -> Reduce(TokenTree+ = TokenTree => ActionFn(65);)
-    //   ")" -> Reduce(TokenTree+ = TokenTree => ActionFn(65);)
-    //   "*" -> Reduce(TokenTree+ = TokenTree => ActionFn(65);)
-    //   "," -> Reduce(TokenTree+ = TokenTree => ActionFn(65);)
-    //   "." -> Reduce(TokenTree+ = TokenTree => ActionFn(65);)
-    //   ";" -> Reduce(TokenTree+ = TokenTree => ActionFn(65);)
-    //   "=" -> Reduce(TokenTree+ = TokenTree => ActionFn(65);)
-    //   "[" -> Reduce(TokenTree+ = TokenTree => ActionFn(65);)
-    //   "{" -> Reduce(TokenTree+ = TokenTree => ActionFn(65);)
-    //   r#"\"[^\"]*\""# -> Reduce(TokenTree+ = TokenTree => ActionFn(65);)
-    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree+ = TokenTree => ActionFn(65);)
-    //   r#"$[$0-9]+"# -> Reduce(TokenTree+ = TokenTree => ActionFn(65);)
-    //   r#"\'.\'"# -> Reduce(TokenTree+ = TokenTree => ActionFn(65);)
-    //   r#"[0-9]+"# -> Reduce(TokenTree+ = TokenTree => ActionFn(65);)
-    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree+ = TokenTree => ActionFn(65);)
+    //   "(" -> Reduce(TokenTree+ = TokenTree => ActionFn(69);)
+    //   ")" -> Reduce(TokenTree+ = TokenTree => ActionFn(69);)
+    //   "*" -> Reduce(TokenTree+ = TokenTree => ActionFn(69);)
+    //   "," -> Reduce(TokenTree+ = TokenTree => ActionFn(69);)
+    //   "." -> Reduce(TokenTree+ = TokenTree => ActionFn(69);)
+    //   ";" -> Reduce(TokenTree+ = TokenTree => ActionFn(69);)
+    //   "=" -> Reduce(TokenTree+ = TokenTree => ActionFn(69);)
+    //   "[" -> Reduce(TokenTree+ = TokenTree => ActionFn(69);)
+    //   "{" -> Reduce(TokenTree+ = TokenTree => ActionFn(69);)
+    //   r#"\"[^\"]*\""# -> Reduce(TokenTree+ = TokenTree => ActionFn(69);)
+    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree+ = TokenTree => ActionFn(69);)
+    //   r#"$[$0-9]+"# -> Reduce(TokenTree+ = TokenTree => ActionFn(69);)
+    //   r#"\'.\'"# -> Reduce(TokenTree+ = TokenTree => ActionFn(69);)
+    //   r#"[0-9]+"# -> Reduce(TokenTree+ = TokenTree => ActionFn(69);)
+    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree+ = TokenTree => ActionFn(69);)
     //
-    pub fn __state103<
+    pub fn __state106<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -11359,7 +11628,7 @@ mod __parse__Yacc {
             Some((_, (30, _), _)) |
             Some((_, (31, _), _)) => {
                 let __sym0 = __sym0.take().unwrap();
-                let __nt = super::__action65(input, __sym0, &__lookbehind, &__lookahead);
+                let __nt = super::__action69(input, __sym0, &__lookbehind, &__lookahead);
                 return Ok((__lookbehind, __lookahead, __Nonterminal::TokenTree_2b(__nt)));
             }
             _ => {
@@ -11371,7 +11640,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 104
+    // State 107
     //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# ["("]
     //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# [")"]
     //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# ["*"]
@@ -11703,27 +11972,27 @@ mod __parse__Yacc {
     //   UnpairedToken = (*) r#"\'.\'"# [r#"[0-9]+"#]
     //   UnpairedToken = (*) r#"\'.\'"# [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
     //
-    //   "(" -> Shift(S106)
-    //   ")" -> Shift(S144)
-    //   "*" -> Shift(S108)
-    //   "," -> Shift(S109)
-    //   "." -> Shift(S110)
-    //   ";" -> Shift(S111)
-    //   "=" -> Shift(S112)
-    //   "[" -> Shift(S113)
-    //   "{" -> Shift(S114)
-    //   r#"\"[^\"]*\""# -> Shift(S115)
-    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S116)
-    //   r#"$[$0-9]+"# -> Shift(S117)
-    //   r#"\'.\'"# -> Shift(S118)
-    //   r#"[0-9]+"# -> Shift(S119)
-    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S120)
+    //   "(" -> Shift(S109)
+    //   ")" -> Shift(S147)
+    //   "*" -> Shift(S111)
+    //   "," -> Shift(S112)
+    //   "." -> Shift(S113)
+    //   ";" -> Shift(S114)
+    //   "=" -> Shift(S115)
+    //   "[" -> Shift(S116)
+    //   "{" -> Shift(S117)
+    //   r#"\"[^\"]*\""# -> Shift(S118)
+    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S119)
+    //   r#"$[$0-9]+"# -> Shift(S120)
+    //   r#"\'.\'"# -> Shift(S121)
+    //   r#"[0-9]+"# -> Shift(S122)
+    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S123)
     //
-    //   Ident -> S101
-    //   Integer -> S102
-    //   TokenTree -> S143
-    //   UnpairedToken -> S105
-    pub fn __state104<
+    //   Ident -> S104
+    //   Integer -> S105
+    //   TokenTree -> S146
+    //   UnpairedToken -> S108
+    pub fn __state107<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -11740,77 +12009,77 @@ mod __parse__Yacc {
             Some((_, (13, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state106(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state109(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (14, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state144(input, __lookbehind, __tokens, __sym0, __sym1, __sym2));
+                __result = try!(__state147(input, __lookbehind, __tokens, __sym0, __sym1, __sym2));
             }
             Some((_, (15, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state108(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state111(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (16, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state109(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state112(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (17, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state110(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state113(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (19, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state111(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state114(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (20, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state112(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state115(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (21, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state113(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state116(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (23, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state114(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state117(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (26, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state115(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state118(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (27, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state116(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state119(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (28, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state117(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state120(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (29, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state118(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state121(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (30, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state119(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state122(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (31, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state120(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state123(input, __lookbehind, __tokens, __sym2));
             }
             _ => {
                 return Err(__ParseError::UnrecognizedToken {
@@ -11824,19 +12093,19 @@ mod __parse__Yacc {
             match __nt {
                 __Nonterminal::Ident(__nt) => {
                     let __sym2 = &mut Some(__nt);
-                    __result = try!(__state101(input, __lookbehind, __tokens, __lookahead, __sym2));
+                    __result = try!(__state104(input, __lookbehind, __tokens, __lookahead, __sym2));
                 }
                 __Nonterminal::Integer(__nt) => {
                     let __sym2 = &mut Some(__nt);
-                    __result = try!(__state102(input, __lookbehind, __tokens, __lookahead, __sym2));
+                    __result = try!(__state105(input, __lookbehind, __tokens, __lookahead, __sym2));
                 }
                 __Nonterminal::TokenTree(__nt) => {
                     let __sym2 = &mut Some(__nt);
-                    __result = try!(__state143(input, __lookbehind, __tokens, __lookahead, __sym1, __sym2));
+                    __result = try!(__state146(input, __lookbehind, __tokens, __lookahead, __sym1, __sym2));
                 }
                 __Nonterminal::UnpairedToken(__nt) => {
                     let __sym2 = &mut Some(__nt);
-                    __result = try!(__state105(input, __lookbehind, __tokens, __lookahead, __sym2));
+                    __result = try!(__state108(input, __lookbehind, __tokens, __lookahead, __sym2));
                 }
                 _ => {
                     return Ok((__lookbehind, __lookahead, __nt));
@@ -11846,7 +12115,7 @@ mod __parse__Yacc {
         return Ok(__result);
     }
 
-    // State 105
+    // State 108
     //   TokenTree = UnpairedToken (*) ["("]
     //   TokenTree = UnpairedToken (*) [")"]
     //   TokenTree = UnpairedToken (*) ["*"]
@@ -11879,7 +12148,7 @@ mod __parse__Yacc {
     //   r#"[0-9]+"# -> Reduce(TokenTree = UnpairedToken => ActionFn(28);)
     //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = UnpairedToken => ActionFn(28);)
     //
-    pub fn __state105<
+    pub fn __state108<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -11920,7 +12189,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 106
+    // State 109
     //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# ["("]
     //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# [")"]
     //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# ["*"]
@@ -12282,28 +12551,28 @@ mod __parse__Yacc {
     //   UnpairedToken = (*) r#"\'.\'"# [r#"[0-9]+"#]
     //   UnpairedToken = (*) r#"\'.\'"# [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
     //
-    //   "(" -> Shift(S106)
-    //   ")" -> Shift(S146)
-    //   "*" -> Shift(S108)
-    //   "," -> Shift(S109)
-    //   "." -> Shift(S110)
-    //   ";" -> Shift(S111)
-    //   "=" -> Shift(S112)
-    //   "[" -> Shift(S113)
-    //   "{" -> Shift(S114)
-    //   r#"\"[^\"]*\""# -> Shift(S115)
-    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S116)
-    //   r#"$[$0-9]+"# -> Shift(S117)
-    //   r#"\'.\'"# -> Shift(S118)
-    //   r#"[0-9]+"# -> Shift(S119)
-    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S120)
+    //   "(" -> Shift(S109)
+    //   ")" -> Shift(S149)
+    //   "*" -> Shift(S111)
+    //   "," -> Shift(S112)
+    //   "." -> Shift(S113)
+    //   ";" -> Shift(S114)
+    //   "=" -> Shift(S115)
+    //   "[" -> Shift(S116)
+    //   "{" -> Shift(S117)
+    //   r#"\"[^\"]*\""# -> Shift(S118)
+    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S119)
+    //   r#"$[$0-9]+"# -> Shift(S120)
+    //   r#"\'.\'"# -> Shift(S121)
+    //   r#"[0-9]+"# -> Shift(S122)
+    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S123)
     //
-    //   Ident -> S101
-    //   Integer -> S102
-    //   TokenTree -> S103
-    //   TokenTree+ -> S145
-    //   UnpairedToken -> S105
-    pub fn __state106<
+    //   Ident -> S104
+    //   Integer -> S105
+    //   TokenTree -> S106
+    //   TokenTree+ -> S148
+    //   UnpairedToken -> S108
+    pub fn __state109<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -12323,77 +12592,77 @@ mod __parse__Yacc {
             Some((_, (13, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state106(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state109(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (14, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state146(input, __lookbehind, __tokens, __sym0, __sym1));
+                __result = try!(__state149(input, __lookbehind, __tokens, __sym0, __sym1));
             }
             Some((_, (15, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state108(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state111(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (16, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state109(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state112(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (17, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state110(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state113(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (19, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state111(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state114(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (20, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state112(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state115(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (21, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state113(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state116(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (23, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state114(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state117(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (26, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state115(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state118(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (27, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state116(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state119(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (28, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state117(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state120(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (29, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state118(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state121(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (30, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state119(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state122(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (31, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state120(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state123(input, __lookbehind, __tokens, __sym1));
             }
             _ => {
                 return Err(__ParseError::UnrecognizedToken {
@@ -12407,23 +12676,23 @@ mod __parse__Yacc {
             match __nt {
                 __Nonterminal::Ident(__nt) => {
                     let __sym1 = &mut Some(__nt);
-                    __result = try!(__state101(input, __lookbehind, __tokens, __lookahead, __sym1));
+                    __result = try!(__state104(input, __lookbehind, __tokens, __lookahead, __sym1));
                 }
                 __Nonterminal::Integer(__nt) => {
                     let __sym1 = &mut Some(__nt);
-                    __result = try!(__state102(input, __lookbehind, __tokens, __lookahead, __sym1));
+                    __result = try!(__state105(input, __lookbehind, __tokens, __lookahead, __sym1));
                 }
                 __Nonterminal::TokenTree(__nt) => {
                     let __sym1 = &mut Some(__nt);
-                    __result = try!(__state103(input, __lookbehind, __tokens, __lookahead, __sym1));
+                    __result = try!(__state106(input, __lookbehind, __tokens, __lookahead, __sym1));
                 }
                 __Nonterminal::TokenTree_2b(__nt) => {
                     let __sym1 = &mut Some(__nt);
-                    __result = try!(__state145(input, __lookbehind, __tokens, __lookahead, __sym0, __sym1));
+                    __result = try!(__state148(input, __lookbehind, __tokens, __lookahead, __sym0, __sym1));
                 }
                 __Nonterminal::UnpairedToken(__nt) => {
                     let __sym1 = &mut Some(__nt);
-                    __result = try!(__state105(input, __lookbehind, __tokens, __lookahead, __sym1));
+                    __result = try!(__state108(input, __lookbehind, __tokens, __lookahead, __sym1));
                 }
                 _ => {
                     return Ok((__lookbehind, __lookahead, __nt));
@@ -12433,7 +12702,7 @@ mod __parse__Yacc {
         return Ok(__result);
     }
 
-    // State 107
+    // State 110
     //   TokenTree = "(" ")" (*) ["("]
     //   TokenTree = "(" ")" (*) ["*"]
     //   TokenTree = "(" ")" (*) [","]
@@ -12450,23 +12719,23 @@ mod __parse__Yacc {
     //   TokenTree = "(" ")" (*) [r#"[0-9]+"#]
     //   TokenTree = "(" ")" (*) [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
     //
-    //   "(" -> Reduce(TokenTree = "(", ")" => ActionFn(77);)
-    //   "*" -> Reduce(TokenTree = "(", ")" => ActionFn(77);)
-    //   "," -> Reduce(TokenTree = "(", ")" => ActionFn(77);)
-    //   "." -> Reduce(TokenTree = "(", ")" => ActionFn(77);)
-    //   ";" -> Reduce(TokenTree = "(", ")" => ActionFn(77);)
-    //   "=" -> Reduce(TokenTree = "(", ")" => ActionFn(77);)
-    //   "[" -> Reduce(TokenTree = "(", ")" => ActionFn(77);)
-    //   "{" -> Reduce(TokenTree = "(", ")" => ActionFn(77);)
-    //   "}" -> Reduce(TokenTree = "(", ")" => ActionFn(77);)
-    //   r#"\"[^\"]*\""# -> Reduce(TokenTree = "(", ")" => ActionFn(77);)
-    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "(", ")" => ActionFn(77);)
-    //   r#"$[$0-9]+"# -> Reduce(TokenTree = "(", ")" => ActionFn(77);)
-    //   r#"\'.\'"# -> Reduce(TokenTree = "(", ")" => ActionFn(77);)
-    //   r#"[0-9]+"# -> Reduce(TokenTree = "(", ")" => ActionFn(77);)
-    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "(", ")" => ActionFn(77);)
+    //   "(" -> Reduce(TokenTree = "(", ")" => ActionFn(83);)
+    //   "*" -> Reduce(TokenTree = "(", ")" => ActionFn(83);)
+    //   "," -> Reduce(TokenTree = "(", ")" => ActionFn(83);)
+    //   "." -> Reduce(TokenTree = "(", ")" => ActionFn(83);)
+    //   ";" -> Reduce(TokenTree = "(", ")" => ActionFn(83);)
+    //   "=" -> Reduce(TokenTree = "(", ")" => ActionFn(83);)
+    //   "[" -> Reduce(TokenTree = "(", ")" => ActionFn(83);)
+    //   "{" -> Reduce(TokenTree = "(", ")" => ActionFn(83);)
+    //   "}" -> Reduce(TokenTree = "(", ")" => ActionFn(83);)
+    //   r#"\"[^\"]*\""# -> Reduce(TokenTree = "(", ")" => ActionFn(83);)
+    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "(", ")" => ActionFn(83);)
+    //   r#"$[$0-9]+"# -> Reduce(TokenTree = "(", ")" => ActionFn(83);)
+    //   r#"\'.\'"# -> Reduce(TokenTree = "(", ")" => ActionFn(83);)
+    //   r#"[0-9]+"# -> Reduce(TokenTree = "(", ")" => ActionFn(83);)
+    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "(", ")" => ActionFn(83);)
     //
-    pub fn __state107<
+    pub fn __state110<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -12501,7 +12770,7 @@ mod __parse__Yacc {
             Some((_, (31, _), _)) => {
                 let __sym0 = __sym0.take().unwrap();
                 let __sym1 = __sym1.take().unwrap();
-                let __nt = super::__action77(input, __sym0, __sym1, &__lookbehind, &__lookahead);
+                let __nt = super::__action83(input, __sym0, __sym1, &__lookbehind, &__lookahead);
                 return Ok((__lookbehind, __lookahead, __Nonterminal::TokenTree(__nt)));
             }
             _ => {
@@ -12513,7 +12782,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 108
+    // State 111
     //   UnpairedToken = "*" (*) ["("]
     //   UnpairedToken = "*" (*) [")"]
     //   UnpairedToken = "*" (*) ["*"]
@@ -12546,7 +12815,7 @@ mod __parse__Yacc {
     //   r#"[0-9]+"# -> Reduce(UnpairedToken = "*" => ActionFn(45);)
     //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(UnpairedToken = "*" => ActionFn(45);)
     //
-    pub fn __state108<
+    pub fn __state111<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -12591,7 +12860,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 109
+    // State 112
     //   UnpairedToken = "," (*) ["("]
     //   UnpairedToken = "," (*) [")"]
     //   UnpairedToken = "," (*) ["*"]
@@ -12624,7 +12893,7 @@ mod __parse__Yacc {
     //   r#"[0-9]+"# -> Reduce(UnpairedToken = "," => ActionFn(40);)
     //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(UnpairedToken = "," => ActionFn(40);)
     //
-    pub fn __state109<
+    pub fn __state112<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -12669,7 +12938,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 110
+    // State 113
     //   UnpairedToken = "." (*) ["("]
     //   UnpairedToken = "." (*) [")"]
     //   UnpairedToken = "." (*) ["*"]
@@ -12702,7 +12971,7 @@ mod __parse__Yacc {
     //   r#"[0-9]+"# -> Reduce(UnpairedToken = "." => ActionFn(39);)
     //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(UnpairedToken = "." => ActionFn(39);)
     //
-    pub fn __state110<
+    pub fn __state113<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -12747,7 +13016,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 111
+    // State 114
     //   UnpairedToken = ";" (*) ["("]
     //   UnpairedToken = ";" (*) [")"]
     //   UnpairedToken = ";" (*) ["*"]
@@ -12780,7 +13049,7 @@ mod __parse__Yacc {
     //   r#"[0-9]+"# -> Reduce(UnpairedToken = ";" => ActionFn(42);)
     //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(UnpairedToken = ";" => ActionFn(42);)
     //
-    pub fn __state111<
+    pub fn __state114<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -12825,7 +13094,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 112
+    // State 115
     //   UnpairedToken = "=" (*) ["("]
     //   UnpairedToken = "=" (*) [")"]
     //   UnpairedToken = "=" (*) ["*"]
@@ -12858,7 +13127,7 @@ mod __parse__Yacc {
     //   r#"[0-9]+"# -> Reduce(UnpairedToken = "=" => ActionFn(41);)
     //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(UnpairedToken = "=" => ActionFn(41);)
     //
-    pub fn __state112<
+    pub fn __state115<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -12903,7 +13172,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 113
+    // State 116
     //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# ["("]
     //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# ["*"]
     //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# [","]
@@ -13265,28 +13534,28 @@ mod __parse__Yacc {
     //   UnpairedToken = (*) r#"\'.\'"# [r#"[0-9]+"#]
     //   UnpairedToken = (*) r#"\'.\'"# [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
     //
-    //   "(" -> Shift(S126)
-    //   "*" -> Shift(S127)
-    //   "," -> Shift(S128)
-    //   "." -> Shift(S129)
-    //   ";" -> Shift(S130)
-    //   "=" -> Shift(S131)
-    //   "[" -> Shift(S132)
-    //   "]" -> Shift(S148)
-    //   "{" -> Shift(S134)
-    //   r#"\"[^\"]*\""# -> Shift(S135)
-    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S136)
-    //   r#"$[$0-9]+"# -> Shift(S137)
-    //   r#"\'.\'"# -> Shift(S138)
-    //   r#"[0-9]+"# -> Shift(S139)
-    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S140)
+    //   "(" -> Shift(S129)
+    //   "*" -> Shift(S130)
+    //   "," -> Shift(S131)
+    //   "." -> Shift(S132)
+    //   ";" -> Shift(S133)
+    //   "=" -> Shift(S134)
+    //   "[" -> Shift(S135)
+    //   "]" -> Shift(S151)
+    //   "{" -> Shift(S137)
+    //   r#"\"[^\"]*\""# -> Shift(S138)
+    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S139)
+    //   r#"$[$0-9]+"# -> Shift(S140)
+    //   r#"\'.\'"# -> Shift(S141)
+    //   r#"[0-9]+"# -> Shift(S142)
+    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S143)
     //
-    //   Ident -> S121
-    //   Integer -> S122
-    //   TokenTree -> S123
-    //   TokenTree+ -> S147
-    //   UnpairedToken -> S125
-    pub fn __state113<
+    //   Ident -> S124
+    //   Integer -> S125
+    //   TokenTree -> S126
+    //   TokenTree+ -> S150
+    //   UnpairedToken -> S128
+    pub fn __state116<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -13306,77 +13575,77 @@ mod __parse__Yacc {
             Some((_, (13, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state126(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state129(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (15, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state127(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state130(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (16, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state128(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state131(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (17, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state129(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state132(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (19, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state130(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state133(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (20, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state131(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state134(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (21, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state132(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state135(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (22, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state148(input, __lookbehind, __tokens, __sym0, __sym1));
+                __result = try!(__state151(input, __lookbehind, __tokens, __sym0, __sym1));
             }
             Some((_, (23, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state134(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state137(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (26, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state135(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state138(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (27, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state136(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state139(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (28, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state137(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state140(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (29, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state138(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state141(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (30, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state139(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state142(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (31, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state140(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state143(input, __lookbehind, __tokens, __sym1));
             }
             _ => {
                 return Err(__ParseError::UnrecognizedToken {
@@ -13390,23 +13659,23 @@ mod __parse__Yacc {
             match __nt {
                 __Nonterminal::Ident(__nt) => {
                     let __sym1 = &mut Some(__nt);
-                    __result = try!(__state121(input, __lookbehind, __tokens, __lookahead, __sym1));
+                    __result = try!(__state124(input, __lookbehind, __tokens, __lookahead, __sym1));
                 }
                 __Nonterminal::Integer(__nt) => {
                     let __sym1 = &mut Some(__nt);
-                    __result = try!(__state122(input, __lookbehind, __tokens, __lookahead, __sym1));
+                    __result = try!(__state125(input, __lookbehind, __tokens, __lookahead, __sym1));
                 }
                 __Nonterminal::TokenTree(__nt) => {
                     let __sym1 = &mut Some(__nt);
-                    __result = try!(__state123(input, __lookbehind, __tokens, __lookahead, __sym1));
+                    __result = try!(__state126(input, __lookbehind, __tokens, __lookahead, __sym1));
                 }
                 __Nonterminal::TokenTree_2b(__nt) => {
                     let __sym1 = &mut Some(__nt);
-                    __result = try!(__state147(input, __lookbehind, __tokens, __lookahead, __sym0, __sym1));
+                    __result = try!(__state150(input, __lookbehind, __tokens, __lookahead, __sym0, __sym1));
                 }
                 __Nonterminal::UnpairedToken(__nt) => {
                     let __sym1 = &mut Some(__nt);
-                    __result = try!(__state125(input, __lookbehind, __tokens, __lookahead, __sym1));
+                    __result = try!(__state128(input, __lookbehind, __tokens, __lookahead, __sym1));
                 }
                 _ => {
                     return Ok((__lookbehind, __lookahead, __nt));
@@ -13416,7 +13685,7 @@ mod __parse__Yacc {
         return Ok(__result);
     }
 
-    // State 114
+    // State 117
     //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# ["("]
     //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# ["*"]
     //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# [","]
@@ -13778,28 +14047,28 @@ mod __parse__Yacc {
     //   UnpairedToken = (*) r#"\'.\'"# [r#"[0-9]+"#]
     //   UnpairedToken = (*) r#"\'.\'"# [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
     //
-    //   "(" -> Shift(S83)
-    //   "*" -> Shift(S84)
-    //   "," -> Shift(S85)
-    //   "." -> Shift(S86)
-    //   ";" -> Shift(S87)
-    //   "=" -> Shift(S88)
-    //   "[" -> Shift(S89)
-    //   "{" -> Shift(S90)
-    //   "}" -> Shift(S150)
-    //   r#"\"[^\"]*\""# -> Shift(S92)
-    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S93)
-    //   r#"$[$0-9]+"# -> Shift(S94)
-    //   r#"\'.\'"# -> Shift(S95)
-    //   r#"[0-9]+"# -> Shift(S96)
-    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S97)
+    //   "(" -> Shift(S86)
+    //   "*" -> Shift(S87)
+    //   "," -> Shift(S88)
+    //   "." -> Shift(S89)
+    //   ";" -> Shift(S90)
+    //   "=" -> Shift(S91)
+    //   "[" -> Shift(S92)
+    //   "{" -> Shift(S93)
+    //   "}" -> Shift(S153)
+    //   r#"\"[^\"]*\""# -> Shift(S95)
+    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S96)
+    //   r#"$[$0-9]+"# -> Shift(S97)
+    //   r#"\'.\'"# -> Shift(S98)
+    //   r#"[0-9]+"# -> Shift(S99)
+    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S100)
     //
-    //   Ident -> S78
-    //   Integer -> S79
-    //   TokenTree -> S80
-    //   TokenTree+ -> S149
-    //   UnpairedToken -> S82
-    pub fn __state114<
+    //   Ident -> S81
+    //   Integer -> S82
+    //   TokenTree -> S83
+    //   TokenTree+ -> S152
+    //   UnpairedToken -> S85
+    pub fn __state117<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -13819,77 +14088,77 @@ mod __parse__Yacc {
             Some((_, (13, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state83(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state86(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (15, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state84(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state87(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (16, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state85(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state88(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (17, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state86(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state89(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (19, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state87(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state90(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (20, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state88(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state91(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (21, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state89(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state92(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (23, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state90(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state93(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (25, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state150(input, __lookbehind, __tokens, __sym0, __sym1));
+                __result = try!(__state153(input, __lookbehind, __tokens, __sym0, __sym1));
             }
             Some((_, (26, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state92(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state95(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (27, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state93(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state96(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (28, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state94(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state97(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (29, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state95(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state98(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (30, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state96(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state99(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (31, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state97(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state100(input, __lookbehind, __tokens, __sym1));
             }
             _ => {
                 return Err(__ParseError::UnrecognizedToken {
@@ -13903,23 +14172,23 @@ mod __parse__Yacc {
             match __nt {
                 __Nonterminal::Ident(__nt) => {
                     let __sym1 = &mut Some(__nt);
-                    __result = try!(__state78(input, __lookbehind, __tokens, __lookahead, __sym1));
+                    __result = try!(__state81(input, __lookbehind, __tokens, __lookahead, __sym1));
                 }
                 __Nonterminal::Integer(__nt) => {
                     let __sym1 = &mut Some(__nt);
-                    __result = try!(__state79(input, __lookbehind, __tokens, __lookahead, __sym1));
+                    __result = try!(__state82(input, __lookbehind, __tokens, __lookahead, __sym1));
                 }
                 __Nonterminal::TokenTree(__nt) => {
                     let __sym1 = &mut Some(__nt);
-                    __result = try!(__state80(input, __lookbehind, __tokens, __lookahead, __sym1));
+                    __result = try!(__state83(input, __lookbehind, __tokens, __lookahead, __sym1));
                 }
                 __Nonterminal::TokenTree_2b(__nt) => {
                     let __sym1 = &mut Some(__nt);
-                    __result = try!(__state149(input, __lookbehind, __tokens, __lookahead, __sym0, __sym1));
+                    __result = try!(__state152(input, __lookbehind, __tokens, __lookahead, __sym0, __sym1));
                 }
                 __Nonterminal::UnpairedToken(__nt) => {
                     let __sym1 = &mut Some(__nt);
-                    __result = try!(__state82(input, __lookbehind, __tokens, __lookahead, __sym1));
+                    __result = try!(__state85(input, __lookbehind, __tokens, __lookahead, __sym1));
                 }
                 _ => {
                     return Ok((__lookbehind, __lookahead, __nt));
@@ -13929,7 +14198,7 @@ mod __parse__Yacc {
         return Ok(__result);
     }
 
-    // State 115
+    // State 118
     //   UnpairedToken = r#"\"[^\"]*\""# (*) ["("]
     //   UnpairedToken = r#"\"[^\"]*\""# (*) [")"]
     //   UnpairedToken = r#"\"[^\"]*\""# (*) ["*"]
@@ -13962,7 +14231,7 @@ mod __parse__Yacc {
     //   r#"[0-9]+"# -> Reduce(UnpairedToken = r#"\"[^\"]*\""# => ActionFn(38);)
     //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(UnpairedToken = r#"\"[^\"]*\""# => ActionFn(38);)
     //
-    pub fn __state115<
+    pub fn __state118<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -14007,7 +14276,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 116
+    // State 119
     //   UnpairedToken = r#"#[_a-zA-Z][_a-zA-Z0-9]*"# (*) ["("]
     //   UnpairedToken = r#"#[_a-zA-Z][_a-zA-Z0-9]*"# (*) [")"]
     //   UnpairedToken = r#"#[_a-zA-Z][_a-zA-Z0-9]*"# (*) ["*"]
@@ -14040,7 +14309,7 @@ mod __parse__Yacc {
     //   r#"[0-9]+"# -> Reduce(UnpairedToken = r#"#[_a-zA-Z][_a-zA-Z0-9]*"# => ActionFn(44);)
     //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(UnpairedToken = r#"#[_a-zA-Z][_a-zA-Z0-9]*"# => ActionFn(44);)
     //
-    pub fn __state116<
+    pub fn __state119<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -14085,7 +14354,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 117
+    // State 120
     //   UnpairedToken = r#"$[$0-9]+"# (*) ["("]
     //   UnpairedToken = r#"$[$0-9]+"# (*) [")"]
     //   UnpairedToken = r#"$[$0-9]+"# (*) ["*"]
@@ -14118,7 +14387,7 @@ mod __parse__Yacc {
     //   r#"[0-9]+"# -> Reduce(UnpairedToken = r#"$[$0-9]+"# => ActionFn(43);)
     //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(UnpairedToken = r#"$[$0-9]+"# => ActionFn(43);)
     //
-    pub fn __state117<
+    pub fn __state120<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -14163,7 +14432,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 118
+    // State 121
     //   UnpairedToken = r#"\'.\'"# (*) ["("]
     //   UnpairedToken = r#"\'.\'"# (*) [")"]
     //   UnpairedToken = r#"\'.\'"# (*) ["*"]
@@ -14196,7 +14465,7 @@ mod __parse__Yacc {
     //   r#"[0-9]+"# -> Reduce(UnpairedToken = r#"\'.\'"# => ActionFn(46);)
     //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(UnpairedToken = r#"\'.\'"# => ActionFn(46);)
     //
-    pub fn __state118<
+    pub fn __state121<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -14241,7 +14510,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 119
+    // State 122
     //   Integer = r#"[0-9]+"# (*) ["("]
     //   Integer = r#"[0-9]+"# (*) [")"]
     //   Integer = r#"[0-9]+"# (*) ["*"]
@@ -14274,7 +14543,7 @@ mod __parse__Yacc {
     //   r#"[0-9]+"# -> Reduce(Integer = r#"[0-9]+"# => ActionFn(15);)
     //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(Integer = r#"[0-9]+"# => ActionFn(15);)
     //
-    pub fn __state119<
+    pub fn __state122<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -14319,7 +14588,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 120
+    // State 123
     //   Ident = r#"[_a-zA-Z][_a-zA-Z0-9]*"# (*) ["("]
     //   Ident = r#"[_a-zA-Z][_a-zA-Z0-9]*"# (*) [")"]
     //   Ident = r#"[_a-zA-Z][_a-zA-Z0-9]*"# (*) ["*"]
@@ -14352,7 +14621,7 @@ mod __parse__Yacc {
     //   r#"[0-9]+"# -> Reduce(Ident = r#"[_a-zA-Z][_a-zA-Z0-9]*"# => ActionFn(14);)
     //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(Ident = r#"[_a-zA-Z][_a-zA-Z0-9]*"# => ActionFn(14);)
     //
-    pub fn __state120<
+    pub fn __state123<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -14397,7 +14666,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 121
+    // State 124
     //   UnpairedToken = Ident (*) ["("]
     //   UnpairedToken = Ident (*) ["*"]
     //   UnpairedToken = Ident (*) [","]
@@ -14430,7 +14699,7 @@ mod __parse__Yacc {
     //   r#"[0-9]+"# -> Reduce(UnpairedToken = Ident => ActionFn(36);)
     //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(UnpairedToken = Ident => ActionFn(36);)
     //
-    pub fn __state121<
+    pub fn __state124<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -14471,7 +14740,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 122
+    // State 125
     //   UnpairedToken = Integer (*) ["("]
     //   UnpairedToken = Integer (*) ["*"]
     //   UnpairedToken = Integer (*) [","]
@@ -14504,7 +14773,7 @@ mod __parse__Yacc {
     //   r#"[0-9]+"# -> Reduce(UnpairedToken = Integer => ActionFn(37);)
     //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(UnpairedToken = Integer => ActionFn(37);)
     //
-    pub fn __state122<
+    pub fn __state125<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -14545,7 +14814,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 123
+    // State 126
     //   TokenTree+ = TokenTree (*) ["("]
     //   TokenTree+ = TokenTree (*) ["*"]
     //   TokenTree+ = TokenTree (*) [","]
@@ -14562,23 +14831,23 @@ mod __parse__Yacc {
     //   TokenTree+ = TokenTree (*) [r#"[0-9]+"#]
     //   TokenTree+ = TokenTree (*) [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
     //
-    //   "(" -> Reduce(TokenTree+ = TokenTree => ActionFn(65);)
-    //   "*" -> Reduce(TokenTree+ = TokenTree => ActionFn(65);)
-    //   "," -> Reduce(TokenTree+ = TokenTree => ActionFn(65);)
-    //   "." -> Reduce(TokenTree+ = TokenTree => ActionFn(65);)
-    //   ";" -> Reduce(TokenTree+ = TokenTree => ActionFn(65);)
-    //   "=" -> Reduce(TokenTree+ = TokenTree => ActionFn(65);)
-    //   "[" -> Reduce(TokenTree+ = TokenTree => ActionFn(65);)
-    //   "]" -> Reduce(TokenTree+ = TokenTree => ActionFn(65);)
-    //   "{" -> Reduce(TokenTree+ = TokenTree => ActionFn(65);)
-    //   r#"\"[^\"]*\""# -> Reduce(TokenTree+ = TokenTree => ActionFn(65);)
-    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree+ = TokenTree => ActionFn(65);)
-    //   r#"$[$0-9]+"# -> Reduce(TokenTree+ = TokenTree => ActionFn(65);)
-    //   r#"\'.\'"# -> Reduce(TokenTree+ = TokenTree => ActionFn(65);)
-    //   r#"[0-9]+"# -> Reduce(TokenTree+ = TokenTree => ActionFn(65);)
-    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree+ = TokenTree => ActionFn(65);)
+    //   "(" -> Reduce(TokenTree+ = TokenTree => ActionFn(69);)
+    //   "*" -> Reduce(TokenTree+ = TokenTree => ActionFn(69);)
+    //   "," -> Reduce(TokenTree+ = TokenTree => ActionFn(69);)
+    //   "." -> Reduce(TokenTree+ = TokenTree => ActionFn(69);)
+    //   ";" -> Reduce(TokenTree+ = TokenTree => ActionFn(69);)
+    //   "=" -> Reduce(TokenTree+ = TokenTree => ActionFn(69);)
+    //   "[" -> Reduce(TokenTree+ = TokenTree => ActionFn(69);)
+    //   "]" -> Reduce(TokenTree+ = TokenTree => ActionFn(69);)
+    //   "{" -> Reduce(TokenTree+ = TokenTree => ActionFn(69);)
+    //   r#"\"[^\"]*\""# -> Reduce(TokenTree+ = TokenTree => ActionFn(69);)
+    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree+ = TokenTree => ActionFn(69);)
+    //   r#"$[$0-9]+"# -> Reduce(TokenTree+ = TokenTree => ActionFn(69);)
+    //   r#"\'.\'"# -> Reduce(TokenTree+ = TokenTree => ActionFn(69);)
+    //   r#"[0-9]+"# -> Reduce(TokenTree+ = TokenTree => ActionFn(69);)
+    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree+ = TokenTree => ActionFn(69);)
     //
-    pub fn __state123<
+    pub fn __state126<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -14607,7 +14876,7 @@ mod __parse__Yacc {
             Some((_, (30, _), _)) |
             Some((_, (31, _), _)) => {
                 let __sym0 = __sym0.take().unwrap();
-                let __nt = super::__action65(input, __sym0, &__lookbehind, &__lookahead);
+                let __nt = super::__action69(input, __sym0, &__lookbehind, &__lookahead);
                 return Ok((__lookbehind, __lookahead, __Nonterminal::TokenTree_2b(__nt)));
             }
             _ => {
@@ -14619,7 +14888,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 124
+    // State 127
     //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# ["("]
     //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# ["*"]
     //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# [","]
@@ -14951,27 +15220,27 @@ mod __parse__Yacc {
     //   UnpairedToken = (*) r#"\'.\'"# [r#"[0-9]+"#]
     //   UnpairedToken = (*) r#"\'.\'"# [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
     //
-    //   "(" -> Shift(S126)
-    //   "*" -> Shift(S127)
-    //   "," -> Shift(S128)
-    //   "." -> Shift(S129)
-    //   ";" -> Shift(S130)
-    //   "=" -> Shift(S131)
-    //   "[" -> Shift(S132)
-    //   "]" -> Shift(S152)
-    //   "{" -> Shift(S134)
-    //   r#"\"[^\"]*\""# -> Shift(S135)
-    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S136)
-    //   r#"$[$0-9]+"# -> Shift(S137)
-    //   r#"\'.\'"# -> Shift(S138)
-    //   r#"[0-9]+"# -> Shift(S139)
-    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S140)
+    //   "(" -> Shift(S129)
+    //   "*" -> Shift(S130)
+    //   "," -> Shift(S131)
+    //   "." -> Shift(S132)
+    //   ";" -> Shift(S133)
+    //   "=" -> Shift(S134)
+    //   "[" -> Shift(S135)
+    //   "]" -> Shift(S155)
+    //   "{" -> Shift(S137)
+    //   r#"\"[^\"]*\""# -> Shift(S138)
+    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S139)
+    //   r#"$[$0-9]+"# -> Shift(S140)
+    //   r#"\'.\'"# -> Shift(S141)
+    //   r#"[0-9]+"# -> Shift(S142)
+    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S143)
     //
-    //   Ident -> S121
-    //   Integer -> S122
-    //   TokenTree -> S151
-    //   UnpairedToken -> S125
-    pub fn __state124<
+    //   Ident -> S124
+    //   Integer -> S125
+    //   TokenTree -> S154
+    //   UnpairedToken -> S128
+    pub fn __state127<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -14988,77 +15257,77 @@ mod __parse__Yacc {
             Some((_, (13, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state126(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state129(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (15, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state127(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state130(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (16, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state128(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state131(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (17, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state129(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state132(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (19, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state130(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state133(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (20, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state131(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state134(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (21, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state132(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state135(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (22, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state152(input, __lookbehind, __tokens, __sym0, __sym1, __sym2));
+                __result = try!(__state155(input, __lookbehind, __tokens, __sym0, __sym1, __sym2));
             }
             Some((_, (23, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state134(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state137(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (26, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state135(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state138(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (27, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state136(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state139(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (28, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state137(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state140(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (29, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state138(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state141(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (30, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state139(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state142(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (31, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state140(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state143(input, __lookbehind, __tokens, __sym2));
             }
             _ => {
                 return Err(__ParseError::UnrecognizedToken {
@@ -15072,19 +15341,19 @@ mod __parse__Yacc {
             match __nt {
                 __Nonterminal::Ident(__nt) => {
                     let __sym2 = &mut Some(__nt);
-                    __result = try!(__state121(input, __lookbehind, __tokens, __lookahead, __sym2));
+                    __result = try!(__state124(input, __lookbehind, __tokens, __lookahead, __sym2));
                 }
                 __Nonterminal::Integer(__nt) => {
                     let __sym2 = &mut Some(__nt);
-                    __result = try!(__state122(input, __lookbehind, __tokens, __lookahead, __sym2));
+                    __result = try!(__state125(input, __lookbehind, __tokens, __lookahead, __sym2));
                 }
                 __Nonterminal::TokenTree(__nt) => {
                     let __sym2 = &mut Some(__nt);
-                    __result = try!(__state151(input, __lookbehind, __tokens, __lookahead, __sym1, __sym2));
+                    __result = try!(__state154(input, __lookbehind, __tokens, __lookahead, __sym1, __sym2));
                 }
                 __Nonterminal::UnpairedToken(__nt) => {
                     let __sym2 = &mut Some(__nt);
-                    __result = try!(__state125(input, __lookbehind, __tokens, __lookahead, __sym2));
+                    __result = try!(__state128(input, __lookbehind, __tokens, __lookahead, __sym2));
                 }
                 _ => {
                     return Ok((__lookbehind, __lookahead, __nt));
@@ -15094,7 +15363,7 @@ mod __parse__Yacc {
         return Ok(__result);
     }
 
-    // State 125
+    // State 128
     //   TokenTree = UnpairedToken (*) ["("]
     //   TokenTree = UnpairedToken (*) ["*"]
     //   TokenTree = UnpairedToken (*) [","]
@@ -15127,7 +15396,7 @@ mod __parse__Yacc {
     //   r#"[0-9]+"# -> Reduce(TokenTree = UnpairedToken => ActionFn(28);)
     //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = UnpairedToken => ActionFn(28);)
     //
-    pub fn __state125<
+    pub fn __state128<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -15168,7 +15437,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 126
+    // State 129
     //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# ["("]
     //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# [")"]
     //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# ["*"]
@@ -15530,28 +15799,28 @@ mod __parse__Yacc {
     //   UnpairedToken = (*) r#"\'.\'"# [r#"[0-9]+"#]
     //   UnpairedToken = (*) r#"\'.\'"# [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
     //
-    //   "(" -> Shift(S106)
-    //   ")" -> Shift(S154)
-    //   "*" -> Shift(S108)
-    //   "," -> Shift(S109)
-    //   "." -> Shift(S110)
-    //   ";" -> Shift(S111)
-    //   "=" -> Shift(S112)
-    //   "[" -> Shift(S113)
-    //   "{" -> Shift(S114)
-    //   r#"\"[^\"]*\""# -> Shift(S115)
-    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S116)
-    //   r#"$[$0-9]+"# -> Shift(S117)
-    //   r#"\'.\'"# -> Shift(S118)
-    //   r#"[0-9]+"# -> Shift(S119)
-    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S120)
+    //   "(" -> Shift(S109)
+    //   ")" -> Shift(S157)
+    //   "*" -> Shift(S111)
+    //   "," -> Shift(S112)
+    //   "." -> Shift(S113)
+    //   ";" -> Shift(S114)
+    //   "=" -> Shift(S115)
+    //   "[" -> Shift(S116)
+    //   "{" -> Shift(S117)
+    //   r#"\"[^\"]*\""# -> Shift(S118)
+    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S119)
+    //   r#"$[$0-9]+"# -> Shift(S120)
+    //   r#"\'.\'"# -> Shift(S121)
+    //   r#"[0-9]+"# -> Shift(S122)
+    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S123)
     //
-    //   Ident -> S101
-    //   Integer -> S102
-    //   TokenTree -> S103
-    //   TokenTree+ -> S153
-    //   UnpairedToken -> S105
-    pub fn __state126<
+    //   Ident -> S104
+    //   Integer -> S105
+    //   TokenTree -> S106
+    //   TokenTree+ -> S156
+    //   UnpairedToken -> S108
+    pub fn __state129<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -15571,77 +15840,77 @@ mod __parse__Yacc {
             Some((_, (13, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state106(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state109(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (14, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state154(input, __lookbehind, __tokens, __sym0, __sym1));
+                __result = try!(__state157(input, __lookbehind, __tokens, __sym0, __sym1));
             }
             Some((_, (15, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state108(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state111(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (16, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state109(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state112(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (17, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state110(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state113(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (19, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state111(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state114(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (20, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state112(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state115(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (21, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state113(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state116(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (23, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state114(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state117(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (26, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state115(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state118(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (27, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state116(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state119(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (28, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state117(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state120(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (29, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state118(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state121(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (30, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state119(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state122(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (31, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state120(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state123(input, __lookbehind, __tokens, __sym1));
             }
             _ => {
                 return Err(__ParseError::UnrecognizedToken {
@@ -15655,23 +15924,23 @@ mod __parse__Yacc {
             match __nt {
                 __Nonterminal::Ident(__nt) => {
                     let __sym1 = &mut Some(__nt);
-                    __result = try!(__state101(input, __lookbehind, __tokens, __lookahead, __sym1));
+                    __result = try!(__state104(input, __lookbehind, __tokens, __lookahead, __sym1));
                 }
                 __Nonterminal::Integer(__nt) => {
                     let __sym1 = &mut Some(__nt);
-                    __result = try!(__state102(input, __lookbehind, __tokens, __lookahead, __sym1));
+                    __result = try!(__state105(input, __lookbehind, __tokens, __lookahead, __sym1));
                 }
                 __Nonterminal::TokenTree(__nt) => {
                     let __sym1 = &mut Some(__nt);
-                    __result = try!(__state103(input, __lookbehind, __tokens, __lookahead, __sym1));
+                    __result = try!(__state106(input, __lookbehind, __tokens, __lookahead, __sym1));
                 }
                 __Nonterminal::TokenTree_2b(__nt) => {
                     let __sym1 = &mut Some(__nt);
-                    __result = try!(__state153(input, __lookbehind, __tokens, __lookahead, __sym0, __sym1));
+                    __result = try!(__state156(input, __lookbehind, __tokens, __lookahead, __sym0, __sym1));
                 }
                 __Nonterminal::UnpairedToken(__nt) => {
                     let __sym1 = &mut Some(__nt);
-                    __result = try!(__state105(input, __lookbehind, __tokens, __lookahead, __sym1));
+                    __result = try!(__state108(input, __lookbehind, __tokens, __lookahead, __sym1));
                 }
                 _ => {
                     return Ok((__lookbehind, __lookahead, __nt));
@@ -15681,7 +15950,7 @@ mod __parse__Yacc {
         return Ok(__result);
     }
 
-    // State 127
+    // State 130
     //   UnpairedToken = "*" (*) ["("]
     //   UnpairedToken = "*" (*) ["*"]
     //   UnpairedToken = "*" (*) [","]
@@ -15714,7 +15983,7 @@ mod __parse__Yacc {
     //   r#"[0-9]+"# -> Reduce(UnpairedToken = "*" => ActionFn(45);)
     //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(UnpairedToken = "*" => ActionFn(45);)
     //
-    pub fn __state127<
+    pub fn __state130<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -15759,7 +16028,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 128
+    // State 131
     //   UnpairedToken = "," (*) ["("]
     //   UnpairedToken = "," (*) ["*"]
     //   UnpairedToken = "," (*) [","]
@@ -15792,7 +16061,7 @@ mod __parse__Yacc {
     //   r#"[0-9]+"# -> Reduce(UnpairedToken = "," => ActionFn(40);)
     //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(UnpairedToken = "," => ActionFn(40);)
     //
-    pub fn __state128<
+    pub fn __state131<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -15837,7 +16106,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 129
+    // State 132
     //   UnpairedToken = "." (*) ["("]
     //   UnpairedToken = "." (*) ["*"]
     //   UnpairedToken = "." (*) [","]
@@ -15870,7 +16139,7 @@ mod __parse__Yacc {
     //   r#"[0-9]+"# -> Reduce(UnpairedToken = "." => ActionFn(39);)
     //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(UnpairedToken = "." => ActionFn(39);)
     //
-    pub fn __state129<
+    pub fn __state132<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -15915,7 +16184,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 130
+    // State 133
     //   UnpairedToken = ";" (*) ["("]
     //   UnpairedToken = ";" (*) ["*"]
     //   UnpairedToken = ";" (*) [","]
@@ -15948,7 +16217,7 @@ mod __parse__Yacc {
     //   r#"[0-9]+"# -> Reduce(UnpairedToken = ";" => ActionFn(42);)
     //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(UnpairedToken = ";" => ActionFn(42);)
     //
-    pub fn __state130<
+    pub fn __state133<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -15993,7 +16262,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 131
+    // State 134
     //   UnpairedToken = "=" (*) ["("]
     //   UnpairedToken = "=" (*) ["*"]
     //   UnpairedToken = "=" (*) [","]
@@ -16026,7 +16295,7 @@ mod __parse__Yacc {
     //   r#"[0-9]+"# -> Reduce(UnpairedToken = "=" => ActionFn(41);)
     //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(UnpairedToken = "=" => ActionFn(41);)
     //
-    pub fn __state131<
+    pub fn __state134<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -16071,7 +16340,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 132
+    // State 135
     //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# ["("]
     //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# ["*"]
     //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# [","]
@@ -16433,28 +16702,28 @@ mod __parse__Yacc {
     //   UnpairedToken = (*) r#"\'.\'"# [r#"[0-9]+"#]
     //   UnpairedToken = (*) r#"\'.\'"# [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
     //
-    //   "(" -> Shift(S126)
-    //   "*" -> Shift(S127)
-    //   "," -> Shift(S128)
-    //   "." -> Shift(S129)
-    //   ";" -> Shift(S130)
-    //   "=" -> Shift(S131)
-    //   "[" -> Shift(S132)
-    //   "]" -> Shift(S156)
-    //   "{" -> Shift(S134)
-    //   r#"\"[^\"]*\""# -> Shift(S135)
-    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S136)
-    //   r#"$[$0-9]+"# -> Shift(S137)
-    //   r#"\'.\'"# -> Shift(S138)
-    //   r#"[0-9]+"# -> Shift(S139)
-    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S140)
+    //   "(" -> Shift(S129)
+    //   "*" -> Shift(S130)
+    //   "," -> Shift(S131)
+    //   "." -> Shift(S132)
+    //   ";" -> Shift(S133)
+    //   "=" -> Shift(S134)
+    //   "[" -> Shift(S135)
+    //   "]" -> Shift(S159)
+    //   "{" -> Shift(S137)
+    //   r#"\"[^\"]*\""# -> Shift(S138)
+    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S139)
+    //   r#"$[$0-9]+"# -> Shift(S140)
+    //   r#"\'.\'"# -> Shift(S141)
+    //   r#"[0-9]+"# -> Shift(S142)
+    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S143)
     //
-    //   Ident -> S121
-    //   Integer -> S122
-    //   TokenTree -> S123
-    //   TokenTree+ -> S155
-    //   UnpairedToken -> S125
-    pub fn __state132<
+    //   Ident -> S124
+    //   Integer -> S125
+    //   TokenTree -> S126
+    //   TokenTree+ -> S158
+    //   UnpairedToken -> S128
+    pub fn __state135<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -16474,77 +16743,77 @@ mod __parse__Yacc {
             Some((_, (13, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state126(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state129(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (15, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state127(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state130(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (16, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state128(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state131(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (17, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state129(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state132(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (19, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state130(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state133(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (20, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state131(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state134(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (21, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state132(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state135(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (22, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state156(input, __lookbehind, __tokens, __sym0, __sym1));
+                __result = try!(__state159(input, __lookbehind, __tokens, __sym0, __sym1));
             }
             Some((_, (23, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state134(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state137(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (26, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state135(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state138(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (27, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state136(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state139(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (28, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state137(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state140(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (29, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state138(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state141(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (30, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state139(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state142(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (31, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state140(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state143(input, __lookbehind, __tokens, __sym1));
             }
             _ => {
                 return Err(__ParseError::UnrecognizedToken {
@@ -16558,23 +16827,23 @@ mod __parse__Yacc {
             match __nt {
                 __Nonterminal::Ident(__nt) => {
                     let __sym1 = &mut Some(__nt);
-                    __result = try!(__state121(input, __lookbehind, __tokens, __lookahead, __sym1));
+                    __result = try!(__state124(input, __lookbehind, __tokens, __lookahead, __sym1));
                 }
                 __Nonterminal::Integer(__nt) => {
                     let __sym1 = &mut Some(__nt);
-                    __result = try!(__state122(input, __lookbehind, __tokens, __lookahead, __sym1));
+                    __result = try!(__state125(input, __lookbehind, __tokens, __lookahead, __sym1));
                 }
                 __Nonterminal::TokenTree(__nt) => {
                     let __sym1 = &mut Some(__nt);
-                    __result = try!(__state123(input, __lookbehind, __tokens, __lookahead, __sym1));
+                    __result = try!(__state126(input, __lookbehind, __tokens, __lookahead, __sym1));
                 }
                 __Nonterminal::TokenTree_2b(__nt) => {
                     let __sym1 = &mut Some(__nt);
-                    __result = try!(__state155(input, __lookbehind, __tokens, __lookahead, __sym0, __sym1));
+                    __result = try!(__state158(input, __lookbehind, __tokens, __lookahead, __sym0, __sym1));
                 }
                 __Nonterminal::UnpairedToken(__nt) => {
                     let __sym1 = &mut Some(__nt);
-                    __result = try!(__state125(input, __lookbehind, __tokens, __lookahead, __sym1));
+                    __result = try!(__state128(input, __lookbehind, __tokens, __lookahead, __sym1));
                 }
                 _ => {
                     return Ok((__lookbehind, __lookahead, __nt));
@@ -16584,7 +16853,7 @@ mod __parse__Yacc {
         return Ok(__result);
     }
 
-    // State 133
+    // State 136
     //   TokenTree = "[" "]" (*) ["("]
     //   TokenTree = "[" "]" (*) ["*"]
     //   TokenTree = "[" "]" (*) [","]
@@ -16601,23 +16870,23 @@ mod __parse__Yacc {
     //   TokenTree = "[" "]" (*) [r#"[0-9]+"#]
     //   TokenTree = "[" "]" (*) [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
     //
-    //   "(" -> Reduce(TokenTree = "[", "]" => ActionFn(79);)
-    //   "*" -> Reduce(TokenTree = "[", "]" => ActionFn(79);)
-    //   "," -> Reduce(TokenTree = "[", "]" => ActionFn(79);)
-    //   "." -> Reduce(TokenTree = "[", "]" => ActionFn(79);)
-    //   ";" -> Reduce(TokenTree = "[", "]" => ActionFn(79);)
-    //   "=" -> Reduce(TokenTree = "[", "]" => ActionFn(79);)
-    //   "[" -> Reduce(TokenTree = "[", "]" => ActionFn(79);)
-    //   "{" -> Reduce(TokenTree = "[", "]" => ActionFn(79);)
-    //   "}" -> Reduce(TokenTree = "[", "]" => ActionFn(79);)
-    //   r#"\"[^\"]*\""# -> Reduce(TokenTree = "[", "]" => ActionFn(79);)
-    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "[", "]" => ActionFn(79);)
-    //   r#"$[$0-9]+"# -> Reduce(TokenTree = "[", "]" => ActionFn(79);)
-    //   r#"\'.\'"# -> Reduce(TokenTree = "[", "]" => ActionFn(79);)
-    //   r#"[0-9]+"# -> Reduce(TokenTree = "[", "]" => ActionFn(79);)
-    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "[", "]" => ActionFn(79);)
+    //   "(" -> Reduce(TokenTree = "[", "]" => ActionFn(85);)
+    //   "*" -> Reduce(TokenTree = "[", "]" => ActionFn(85);)
+    //   "," -> Reduce(TokenTree = "[", "]" => ActionFn(85);)
+    //   "." -> Reduce(TokenTree = "[", "]" => ActionFn(85);)
+    //   ";" -> Reduce(TokenTree = "[", "]" => ActionFn(85);)
+    //   "=" -> Reduce(TokenTree = "[", "]" => ActionFn(85);)
+    //   "[" -> Reduce(TokenTree = "[", "]" => ActionFn(85);)
+    //   "{" -> Reduce(TokenTree = "[", "]" => ActionFn(85);)
+    //   "}" -> Reduce(TokenTree = "[", "]" => ActionFn(85);)
+    //   r#"\"[^\"]*\""# -> Reduce(TokenTree = "[", "]" => ActionFn(85);)
+    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "[", "]" => ActionFn(85);)
+    //   r#"$[$0-9]+"# -> Reduce(TokenTree = "[", "]" => ActionFn(85);)
+    //   r#"\'.\'"# -> Reduce(TokenTree = "[", "]" => ActionFn(85);)
+    //   r#"[0-9]+"# -> Reduce(TokenTree = "[", "]" => ActionFn(85);)
+    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "[", "]" => ActionFn(85);)
     //
-    pub fn __state133<
+    pub fn __state136<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -16652,7 +16921,7 @@ mod __parse__Yacc {
             Some((_, (31, _), _)) => {
                 let __sym0 = __sym0.take().unwrap();
                 let __sym1 = __sym1.take().unwrap();
-                let __nt = super::__action79(input, __sym0, __sym1, &__lookbehind, &__lookahead);
+                let __nt = super::__action85(input, __sym0, __sym1, &__lookbehind, &__lookahead);
                 return Ok((__lookbehind, __lookahead, __Nonterminal::TokenTree(__nt)));
             }
             _ => {
@@ -16664,7 +16933,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 134
+    // State 137
     //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# ["("]
     //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# ["*"]
     //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# [","]
@@ -17026,28 +17295,28 @@ mod __parse__Yacc {
     //   UnpairedToken = (*) r#"\'.\'"# [r#"[0-9]+"#]
     //   UnpairedToken = (*) r#"\'.\'"# [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
     //
-    //   "(" -> Shift(S83)
-    //   "*" -> Shift(S84)
-    //   "," -> Shift(S85)
-    //   "." -> Shift(S86)
-    //   ";" -> Shift(S87)
-    //   "=" -> Shift(S88)
-    //   "[" -> Shift(S89)
-    //   "{" -> Shift(S90)
-    //   "}" -> Shift(S158)
-    //   r#"\"[^\"]*\""# -> Shift(S92)
-    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S93)
-    //   r#"$[$0-9]+"# -> Shift(S94)
-    //   r#"\'.\'"# -> Shift(S95)
-    //   r#"[0-9]+"# -> Shift(S96)
-    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S97)
+    //   "(" -> Shift(S86)
+    //   "*" -> Shift(S87)
+    //   "," -> Shift(S88)
+    //   "." -> Shift(S89)
+    //   ";" -> Shift(S90)
+    //   "=" -> Shift(S91)
+    //   "[" -> Shift(S92)
+    //   "{" -> Shift(S93)
+    //   "}" -> Shift(S161)
+    //   r#"\"[^\"]*\""# -> Shift(S95)
+    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S96)
+    //   r#"$[$0-9]+"# -> Shift(S97)
+    //   r#"\'.\'"# -> Shift(S98)
+    //   r#"[0-9]+"# -> Shift(S99)
+    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S100)
     //
-    //   Ident -> S78
-    //   Integer -> S79
-    //   TokenTree -> S80
-    //   TokenTree+ -> S157
-    //   UnpairedToken -> S82
-    pub fn __state134<
+    //   Ident -> S81
+    //   Integer -> S82
+    //   TokenTree -> S83
+    //   TokenTree+ -> S160
+    //   UnpairedToken -> S85
+    pub fn __state137<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -17067,77 +17336,77 @@ mod __parse__Yacc {
             Some((_, (13, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state83(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state86(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (15, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state84(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state87(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (16, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state85(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state88(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (17, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state86(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state89(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (19, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state87(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state90(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (20, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state88(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state91(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (21, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state89(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state92(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (23, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state90(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state93(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (25, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state158(input, __lookbehind, __tokens, __sym0, __sym1));
+                __result = try!(__state161(input, __lookbehind, __tokens, __sym0, __sym1));
             }
             Some((_, (26, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state92(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state95(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (27, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state93(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state96(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (28, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state94(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state97(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (29, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state95(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state98(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (30, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state96(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state99(input, __lookbehind, __tokens, __sym1));
             }
             Some((_, (31, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym1 = &mut Some((__tok0));
-                __result = try!(__state97(input, __lookbehind, __tokens, __sym1));
+                __result = try!(__state100(input, __lookbehind, __tokens, __sym1));
             }
             _ => {
                 return Err(__ParseError::UnrecognizedToken {
@@ -17151,23 +17420,23 @@ mod __parse__Yacc {
             match __nt {
                 __Nonterminal::Ident(__nt) => {
                     let __sym1 = &mut Some(__nt);
-                    __result = try!(__state78(input, __lookbehind, __tokens, __lookahead, __sym1));
+                    __result = try!(__state81(input, __lookbehind, __tokens, __lookahead, __sym1));
                 }
                 __Nonterminal::Integer(__nt) => {
                     let __sym1 = &mut Some(__nt);
-                    __result = try!(__state79(input, __lookbehind, __tokens, __lookahead, __sym1));
+                    __result = try!(__state82(input, __lookbehind, __tokens, __lookahead, __sym1));
                 }
                 __Nonterminal::TokenTree(__nt) => {
                     let __sym1 = &mut Some(__nt);
-                    __result = try!(__state80(input, __lookbehind, __tokens, __lookahead, __sym1));
+                    __result = try!(__state83(input, __lookbehind, __tokens, __lookahead, __sym1));
                 }
                 __Nonterminal::TokenTree_2b(__nt) => {
                     let __sym1 = &mut Some(__nt);
-                    __result = try!(__state157(input, __lookbehind, __tokens, __lookahead, __sym0, __sym1));
+                    __result = try!(__state160(input, __lookbehind, __tokens, __lookahead, __sym0, __sym1));
                 }
                 __Nonterminal::UnpairedToken(__nt) => {
                     let __sym1 = &mut Some(__nt);
-                    __result = try!(__state82(input, __lookbehind, __tokens, __lookahead, __sym1));
+                    __result = try!(__state85(input, __lookbehind, __tokens, __lookahead, __sym1));
                 }
                 _ => {
                     return Ok((__lookbehind, __lookahead, __nt));
@@ -17177,7 +17446,7 @@ mod __parse__Yacc {
         return Ok(__result);
     }
 
-    // State 135
+    // State 138
     //   UnpairedToken = r#"\"[^\"]*\""# (*) ["("]
     //   UnpairedToken = r#"\"[^\"]*\""# (*) ["*"]
     //   UnpairedToken = r#"\"[^\"]*\""# (*) [","]
@@ -17210,7 +17479,7 @@ mod __parse__Yacc {
     //   r#"[0-9]+"# -> Reduce(UnpairedToken = r#"\"[^\"]*\""# => ActionFn(38);)
     //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(UnpairedToken = r#"\"[^\"]*\""# => ActionFn(38);)
     //
-    pub fn __state135<
+    pub fn __state138<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -17255,7 +17524,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 136
+    // State 139
     //   UnpairedToken = r#"#[_a-zA-Z][_a-zA-Z0-9]*"# (*) ["("]
     //   UnpairedToken = r#"#[_a-zA-Z][_a-zA-Z0-9]*"# (*) ["*"]
     //   UnpairedToken = r#"#[_a-zA-Z][_a-zA-Z0-9]*"# (*) [","]
@@ -17288,7 +17557,7 @@ mod __parse__Yacc {
     //   r#"[0-9]+"# -> Reduce(UnpairedToken = r#"#[_a-zA-Z][_a-zA-Z0-9]*"# => ActionFn(44);)
     //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(UnpairedToken = r#"#[_a-zA-Z][_a-zA-Z0-9]*"# => ActionFn(44);)
     //
-    pub fn __state136<
+    pub fn __state139<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -17333,7 +17602,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 137
+    // State 140
     //   UnpairedToken = r#"$[$0-9]+"# (*) ["("]
     //   UnpairedToken = r#"$[$0-9]+"# (*) ["*"]
     //   UnpairedToken = r#"$[$0-9]+"# (*) [","]
@@ -17366,7 +17635,7 @@ mod __parse__Yacc {
     //   r#"[0-9]+"# -> Reduce(UnpairedToken = r#"$[$0-9]+"# => ActionFn(43);)
     //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(UnpairedToken = r#"$[$0-9]+"# => ActionFn(43);)
     //
-    pub fn __state137<
+    pub fn __state140<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -17411,7 +17680,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 138
+    // State 141
     //   UnpairedToken = r#"\'.\'"# (*) ["("]
     //   UnpairedToken = r#"\'.\'"# (*) ["*"]
     //   UnpairedToken = r#"\'.\'"# (*) [","]
@@ -17444,7 +17713,7 @@ mod __parse__Yacc {
     //   r#"[0-9]+"# -> Reduce(UnpairedToken = r#"\'.\'"# => ActionFn(46);)
     //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(UnpairedToken = r#"\'.\'"# => ActionFn(46);)
     //
-    pub fn __state138<
+    pub fn __state141<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -17489,7 +17758,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 139
+    // State 142
     //   Integer = r#"[0-9]+"# (*) ["("]
     //   Integer = r#"[0-9]+"# (*) ["*"]
     //   Integer = r#"[0-9]+"# (*) [","]
@@ -17522,7 +17791,7 @@ mod __parse__Yacc {
     //   r#"[0-9]+"# -> Reduce(Integer = r#"[0-9]+"# => ActionFn(15);)
     //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(Integer = r#"[0-9]+"# => ActionFn(15);)
     //
-    pub fn __state139<
+    pub fn __state142<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -17567,7 +17836,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 140
+    // State 143
     //   Ident = r#"[_a-zA-Z][_a-zA-Z0-9]*"# (*) ["("]
     //   Ident = r#"[_a-zA-Z][_a-zA-Z0-9]*"# (*) ["*"]
     //   Ident = r#"[_a-zA-Z][_a-zA-Z0-9]*"# (*) [","]
@@ -17600,7 +17869,7 @@ mod __parse__Yacc {
     //   r#"[0-9]+"# -> Reduce(Ident = r#"[_a-zA-Z][_a-zA-Z0-9]*"# => ActionFn(14);)
     //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(Ident = r#"[_a-zA-Z][_a-zA-Z0-9]*"# => ActionFn(14);)
     //
-    pub fn __state140<
+    pub fn __state143<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -17645,7 +17914,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 141
+    // State 144
     //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# ["("]
     //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# ["*"]
     //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# [","]
@@ -17977,27 +18246,27 @@ mod __parse__Yacc {
     //   UnpairedToken = (*) r#"\'.\'"# [r#"[0-9]+"#]
     //   UnpairedToken = (*) r#"\'.\'"# [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
     //
-    //   "(" -> Shift(S83)
-    //   "*" -> Shift(S84)
-    //   "," -> Shift(S85)
-    //   "." -> Shift(S86)
-    //   ";" -> Shift(S87)
-    //   "=" -> Shift(S88)
-    //   "[" -> Shift(S89)
-    //   "{" -> Shift(S90)
-    //   "}" -> Shift(S159)
-    //   r#"\"[^\"]*\""# -> Shift(S92)
-    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S93)
-    //   r#"$[$0-9]+"# -> Shift(S94)
-    //   r#"\'.\'"# -> Shift(S95)
-    //   r#"[0-9]+"# -> Shift(S96)
-    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S97)
+    //   "(" -> Shift(S86)
+    //   "*" -> Shift(S87)
+    //   "," -> Shift(S88)
+    //   "." -> Shift(S89)
+    //   ";" -> Shift(S90)
+    //   "=" -> Shift(S91)
+    //   "[" -> Shift(S92)
+    //   "{" -> Shift(S93)
+    //   "}" -> Shift(S162)
+    //   r#"\"[^\"]*\""# -> Shift(S95)
+    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S96)
+    //   r#"$[$0-9]+"# -> Shift(S97)
+    //   r#"\'.\'"# -> Shift(S98)
+    //   r#"[0-9]+"# -> Shift(S99)
+    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S100)
     //
-    //   Ident -> S78
-    //   Integer -> S79
-    //   TokenTree -> S99
-    //   UnpairedToken -> S82
-    pub fn __state141<
+    //   Ident -> S81
+    //   Integer -> S82
+    //   TokenTree -> S102
+    //   UnpairedToken -> S85
+    pub fn __state144<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -18014,77 +18283,77 @@ mod __parse__Yacc {
             Some((_, (13, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state83(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state86(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (15, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state84(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state87(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (16, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state85(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state88(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (17, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state86(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state89(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (19, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state87(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state90(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (20, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state88(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state91(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (21, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state89(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state92(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (23, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state90(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state93(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (25, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state159(input, __lookbehind, __tokens, __sym0, __sym1, __sym2));
+                __result = try!(__state162(input, __lookbehind, __tokens, __sym0, __sym1, __sym2));
             }
             Some((_, (26, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state92(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state95(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (27, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state93(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state96(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (28, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state94(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state97(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (29, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state95(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state98(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (30, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state96(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state99(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (31, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state97(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state100(input, __lookbehind, __tokens, __sym2));
             }
             _ => {
                 return Err(__ParseError::UnrecognizedToken {
@@ -18098,19 +18367,19 @@ mod __parse__Yacc {
             match __nt {
                 __Nonterminal::Ident(__nt) => {
                     let __sym2 = &mut Some(__nt);
-                    __result = try!(__state78(input, __lookbehind, __tokens, __lookahead, __sym2));
+                    __result = try!(__state81(input, __lookbehind, __tokens, __lookahead, __sym2));
                 }
                 __Nonterminal::Integer(__nt) => {
                     let __sym2 = &mut Some(__nt);
-                    __result = try!(__state79(input, __lookbehind, __tokens, __lookahead, __sym2));
+                    __result = try!(__state82(input, __lookbehind, __tokens, __lookahead, __sym2));
                 }
                 __Nonterminal::TokenTree(__nt) => {
                     let __sym2 = &mut Some(__nt);
-                    __result = try!(__state99(input, __lookbehind, __tokens, __lookahead, __sym1, __sym2));
+                    __result = try!(__state102(input, __lookbehind, __tokens, __lookahead, __sym1, __sym2));
                 }
                 __Nonterminal::UnpairedToken(__nt) => {
                     let __sym2 = &mut Some(__nt);
-                    __result = try!(__state82(input, __lookbehind, __tokens, __lookahead, __sym2));
+                    __result = try!(__state85(input, __lookbehind, __tokens, __lookahead, __sym2));
                 }
                 _ => {
                     return Ok((__lookbehind, __lookahead, __nt));
@@ -18120,7 +18389,7 @@ mod __parse__Yacc {
         return Ok(__result);
     }
 
-    // State 142
+    // State 145
     //   TokenTree = "{" "}" (*) ["("]
     //   TokenTree = "{" "}" (*) ["*"]
     //   TokenTree = "{" "}" (*) [","]
@@ -18137,23 +18406,23 @@ mod __parse__Yacc {
     //   TokenTree = "{" "}" (*) [r#"[0-9]+"#]
     //   TokenTree = "{" "}" (*) [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
     //
-    //   "(" -> Reduce(TokenTree = "{", "}" => ActionFn(75);)
-    //   "*" -> Reduce(TokenTree = "{", "}" => ActionFn(75);)
-    //   "," -> Reduce(TokenTree = "{", "}" => ActionFn(75);)
-    //   "." -> Reduce(TokenTree = "{", "}" => ActionFn(75);)
-    //   ";" -> Reduce(TokenTree = "{", "}" => ActionFn(75);)
-    //   "=" -> Reduce(TokenTree = "{", "}" => ActionFn(75);)
-    //   "[" -> Reduce(TokenTree = "{", "}" => ActionFn(75);)
-    //   "{" -> Reduce(TokenTree = "{", "}" => ActionFn(75);)
-    //   "}" -> Reduce(TokenTree = "{", "}" => ActionFn(75);)
-    //   r#"\"[^\"]*\""# -> Reduce(TokenTree = "{", "}" => ActionFn(75);)
-    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "{", "}" => ActionFn(75);)
-    //   r#"$[$0-9]+"# -> Reduce(TokenTree = "{", "}" => ActionFn(75);)
-    //   r#"\'.\'"# -> Reduce(TokenTree = "{", "}" => ActionFn(75);)
-    //   r#"[0-9]+"# -> Reduce(TokenTree = "{", "}" => ActionFn(75);)
-    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "{", "}" => ActionFn(75);)
+    //   "(" -> Reduce(TokenTree = "{", "}" => ActionFn(81);)
+    //   "*" -> Reduce(TokenTree = "{", "}" => ActionFn(81);)
+    //   "," -> Reduce(TokenTree = "{", "}" => ActionFn(81);)
+    //   "." -> Reduce(TokenTree = "{", "}" => ActionFn(81);)
+    //   ";" -> Reduce(TokenTree = "{", "}" => ActionFn(81);)
+    //   "=" -> Reduce(TokenTree = "{", "}" => ActionFn(81);)
+    //   "[" -> Reduce(TokenTree = "{", "}" => ActionFn(81);)
+    //   "{" -> Reduce(TokenTree = "{", "}" => ActionFn(81);)
+    //   "}" -> Reduce(TokenTree = "{", "}" => ActionFn(81);)
+    //   r#"\"[^\"]*\""# -> Reduce(TokenTree = "{", "}" => ActionFn(81);)
+    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "{", "}" => ActionFn(81);)
+    //   r#"$[$0-9]+"# -> Reduce(TokenTree = "{", "}" => ActionFn(81);)
+    //   r#"\'.\'"# -> Reduce(TokenTree = "{", "}" => ActionFn(81);)
+    //   r#"[0-9]+"# -> Reduce(TokenTree = "{", "}" => ActionFn(81);)
+    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "{", "}" => ActionFn(81);)
     //
-    pub fn __state142<
+    pub fn __state145<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -18188,7 +18457,7 @@ mod __parse__Yacc {
             Some((_, (31, _), _)) => {
                 let __sym0 = __sym0.take().unwrap();
                 let __sym1 = __sym1.take().unwrap();
-                let __nt = super::__action75(input, __sym0, __sym1, &__lookbehind, &__lookahead);
+                let __nt = super::__action81(input, __sym0, __sym1, &__lookbehind, &__lookahead);
                 return Ok((__lookbehind, __lookahead, __Nonterminal::TokenTree(__nt)));
             }
             _ => {
@@ -18200,7 +18469,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 143
+    // State 146
     //   TokenTree+ = TokenTree+ TokenTree (*) ["("]
     //   TokenTree+ = TokenTree+ TokenTree (*) [")"]
     //   TokenTree+ = TokenTree+ TokenTree (*) ["*"]
@@ -18217,23 +18486,23 @@ mod __parse__Yacc {
     //   TokenTree+ = TokenTree+ TokenTree (*) [r#"[0-9]+"#]
     //   TokenTree+ = TokenTree+ TokenTree (*) [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
     //
-    //   "(" -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(66);)
-    //   ")" -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(66);)
-    //   "*" -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(66);)
-    //   "," -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(66);)
-    //   "." -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(66);)
-    //   ";" -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(66);)
-    //   "=" -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(66);)
-    //   "[" -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(66);)
-    //   "{" -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(66);)
-    //   r#"\"[^\"]*\""# -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(66);)
-    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(66);)
-    //   r#"$[$0-9]+"# -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(66);)
-    //   r#"\'.\'"# -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(66);)
-    //   r#"[0-9]+"# -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(66);)
-    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(66);)
+    //   "(" -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(70);)
+    //   ")" -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(70);)
+    //   "*" -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(70);)
+    //   "," -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(70);)
+    //   "." -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(70);)
+    //   ";" -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(70);)
+    //   "=" -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(70);)
+    //   "[" -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(70);)
+    //   "{" -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(70);)
+    //   r#"\"[^\"]*\""# -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(70);)
+    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(70);)
+    //   r#"$[$0-9]+"# -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(70);)
+    //   r#"\'.\'"# -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(70);)
+    //   r#"[0-9]+"# -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(70);)
+    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(70);)
     //
-    pub fn __state143<
+    pub fn __state146<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -18264,7 +18533,7 @@ mod __parse__Yacc {
             Some((_, (31, _), _)) => {
                 let __sym0 = __sym0.take().unwrap();
                 let __sym1 = __sym1.take().unwrap();
-                let __nt = super::__action66(input, __sym0, __sym1, &__lookbehind, &__lookahead);
+                let __nt = super::__action70(input, __sym0, __sym1, &__lookbehind, &__lookahead);
                 return Ok((__lookbehind, __lookahead, __Nonterminal::TokenTree_2b(__nt)));
             }
             _ => {
@@ -18276,7 +18545,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 144
+    // State 147
     //   TokenTree = "(" TokenTree+ ")" (*) ["("]
     //   TokenTree = "(" TokenTree+ ")" (*) ["*"]
     //   TokenTree = "(" TokenTree+ ")" (*) [","]
@@ -18293,23 +18562,23 @@ mod __parse__Yacc {
     //   TokenTree = "(" TokenTree+ ")" (*) [r#"[0-9]+"#]
     //   TokenTree = "(" TokenTree+ ")" (*) [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
     //
-    //   "(" -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(78);)
-    //   "*" -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(78);)
-    //   "," -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(78);)
-    //   "." -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(78);)
-    //   ";" -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(78);)
-    //   "=" -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(78);)
-    //   "[" -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(78);)
-    //   "{" -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(78);)
-    //   "}" -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(78);)
-    //   r#"\"[^\"]*\""# -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(78);)
-    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(78);)
-    //   r#"$[$0-9]+"# -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(78);)
-    //   r#"\'.\'"# -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(78);)
-    //   r#"[0-9]+"# -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(78);)
-    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(78);)
+    //   "(" -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(84);)
+    //   "*" -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(84);)
+    //   "," -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(84);)
+    //   "." -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(84);)
+    //   ";" -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(84);)
+    //   "=" -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(84);)
+    //   "[" -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(84);)
+    //   "{" -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(84);)
+    //   "}" -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(84);)
+    //   r#"\"[^\"]*\""# -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(84);)
+    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(84);)
+    //   r#"$[$0-9]+"# -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(84);)
+    //   r#"\'.\'"# -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(84);)
+    //   r#"[0-9]+"# -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(84);)
+    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(84);)
     //
-    pub fn __state144<
+    pub fn __state147<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -18346,7 +18615,7 @@ mod __parse__Yacc {
                 let __sym0 = __sym0.take().unwrap();
                 let __sym1 = __sym1.take().unwrap();
                 let __sym2 = __sym2.take().unwrap();
-                let __nt = super::__action78(input, __sym0, __sym1, __sym2, &__lookbehind, &__lookahead);
+                let __nt = super::__action84(input, __sym0, __sym1, __sym2, &__lookbehind, &__lookahead);
                 return Ok((__lookbehind, __lookahead, __Nonterminal::TokenTree(__nt)));
             }
             _ => {
@@ -18358,7 +18627,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 145
+    // State 148
     //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# ["("]
     //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# [")"]
     //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# ["*"]
@@ -18690,27 +18959,27 @@ mod __parse__Yacc {
     //   UnpairedToken = (*) r#"\'.\'"# [r#"[0-9]+"#]
     //   UnpairedToken = (*) r#"\'.\'"# [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
     //
-    //   "(" -> Shift(S106)
-    //   ")" -> Shift(S160)
-    //   "*" -> Shift(S108)
-    //   "," -> Shift(S109)
-    //   "." -> Shift(S110)
-    //   ";" -> Shift(S111)
-    //   "=" -> Shift(S112)
-    //   "[" -> Shift(S113)
-    //   "{" -> Shift(S114)
-    //   r#"\"[^\"]*\""# -> Shift(S115)
-    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S116)
-    //   r#"$[$0-9]+"# -> Shift(S117)
-    //   r#"\'.\'"# -> Shift(S118)
-    //   r#"[0-9]+"# -> Shift(S119)
-    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S120)
+    //   "(" -> Shift(S109)
+    //   ")" -> Shift(S163)
+    //   "*" -> Shift(S111)
+    //   "," -> Shift(S112)
+    //   "." -> Shift(S113)
+    //   ";" -> Shift(S114)
+    //   "=" -> Shift(S115)
+    //   "[" -> Shift(S116)
+    //   "{" -> Shift(S117)
+    //   r#"\"[^\"]*\""# -> Shift(S118)
+    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S119)
+    //   r#"$[$0-9]+"# -> Shift(S120)
+    //   r#"\'.\'"# -> Shift(S121)
+    //   r#"[0-9]+"# -> Shift(S122)
+    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S123)
     //
-    //   Ident -> S101
-    //   Integer -> S102
-    //   TokenTree -> S143
-    //   UnpairedToken -> S105
-    pub fn __state145<
+    //   Ident -> S104
+    //   Integer -> S105
+    //   TokenTree -> S146
+    //   UnpairedToken -> S108
+    pub fn __state148<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -18727,77 +18996,77 @@ mod __parse__Yacc {
             Some((_, (13, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state106(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state109(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (14, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state160(input, __lookbehind, __tokens, __sym0, __sym1, __sym2));
+                __result = try!(__state163(input, __lookbehind, __tokens, __sym0, __sym1, __sym2));
             }
             Some((_, (15, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state108(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state111(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (16, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state109(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state112(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (17, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state110(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state113(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (19, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state111(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state114(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (20, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state112(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state115(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (21, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state113(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state116(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (23, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state114(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state117(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (26, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state115(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state118(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (27, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state116(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state119(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (28, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state117(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state120(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (29, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state118(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state121(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (30, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state119(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state122(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (31, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state120(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state123(input, __lookbehind, __tokens, __sym2));
             }
             _ => {
                 return Err(__ParseError::UnrecognizedToken {
@@ -18811,19 +19080,19 @@ mod __parse__Yacc {
             match __nt {
                 __Nonterminal::Ident(__nt) => {
                     let __sym2 = &mut Some(__nt);
-                    __result = try!(__state101(input, __lookbehind, __tokens, __lookahead, __sym2));
+                    __result = try!(__state104(input, __lookbehind, __tokens, __lookahead, __sym2));
                 }
                 __Nonterminal::Integer(__nt) => {
                     let __sym2 = &mut Some(__nt);
-                    __result = try!(__state102(input, __lookbehind, __tokens, __lookahead, __sym2));
+                    __result = try!(__state105(input, __lookbehind, __tokens, __lookahead, __sym2));
                 }
                 __Nonterminal::TokenTree(__nt) => {
                     let __sym2 = &mut Some(__nt);
-                    __result = try!(__state143(input, __lookbehind, __tokens, __lookahead, __sym1, __sym2));
+                    __result = try!(__state146(input, __lookbehind, __tokens, __lookahead, __sym1, __sym2));
                 }
                 __Nonterminal::UnpairedToken(__nt) => {
                     let __sym2 = &mut Some(__nt);
-                    __result = try!(__state105(input, __lookbehind, __tokens, __lookahead, __sym2));
+                    __result = try!(__state108(input, __lookbehind, __tokens, __lookahead, __sym2));
                 }
                 _ => {
                     return Ok((__lookbehind, __lookahead, __nt));
@@ -18833,7 +19102,7 @@ mod __parse__Yacc {
         return Ok(__result);
     }
 
-    // State 146
+    // State 149
     //   TokenTree = "(" ")" (*) ["("]
     //   TokenTree = "(" ")" (*) [")"]
     //   TokenTree = "(" ")" (*) ["*"]
@@ -18850,23 +19119,23 @@ mod __parse__Yacc {
     //   TokenTree = "(" ")" (*) [r#"[0-9]+"#]
     //   TokenTree = "(" ")" (*) [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
     //
-    //   "(" -> Reduce(TokenTree = "(", ")" => ActionFn(77);)
-    //   ")" -> Reduce(TokenTree = "(", ")" => ActionFn(77);)
-    //   "*" -> Reduce(TokenTree = "(", ")" => ActionFn(77);)
-    //   "," -> Reduce(TokenTree = "(", ")" => ActionFn(77);)
-    //   "." -> Reduce(TokenTree = "(", ")" => ActionFn(77);)
-    //   ";" -> Reduce(TokenTree = "(", ")" => ActionFn(77);)
-    //   "=" -> Reduce(TokenTree = "(", ")" => ActionFn(77);)
-    //   "[" -> Reduce(TokenTree = "(", ")" => ActionFn(77);)
-    //   "{" -> Reduce(TokenTree = "(", ")" => ActionFn(77);)
-    //   r#"\"[^\"]*\""# -> Reduce(TokenTree = "(", ")" => ActionFn(77);)
-    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "(", ")" => ActionFn(77);)
-    //   r#"$[$0-9]+"# -> Reduce(TokenTree = "(", ")" => ActionFn(77);)
-    //   r#"\'.\'"# -> Reduce(TokenTree = "(", ")" => ActionFn(77);)
-    //   r#"[0-9]+"# -> Reduce(TokenTree = "(", ")" => ActionFn(77);)
-    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "(", ")" => ActionFn(77);)
+    //   "(" -> Reduce(TokenTree = "(", ")" => ActionFn(83);)
+    //   ")" -> Reduce(TokenTree = "(", ")" => ActionFn(83);)
+    //   "*" -> Reduce(TokenTree = "(", ")" => ActionFn(83);)
+    //   "," -> Reduce(TokenTree = "(", ")" => ActionFn(83);)
+    //   "." -> Reduce(TokenTree = "(", ")" => ActionFn(83);)
+    //   ";" -> Reduce(TokenTree = "(", ")" => ActionFn(83);)
+    //   "=" -> Reduce(TokenTree = "(", ")" => ActionFn(83);)
+    //   "[" -> Reduce(TokenTree = "(", ")" => ActionFn(83);)
+    //   "{" -> Reduce(TokenTree = "(", ")" => ActionFn(83);)
+    //   r#"\"[^\"]*\""# -> Reduce(TokenTree = "(", ")" => ActionFn(83);)
+    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "(", ")" => ActionFn(83);)
+    //   r#"$[$0-9]+"# -> Reduce(TokenTree = "(", ")" => ActionFn(83);)
+    //   r#"\'.\'"# -> Reduce(TokenTree = "(", ")" => ActionFn(83);)
+    //   r#"[0-9]+"# -> Reduce(TokenTree = "(", ")" => ActionFn(83);)
+    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "(", ")" => ActionFn(83);)
     //
-    pub fn __state146<
+    pub fn __state149<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -18901,7 +19170,7 @@ mod __parse__Yacc {
             Some((_, (31, _), _)) => {
                 let __sym0 = __sym0.take().unwrap();
                 let __sym1 = __sym1.take().unwrap();
-                let __nt = super::__action77(input, __sym0, __sym1, &__lookbehind, &__lookahead);
+                let __nt = super::__action83(input, __sym0, __sym1, &__lookbehind, &__lookahead);
                 return Ok((__lookbehind, __lookahead, __Nonterminal::TokenTree(__nt)));
             }
             _ => {
@@ -18913,7 +19182,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 147
+    // State 150
     //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# ["("]
     //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# ["*"]
     //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# [","]
@@ -19245,27 +19514,27 @@ mod __parse__Yacc {
     //   UnpairedToken = (*) r#"\'.\'"# [r#"[0-9]+"#]
     //   UnpairedToken = (*) r#"\'.\'"# [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
     //
-    //   "(" -> Shift(S126)
-    //   "*" -> Shift(S127)
-    //   "," -> Shift(S128)
-    //   "." -> Shift(S129)
-    //   ";" -> Shift(S130)
-    //   "=" -> Shift(S131)
-    //   "[" -> Shift(S132)
-    //   "]" -> Shift(S161)
-    //   "{" -> Shift(S134)
-    //   r#"\"[^\"]*\""# -> Shift(S135)
-    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S136)
-    //   r#"$[$0-9]+"# -> Shift(S137)
-    //   r#"\'.\'"# -> Shift(S138)
-    //   r#"[0-9]+"# -> Shift(S139)
-    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S140)
+    //   "(" -> Shift(S129)
+    //   "*" -> Shift(S130)
+    //   "," -> Shift(S131)
+    //   "." -> Shift(S132)
+    //   ";" -> Shift(S133)
+    //   "=" -> Shift(S134)
+    //   "[" -> Shift(S135)
+    //   "]" -> Shift(S164)
+    //   "{" -> Shift(S137)
+    //   r#"\"[^\"]*\""# -> Shift(S138)
+    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S139)
+    //   r#"$[$0-9]+"# -> Shift(S140)
+    //   r#"\'.\'"# -> Shift(S141)
+    //   r#"[0-9]+"# -> Shift(S142)
+    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S143)
     //
-    //   Ident -> S121
-    //   Integer -> S122
-    //   TokenTree -> S151
-    //   UnpairedToken -> S125
-    pub fn __state147<
+    //   Ident -> S124
+    //   Integer -> S125
+    //   TokenTree -> S154
+    //   UnpairedToken -> S128
+    pub fn __state150<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -19282,77 +19551,77 @@ mod __parse__Yacc {
             Some((_, (13, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state126(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state129(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (15, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state127(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state130(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (16, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state128(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state131(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (17, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state129(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state132(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (19, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state130(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state133(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (20, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state131(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state134(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (21, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state132(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state135(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (22, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state161(input, __lookbehind, __tokens, __sym0, __sym1, __sym2));
+                __result = try!(__state164(input, __lookbehind, __tokens, __sym0, __sym1, __sym2));
             }
             Some((_, (23, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state134(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state137(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (26, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state135(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state138(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (27, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state136(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state139(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (28, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state137(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state140(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (29, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state138(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state141(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (30, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state139(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state142(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (31, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state140(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state143(input, __lookbehind, __tokens, __sym2));
             }
             _ => {
                 return Err(__ParseError::UnrecognizedToken {
@@ -19366,19 +19635,19 @@ mod __parse__Yacc {
             match __nt {
                 __Nonterminal::Ident(__nt) => {
                     let __sym2 = &mut Some(__nt);
-                    __result = try!(__state121(input, __lookbehind, __tokens, __lookahead, __sym2));
+                    __result = try!(__state124(input, __lookbehind, __tokens, __lookahead, __sym2));
                 }
                 __Nonterminal::Integer(__nt) => {
                     let __sym2 = &mut Some(__nt);
-                    __result = try!(__state122(input, __lookbehind, __tokens, __lookahead, __sym2));
+                    __result = try!(__state125(input, __lookbehind, __tokens, __lookahead, __sym2));
                 }
                 __Nonterminal::TokenTree(__nt) => {
                     let __sym2 = &mut Some(__nt);
-                    __result = try!(__state151(input, __lookbehind, __tokens, __lookahead, __sym1, __sym2));
+                    __result = try!(__state154(input, __lookbehind, __tokens, __lookahead, __sym1, __sym2));
                 }
                 __Nonterminal::UnpairedToken(__nt) => {
                     let __sym2 = &mut Some(__nt);
-                    __result = try!(__state125(input, __lookbehind, __tokens, __lookahead, __sym2));
+                    __result = try!(__state128(input, __lookbehind, __tokens, __lookahead, __sym2));
                 }
                 _ => {
                     return Ok((__lookbehind, __lookahead, __nt));
@@ -19388,7 +19657,7 @@ mod __parse__Yacc {
         return Ok(__result);
     }
 
-    // State 148
+    // State 151
     //   TokenTree = "[" "]" (*) ["("]
     //   TokenTree = "[" "]" (*) [")"]
     //   TokenTree = "[" "]" (*) ["*"]
@@ -19405,23 +19674,23 @@ mod __parse__Yacc {
     //   TokenTree = "[" "]" (*) [r#"[0-9]+"#]
     //   TokenTree = "[" "]" (*) [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
     //
-    //   "(" -> Reduce(TokenTree = "[", "]" => ActionFn(79);)
-    //   ")" -> Reduce(TokenTree = "[", "]" => ActionFn(79);)
-    //   "*" -> Reduce(TokenTree = "[", "]" => ActionFn(79);)
-    //   "," -> Reduce(TokenTree = "[", "]" => ActionFn(79);)
-    //   "." -> Reduce(TokenTree = "[", "]" => ActionFn(79);)
-    //   ";" -> Reduce(TokenTree = "[", "]" => ActionFn(79);)
-    //   "=" -> Reduce(TokenTree = "[", "]" => ActionFn(79);)
-    //   "[" -> Reduce(TokenTree = "[", "]" => ActionFn(79);)
-    //   "{" -> Reduce(TokenTree = "[", "]" => ActionFn(79);)
-    //   r#"\"[^\"]*\""# -> Reduce(TokenTree = "[", "]" => ActionFn(79);)
-    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "[", "]" => ActionFn(79);)
-    //   r#"$[$0-9]+"# -> Reduce(TokenTree = "[", "]" => ActionFn(79);)
-    //   r#"\'.\'"# -> Reduce(TokenTree = "[", "]" => ActionFn(79);)
-    //   r#"[0-9]+"# -> Reduce(TokenTree = "[", "]" => ActionFn(79);)
-    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "[", "]" => ActionFn(79);)
+    //   "(" -> Reduce(TokenTree = "[", "]" => ActionFn(85);)
+    //   ")" -> Reduce(TokenTree = "[", "]" => ActionFn(85);)
+    //   "*" -> Reduce(TokenTree = "[", "]" => ActionFn(85);)
+    //   "," -> Reduce(TokenTree = "[", "]" => ActionFn(85);)
+    //   "." -> Reduce(TokenTree = "[", "]" => ActionFn(85);)
+    //   ";" -> Reduce(TokenTree = "[", "]" => ActionFn(85);)
+    //   "=" -> Reduce(TokenTree = "[", "]" => ActionFn(85);)
+    //   "[" -> Reduce(TokenTree = "[", "]" => ActionFn(85);)
+    //   "{" -> Reduce(TokenTree = "[", "]" => ActionFn(85);)
+    //   r#"\"[^\"]*\""# -> Reduce(TokenTree = "[", "]" => ActionFn(85);)
+    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "[", "]" => ActionFn(85);)
+    //   r#"$[$0-9]+"# -> Reduce(TokenTree = "[", "]" => ActionFn(85);)
+    //   r#"\'.\'"# -> Reduce(TokenTree = "[", "]" => ActionFn(85);)
+    //   r#"[0-9]+"# -> Reduce(TokenTree = "[", "]" => ActionFn(85);)
+    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "[", "]" => ActionFn(85);)
     //
-    pub fn __state148<
+    pub fn __state151<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -19456,7 +19725,7 @@ mod __parse__Yacc {
             Some((_, (31, _), _)) => {
                 let __sym0 = __sym0.take().unwrap();
                 let __sym1 = __sym1.take().unwrap();
-                let __nt = super::__action79(input, __sym0, __sym1, &__lookbehind, &__lookahead);
+                let __nt = super::__action85(input, __sym0, __sym1, &__lookbehind, &__lookahead);
                 return Ok((__lookbehind, __lookahead, __Nonterminal::TokenTree(__nt)));
             }
             _ => {
@@ -19468,7 +19737,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 149
+    // State 152
     //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# ["("]
     //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# ["*"]
     //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# [","]
@@ -19800,27 +20069,27 @@ mod __parse__Yacc {
     //   UnpairedToken = (*) r#"\'.\'"# [r#"[0-9]+"#]
     //   UnpairedToken = (*) r#"\'.\'"# [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
     //
-    //   "(" -> Shift(S83)
-    //   "*" -> Shift(S84)
-    //   "," -> Shift(S85)
-    //   "." -> Shift(S86)
-    //   ";" -> Shift(S87)
-    //   "=" -> Shift(S88)
-    //   "[" -> Shift(S89)
-    //   "{" -> Shift(S90)
-    //   "}" -> Shift(S162)
-    //   r#"\"[^\"]*\""# -> Shift(S92)
-    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S93)
-    //   r#"$[$0-9]+"# -> Shift(S94)
-    //   r#"\'.\'"# -> Shift(S95)
-    //   r#"[0-9]+"# -> Shift(S96)
-    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S97)
+    //   "(" -> Shift(S86)
+    //   "*" -> Shift(S87)
+    //   "," -> Shift(S88)
+    //   "." -> Shift(S89)
+    //   ";" -> Shift(S90)
+    //   "=" -> Shift(S91)
+    //   "[" -> Shift(S92)
+    //   "{" -> Shift(S93)
+    //   "}" -> Shift(S165)
+    //   r#"\"[^\"]*\""# -> Shift(S95)
+    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S96)
+    //   r#"$[$0-9]+"# -> Shift(S97)
+    //   r#"\'.\'"# -> Shift(S98)
+    //   r#"[0-9]+"# -> Shift(S99)
+    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S100)
     //
-    //   Ident -> S78
-    //   Integer -> S79
-    //   TokenTree -> S99
-    //   UnpairedToken -> S82
-    pub fn __state149<
+    //   Ident -> S81
+    //   Integer -> S82
+    //   TokenTree -> S102
+    //   UnpairedToken -> S85
+    pub fn __state152<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -19837,77 +20106,77 @@ mod __parse__Yacc {
             Some((_, (13, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state83(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state86(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (15, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state84(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state87(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (16, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state85(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state88(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (17, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state86(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state89(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (19, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state87(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state90(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (20, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state88(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state91(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (21, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state89(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state92(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (23, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state90(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state93(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (25, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state162(input, __lookbehind, __tokens, __sym0, __sym1, __sym2));
+                __result = try!(__state165(input, __lookbehind, __tokens, __sym0, __sym1, __sym2));
             }
             Some((_, (26, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state92(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state95(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (27, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state93(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state96(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (28, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state94(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state97(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (29, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state95(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state98(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (30, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state96(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state99(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (31, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state97(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state100(input, __lookbehind, __tokens, __sym2));
             }
             _ => {
                 return Err(__ParseError::UnrecognizedToken {
@@ -19921,19 +20190,19 @@ mod __parse__Yacc {
             match __nt {
                 __Nonterminal::Ident(__nt) => {
                     let __sym2 = &mut Some(__nt);
-                    __result = try!(__state78(input, __lookbehind, __tokens, __lookahead, __sym2));
+                    __result = try!(__state81(input, __lookbehind, __tokens, __lookahead, __sym2));
                 }
                 __Nonterminal::Integer(__nt) => {
                     let __sym2 = &mut Some(__nt);
-                    __result = try!(__state79(input, __lookbehind, __tokens, __lookahead, __sym2));
+                    __result = try!(__state82(input, __lookbehind, __tokens, __lookahead, __sym2));
                 }
                 __Nonterminal::TokenTree(__nt) => {
                     let __sym2 = &mut Some(__nt);
-                    __result = try!(__state99(input, __lookbehind, __tokens, __lookahead, __sym1, __sym2));
+                    __result = try!(__state102(input, __lookbehind, __tokens, __lookahead, __sym1, __sym2));
                 }
                 __Nonterminal::UnpairedToken(__nt) => {
                     let __sym2 = &mut Some(__nt);
-                    __result = try!(__state82(input, __lookbehind, __tokens, __lookahead, __sym2));
+                    __result = try!(__state85(input, __lookbehind, __tokens, __lookahead, __sym2));
                 }
                 _ => {
                     return Ok((__lookbehind, __lookahead, __nt));
@@ -19943,7 +20212,7 @@ mod __parse__Yacc {
         return Ok(__result);
     }
 
-    // State 150
+    // State 153
     //   TokenTree = "{" "}" (*) ["("]
     //   TokenTree = "{" "}" (*) [")"]
     //   TokenTree = "{" "}" (*) ["*"]
@@ -19960,23 +20229,23 @@ mod __parse__Yacc {
     //   TokenTree = "{" "}" (*) [r#"[0-9]+"#]
     //   TokenTree = "{" "}" (*) [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
     //
-    //   "(" -> Reduce(TokenTree = "{", "}" => ActionFn(75);)
-    //   ")" -> Reduce(TokenTree = "{", "}" => ActionFn(75);)
-    //   "*" -> Reduce(TokenTree = "{", "}" => ActionFn(75);)
-    //   "," -> Reduce(TokenTree = "{", "}" => ActionFn(75);)
-    //   "." -> Reduce(TokenTree = "{", "}" => ActionFn(75);)
-    //   ";" -> Reduce(TokenTree = "{", "}" => ActionFn(75);)
-    //   "=" -> Reduce(TokenTree = "{", "}" => ActionFn(75);)
-    //   "[" -> Reduce(TokenTree = "{", "}" => ActionFn(75);)
-    //   "{" -> Reduce(TokenTree = "{", "}" => ActionFn(75);)
-    //   r#"\"[^\"]*\""# -> Reduce(TokenTree = "{", "}" => ActionFn(75);)
-    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "{", "}" => ActionFn(75);)
-    //   r#"$[$0-9]+"# -> Reduce(TokenTree = "{", "}" => ActionFn(75);)
-    //   r#"\'.\'"# -> Reduce(TokenTree = "{", "}" => ActionFn(75);)
-    //   r#"[0-9]+"# -> Reduce(TokenTree = "{", "}" => ActionFn(75);)
-    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "{", "}" => ActionFn(75);)
+    //   "(" -> Reduce(TokenTree = "{", "}" => ActionFn(81);)
+    //   ")" -> Reduce(TokenTree = "{", "}" => ActionFn(81);)
+    //   "*" -> Reduce(TokenTree = "{", "}" => ActionFn(81);)
+    //   "," -> Reduce(TokenTree = "{", "}" => ActionFn(81);)
+    //   "." -> Reduce(TokenTree = "{", "}" => ActionFn(81);)
+    //   ";" -> Reduce(TokenTree = "{", "}" => ActionFn(81);)
+    //   "=" -> Reduce(TokenTree = "{", "}" => ActionFn(81);)
+    //   "[" -> Reduce(TokenTree = "{", "}" => ActionFn(81);)
+    //   "{" -> Reduce(TokenTree = "{", "}" => ActionFn(81);)
+    //   r#"\"[^\"]*\""# -> Reduce(TokenTree = "{", "}" => ActionFn(81);)
+    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "{", "}" => ActionFn(81);)
+    //   r#"$[$0-9]+"# -> Reduce(TokenTree = "{", "}" => ActionFn(81);)
+    //   r#"\'.\'"# -> Reduce(TokenTree = "{", "}" => ActionFn(81);)
+    //   r#"[0-9]+"# -> Reduce(TokenTree = "{", "}" => ActionFn(81);)
+    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "{", "}" => ActionFn(81);)
     //
-    pub fn __state150<
+    pub fn __state153<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -20011,7 +20280,7 @@ mod __parse__Yacc {
             Some((_, (31, _), _)) => {
                 let __sym0 = __sym0.take().unwrap();
                 let __sym1 = __sym1.take().unwrap();
-                let __nt = super::__action75(input, __sym0, __sym1, &__lookbehind, &__lookahead);
+                let __nt = super::__action81(input, __sym0, __sym1, &__lookbehind, &__lookahead);
                 return Ok((__lookbehind, __lookahead, __Nonterminal::TokenTree(__nt)));
             }
             _ => {
@@ -20023,7 +20292,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 151
+    // State 154
     //   TokenTree+ = TokenTree+ TokenTree (*) ["("]
     //   TokenTree+ = TokenTree+ TokenTree (*) ["*"]
     //   TokenTree+ = TokenTree+ TokenTree (*) [","]
@@ -20040,23 +20309,23 @@ mod __parse__Yacc {
     //   TokenTree+ = TokenTree+ TokenTree (*) [r#"[0-9]+"#]
     //   TokenTree+ = TokenTree+ TokenTree (*) [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
     //
-    //   "(" -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(66);)
-    //   "*" -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(66);)
-    //   "," -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(66);)
-    //   "." -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(66);)
-    //   ";" -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(66);)
-    //   "=" -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(66);)
-    //   "[" -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(66);)
-    //   "]" -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(66);)
-    //   "{" -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(66);)
-    //   r#"\"[^\"]*\""# -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(66);)
-    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(66);)
-    //   r#"$[$0-9]+"# -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(66);)
-    //   r#"\'.\'"# -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(66);)
-    //   r#"[0-9]+"# -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(66);)
-    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(66);)
+    //   "(" -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(70);)
+    //   "*" -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(70);)
+    //   "," -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(70);)
+    //   "." -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(70);)
+    //   ";" -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(70);)
+    //   "=" -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(70);)
+    //   "[" -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(70);)
+    //   "]" -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(70);)
+    //   "{" -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(70);)
+    //   r#"\"[^\"]*\""# -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(70);)
+    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(70);)
+    //   r#"$[$0-9]+"# -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(70);)
+    //   r#"\'.\'"# -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(70);)
+    //   r#"[0-9]+"# -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(70);)
+    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree+ = TokenTree+, TokenTree => ActionFn(70);)
     //
-    pub fn __state151<
+    pub fn __state154<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -20087,7 +20356,7 @@ mod __parse__Yacc {
             Some((_, (31, _), _)) => {
                 let __sym0 = __sym0.take().unwrap();
                 let __sym1 = __sym1.take().unwrap();
-                let __nt = super::__action66(input, __sym0, __sym1, &__lookbehind, &__lookahead);
+                let __nt = super::__action70(input, __sym0, __sym1, &__lookbehind, &__lookahead);
                 return Ok((__lookbehind, __lookahead, __Nonterminal::TokenTree_2b(__nt)));
             }
             _ => {
@@ -20099,7 +20368,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 152
+    // State 155
     //   TokenTree = "[" TokenTree+ "]" (*) ["("]
     //   TokenTree = "[" TokenTree+ "]" (*) ["*"]
     //   TokenTree = "[" TokenTree+ "]" (*) [","]
@@ -20116,23 +20385,23 @@ mod __parse__Yacc {
     //   TokenTree = "[" TokenTree+ "]" (*) [r#"[0-9]+"#]
     //   TokenTree = "[" TokenTree+ "]" (*) [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
     //
-    //   "(" -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(80);)
-    //   "*" -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(80);)
-    //   "," -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(80);)
-    //   "." -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(80);)
-    //   ";" -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(80);)
-    //   "=" -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(80);)
-    //   "[" -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(80);)
-    //   "{" -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(80);)
-    //   "}" -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(80);)
-    //   r#"\"[^\"]*\""# -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(80);)
-    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(80);)
-    //   r#"$[$0-9]+"# -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(80);)
-    //   r#"\'.\'"# -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(80);)
-    //   r#"[0-9]+"# -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(80);)
-    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(80);)
+    //   "(" -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(86);)
+    //   "*" -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(86);)
+    //   "," -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(86);)
+    //   "." -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(86);)
+    //   ";" -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(86);)
+    //   "=" -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(86);)
+    //   "[" -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(86);)
+    //   "{" -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(86);)
+    //   "}" -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(86);)
+    //   r#"\"[^\"]*\""# -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(86);)
+    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(86);)
+    //   r#"$[$0-9]+"# -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(86);)
+    //   r#"\'.\'"# -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(86);)
+    //   r#"[0-9]+"# -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(86);)
+    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(86);)
     //
-    pub fn __state152<
+    pub fn __state155<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -20169,7 +20438,7 @@ mod __parse__Yacc {
                 let __sym0 = __sym0.take().unwrap();
                 let __sym1 = __sym1.take().unwrap();
                 let __sym2 = __sym2.take().unwrap();
-                let __nt = super::__action80(input, __sym0, __sym1, __sym2, &__lookbehind, &__lookahead);
+                let __nt = super::__action86(input, __sym0, __sym1, __sym2, &__lookbehind, &__lookahead);
                 return Ok((__lookbehind, __lookahead, __Nonterminal::TokenTree(__nt)));
             }
             _ => {
@@ -20181,7 +20450,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 153
+    // State 156
     //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# ["("]
     //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# [")"]
     //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# ["*"]
@@ -20513,27 +20782,27 @@ mod __parse__Yacc {
     //   UnpairedToken = (*) r#"\'.\'"# [r#"[0-9]+"#]
     //   UnpairedToken = (*) r#"\'.\'"# [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
     //
-    //   "(" -> Shift(S106)
-    //   ")" -> Shift(S163)
-    //   "*" -> Shift(S108)
-    //   "," -> Shift(S109)
-    //   "." -> Shift(S110)
-    //   ";" -> Shift(S111)
-    //   "=" -> Shift(S112)
-    //   "[" -> Shift(S113)
-    //   "{" -> Shift(S114)
-    //   r#"\"[^\"]*\""# -> Shift(S115)
-    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S116)
-    //   r#"$[$0-9]+"# -> Shift(S117)
-    //   r#"\'.\'"# -> Shift(S118)
-    //   r#"[0-9]+"# -> Shift(S119)
-    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S120)
+    //   "(" -> Shift(S109)
+    //   ")" -> Shift(S166)
+    //   "*" -> Shift(S111)
+    //   "," -> Shift(S112)
+    //   "." -> Shift(S113)
+    //   ";" -> Shift(S114)
+    //   "=" -> Shift(S115)
+    //   "[" -> Shift(S116)
+    //   "{" -> Shift(S117)
+    //   r#"\"[^\"]*\""# -> Shift(S118)
+    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S119)
+    //   r#"$[$0-9]+"# -> Shift(S120)
+    //   r#"\'.\'"# -> Shift(S121)
+    //   r#"[0-9]+"# -> Shift(S122)
+    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S123)
     //
-    //   Ident -> S101
-    //   Integer -> S102
-    //   TokenTree -> S143
-    //   UnpairedToken -> S105
-    pub fn __state153<
+    //   Ident -> S104
+    //   Integer -> S105
+    //   TokenTree -> S146
+    //   UnpairedToken -> S108
+    pub fn __state156<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -20550,77 +20819,77 @@ mod __parse__Yacc {
             Some((_, (13, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state106(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state109(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (14, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state163(input, __lookbehind, __tokens, __sym0, __sym1, __sym2));
+                __result = try!(__state166(input, __lookbehind, __tokens, __sym0, __sym1, __sym2));
             }
             Some((_, (15, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state108(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state111(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (16, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state109(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state112(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (17, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state110(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state113(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (19, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state111(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state114(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (20, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state112(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state115(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (21, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state113(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state116(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (23, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state114(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state117(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (26, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state115(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state118(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (27, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state116(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state119(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (28, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state117(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state120(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (29, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state118(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state121(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (30, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state119(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state122(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (31, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state120(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state123(input, __lookbehind, __tokens, __sym2));
             }
             _ => {
                 return Err(__ParseError::UnrecognizedToken {
@@ -20634,19 +20903,19 @@ mod __parse__Yacc {
             match __nt {
                 __Nonterminal::Ident(__nt) => {
                     let __sym2 = &mut Some(__nt);
-                    __result = try!(__state101(input, __lookbehind, __tokens, __lookahead, __sym2));
+                    __result = try!(__state104(input, __lookbehind, __tokens, __lookahead, __sym2));
                 }
                 __Nonterminal::Integer(__nt) => {
                     let __sym2 = &mut Some(__nt);
-                    __result = try!(__state102(input, __lookbehind, __tokens, __lookahead, __sym2));
+                    __result = try!(__state105(input, __lookbehind, __tokens, __lookahead, __sym2));
                 }
                 __Nonterminal::TokenTree(__nt) => {
                     let __sym2 = &mut Some(__nt);
-                    __result = try!(__state143(input, __lookbehind, __tokens, __lookahead, __sym1, __sym2));
+                    __result = try!(__state146(input, __lookbehind, __tokens, __lookahead, __sym1, __sym2));
                 }
                 __Nonterminal::UnpairedToken(__nt) => {
                     let __sym2 = &mut Some(__nt);
-                    __result = try!(__state105(input, __lookbehind, __tokens, __lookahead, __sym2));
+                    __result = try!(__state108(input, __lookbehind, __tokens, __lookahead, __sym2));
                 }
                 _ => {
                     return Ok((__lookbehind, __lookahead, __nt));
@@ -20656,7 +20925,7 @@ mod __parse__Yacc {
         return Ok(__result);
     }
 
-    // State 154
+    // State 157
     //   TokenTree = "(" ")" (*) ["("]
     //   TokenTree = "(" ")" (*) ["*"]
     //   TokenTree = "(" ")" (*) [","]
@@ -20673,23 +20942,23 @@ mod __parse__Yacc {
     //   TokenTree = "(" ")" (*) [r#"[0-9]+"#]
     //   TokenTree = "(" ")" (*) [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
     //
-    //   "(" -> Reduce(TokenTree = "(", ")" => ActionFn(77);)
-    //   "*" -> Reduce(TokenTree = "(", ")" => ActionFn(77);)
-    //   "," -> Reduce(TokenTree = "(", ")" => ActionFn(77);)
-    //   "." -> Reduce(TokenTree = "(", ")" => ActionFn(77);)
-    //   ";" -> Reduce(TokenTree = "(", ")" => ActionFn(77);)
-    //   "=" -> Reduce(TokenTree = "(", ")" => ActionFn(77);)
-    //   "[" -> Reduce(TokenTree = "(", ")" => ActionFn(77);)
-    //   "]" -> Reduce(TokenTree = "(", ")" => ActionFn(77);)
-    //   "{" -> Reduce(TokenTree = "(", ")" => ActionFn(77);)
-    //   r#"\"[^\"]*\""# -> Reduce(TokenTree = "(", ")" => ActionFn(77);)
-    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "(", ")" => ActionFn(77);)
-    //   r#"$[$0-9]+"# -> Reduce(TokenTree = "(", ")" => ActionFn(77);)
-    //   r#"\'.\'"# -> Reduce(TokenTree = "(", ")" => ActionFn(77);)
-    //   r#"[0-9]+"# -> Reduce(TokenTree = "(", ")" => ActionFn(77);)
-    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "(", ")" => ActionFn(77);)
+    //   "(" -> Reduce(TokenTree = "(", ")" => ActionFn(83);)
+    //   "*" -> Reduce(TokenTree = "(", ")" => ActionFn(83);)
+    //   "," -> Reduce(TokenTree = "(", ")" => ActionFn(83);)
+    //   "." -> Reduce(TokenTree = "(", ")" => ActionFn(83);)
+    //   ";" -> Reduce(TokenTree = "(", ")" => ActionFn(83);)
+    //   "=" -> Reduce(TokenTree = "(", ")" => ActionFn(83);)
+    //   "[" -> Reduce(TokenTree = "(", ")" => ActionFn(83);)
+    //   "]" -> Reduce(TokenTree = "(", ")" => ActionFn(83);)
+    //   "{" -> Reduce(TokenTree = "(", ")" => ActionFn(83);)
+    //   r#"\"[^\"]*\""# -> Reduce(TokenTree = "(", ")" => ActionFn(83);)
+    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "(", ")" => ActionFn(83);)
+    //   r#"$[$0-9]+"# -> Reduce(TokenTree = "(", ")" => ActionFn(83);)
+    //   r#"\'.\'"# -> Reduce(TokenTree = "(", ")" => ActionFn(83);)
+    //   r#"[0-9]+"# -> Reduce(TokenTree = "(", ")" => ActionFn(83);)
+    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "(", ")" => ActionFn(83);)
     //
-    pub fn __state154<
+    pub fn __state157<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -20724,7 +20993,7 @@ mod __parse__Yacc {
             Some((_, (31, _), _)) => {
                 let __sym0 = __sym0.take().unwrap();
                 let __sym1 = __sym1.take().unwrap();
-                let __nt = super::__action77(input, __sym0, __sym1, &__lookbehind, &__lookahead);
+                let __nt = super::__action83(input, __sym0, __sym1, &__lookbehind, &__lookahead);
                 return Ok((__lookbehind, __lookahead, __Nonterminal::TokenTree(__nt)));
             }
             _ => {
@@ -20736,7 +21005,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 155
+    // State 158
     //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# ["("]
     //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# ["*"]
     //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# [","]
@@ -21068,27 +21337,27 @@ mod __parse__Yacc {
     //   UnpairedToken = (*) r#"\'.\'"# [r#"[0-9]+"#]
     //   UnpairedToken = (*) r#"\'.\'"# [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
     //
-    //   "(" -> Shift(S126)
-    //   "*" -> Shift(S127)
-    //   "," -> Shift(S128)
-    //   "." -> Shift(S129)
-    //   ";" -> Shift(S130)
-    //   "=" -> Shift(S131)
-    //   "[" -> Shift(S132)
-    //   "]" -> Shift(S164)
-    //   "{" -> Shift(S134)
-    //   r#"\"[^\"]*\""# -> Shift(S135)
-    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S136)
-    //   r#"$[$0-9]+"# -> Shift(S137)
-    //   r#"\'.\'"# -> Shift(S138)
-    //   r#"[0-9]+"# -> Shift(S139)
-    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S140)
+    //   "(" -> Shift(S129)
+    //   "*" -> Shift(S130)
+    //   "," -> Shift(S131)
+    //   "." -> Shift(S132)
+    //   ";" -> Shift(S133)
+    //   "=" -> Shift(S134)
+    //   "[" -> Shift(S135)
+    //   "]" -> Shift(S167)
+    //   "{" -> Shift(S137)
+    //   r#"\"[^\"]*\""# -> Shift(S138)
+    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S139)
+    //   r#"$[$0-9]+"# -> Shift(S140)
+    //   r#"\'.\'"# -> Shift(S141)
+    //   r#"[0-9]+"# -> Shift(S142)
+    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S143)
     //
-    //   Ident -> S121
-    //   Integer -> S122
-    //   TokenTree -> S151
-    //   UnpairedToken -> S125
-    pub fn __state155<
+    //   Ident -> S124
+    //   Integer -> S125
+    //   TokenTree -> S154
+    //   UnpairedToken -> S128
+    pub fn __state158<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -21105,77 +21374,77 @@ mod __parse__Yacc {
             Some((_, (13, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state126(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state129(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (15, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state127(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state130(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (16, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state128(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state131(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (17, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state129(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state132(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (19, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state130(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state133(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (20, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state131(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state134(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (21, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state132(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state135(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (22, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state164(input, __lookbehind, __tokens, __sym0, __sym1, __sym2));
+                __result = try!(__state167(input, __lookbehind, __tokens, __sym0, __sym1, __sym2));
             }
             Some((_, (23, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state134(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state137(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (26, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state135(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state138(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (27, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state136(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state139(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (28, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state137(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state140(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (29, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state138(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state141(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (30, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state139(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state142(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (31, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state140(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state143(input, __lookbehind, __tokens, __sym2));
             }
             _ => {
                 return Err(__ParseError::UnrecognizedToken {
@@ -21189,19 +21458,19 @@ mod __parse__Yacc {
             match __nt {
                 __Nonterminal::Ident(__nt) => {
                     let __sym2 = &mut Some(__nt);
-                    __result = try!(__state121(input, __lookbehind, __tokens, __lookahead, __sym2));
+                    __result = try!(__state124(input, __lookbehind, __tokens, __lookahead, __sym2));
                 }
                 __Nonterminal::Integer(__nt) => {
                     let __sym2 = &mut Some(__nt);
-                    __result = try!(__state122(input, __lookbehind, __tokens, __lookahead, __sym2));
+                    __result = try!(__state125(input, __lookbehind, __tokens, __lookahead, __sym2));
                 }
                 __Nonterminal::TokenTree(__nt) => {
                     let __sym2 = &mut Some(__nt);
-                    __result = try!(__state151(input, __lookbehind, __tokens, __lookahead, __sym1, __sym2));
+                    __result = try!(__state154(input, __lookbehind, __tokens, __lookahead, __sym1, __sym2));
                 }
                 __Nonterminal::UnpairedToken(__nt) => {
                     let __sym2 = &mut Some(__nt);
-                    __result = try!(__state125(input, __lookbehind, __tokens, __lookahead, __sym2));
+                    __result = try!(__state128(input, __lookbehind, __tokens, __lookahead, __sym2));
                 }
                 _ => {
                     return Ok((__lookbehind, __lookahead, __nt));
@@ -21211,7 +21480,7 @@ mod __parse__Yacc {
         return Ok(__result);
     }
 
-    // State 156
+    // State 159
     //   TokenTree = "[" "]" (*) ["("]
     //   TokenTree = "[" "]" (*) ["*"]
     //   TokenTree = "[" "]" (*) [","]
@@ -21228,23 +21497,23 @@ mod __parse__Yacc {
     //   TokenTree = "[" "]" (*) [r#"[0-9]+"#]
     //   TokenTree = "[" "]" (*) [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
     //
-    //   "(" -> Reduce(TokenTree = "[", "]" => ActionFn(79);)
-    //   "*" -> Reduce(TokenTree = "[", "]" => ActionFn(79);)
-    //   "," -> Reduce(TokenTree = "[", "]" => ActionFn(79);)
-    //   "." -> Reduce(TokenTree = "[", "]" => ActionFn(79);)
-    //   ";" -> Reduce(TokenTree = "[", "]" => ActionFn(79);)
-    //   "=" -> Reduce(TokenTree = "[", "]" => ActionFn(79);)
-    //   "[" -> Reduce(TokenTree = "[", "]" => ActionFn(79);)
-    //   "]" -> Reduce(TokenTree = "[", "]" => ActionFn(79);)
-    //   "{" -> Reduce(TokenTree = "[", "]" => ActionFn(79);)
-    //   r#"\"[^\"]*\""# -> Reduce(TokenTree = "[", "]" => ActionFn(79);)
-    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "[", "]" => ActionFn(79);)
-    //   r#"$[$0-9]+"# -> Reduce(TokenTree = "[", "]" => ActionFn(79);)
-    //   r#"\'.\'"# -> Reduce(TokenTree = "[", "]" => ActionFn(79);)
-    //   r#"[0-9]+"# -> Reduce(TokenTree = "[", "]" => ActionFn(79);)
-    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "[", "]" => ActionFn(79);)
+    //   "(" -> Reduce(TokenTree = "[", "]" => ActionFn(85);)
+    //   "*" -> Reduce(TokenTree = "[", "]" => ActionFn(85);)
+    //   "," -> Reduce(TokenTree = "[", "]" => ActionFn(85);)
+    //   "." -> Reduce(TokenTree = "[", "]" => ActionFn(85);)
+    //   ";" -> Reduce(TokenTree = "[", "]" => ActionFn(85);)
+    //   "=" -> Reduce(TokenTree = "[", "]" => ActionFn(85);)
+    //   "[" -> Reduce(TokenTree = "[", "]" => ActionFn(85);)
+    //   "]" -> Reduce(TokenTree = "[", "]" => ActionFn(85);)
+    //   "{" -> Reduce(TokenTree = "[", "]" => ActionFn(85);)
+    //   r#"\"[^\"]*\""# -> Reduce(TokenTree = "[", "]" => ActionFn(85);)
+    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "[", "]" => ActionFn(85);)
+    //   r#"$[$0-9]+"# -> Reduce(TokenTree = "[", "]" => ActionFn(85);)
+    //   r#"\'.\'"# -> Reduce(TokenTree = "[", "]" => ActionFn(85);)
+    //   r#"[0-9]+"# -> Reduce(TokenTree = "[", "]" => ActionFn(85);)
+    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "[", "]" => ActionFn(85);)
     //
-    pub fn __state156<
+    pub fn __state159<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -21279,7 +21548,7 @@ mod __parse__Yacc {
             Some((_, (31, _), _)) => {
                 let __sym0 = __sym0.take().unwrap();
                 let __sym1 = __sym1.take().unwrap();
-                let __nt = super::__action79(input, __sym0, __sym1, &__lookbehind, &__lookahead);
+                let __nt = super::__action85(input, __sym0, __sym1, &__lookbehind, &__lookahead);
                 return Ok((__lookbehind, __lookahead, __Nonterminal::TokenTree(__nt)));
             }
             _ => {
@@ -21291,7 +21560,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 157
+    // State 160
     //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# ["("]
     //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# ["*"]
     //   Ident = (*) r#"[_a-zA-Z][_a-zA-Z0-9]*"# [","]
@@ -21623,27 +21892,27 @@ mod __parse__Yacc {
     //   UnpairedToken = (*) r#"\'.\'"# [r#"[0-9]+"#]
     //   UnpairedToken = (*) r#"\'.\'"# [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
     //
-    //   "(" -> Shift(S83)
-    //   "*" -> Shift(S84)
-    //   "," -> Shift(S85)
-    //   "." -> Shift(S86)
-    //   ";" -> Shift(S87)
-    //   "=" -> Shift(S88)
-    //   "[" -> Shift(S89)
-    //   "{" -> Shift(S90)
-    //   "}" -> Shift(S165)
-    //   r#"\"[^\"]*\""# -> Shift(S92)
-    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S93)
-    //   r#"$[$0-9]+"# -> Shift(S94)
-    //   r#"\'.\'"# -> Shift(S95)
-    //   r#"[0-9]+"# -> Shift(S96)
-    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S97)
+    //   "(" -> Shift(S86)
+    //   "*" -> Shift(S87)
+    //   "," -> Shift(S88)
+    //   "." -> Shift(S89)
+    //   ";" -> Shift(S90)
+    //   "=" -> Shift(S91)
+    //   "[" -> Shift(S92)
+    //   "{" -> Shift(S93)
+    //   "}" -> Shift(S168)
+    //   r#"\"[^\"]*\""# -> Shift(S95)
+    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S96)
+    //   r#"$[$0-9]+"# -> Shift(S97)
+    //   r#"\'.\'"# -> Shift(S98)
+    //   r#"[0-9]+"# -> Shift(S99)
+    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Shift(S100)
     //
-    //   Ident -> S78
-    //   Integer -> S79
-    //   TokenTree -> S99
-    //   UnpairedToken -> S82
-    pub fn __state157<
+    //   Ident -> S81
+    //   Integer -> S82
+    //   TokenTree -> S102
+    //   UnpairedToken -> S85
+    pub fn __state160<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -21660,77 +21929,77 @@ mod __parse__Yacc {
             Some((_, (13, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state83(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state86(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (15, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state84(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state87(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (16, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state85(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state88(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (17, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state86(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state89(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (19, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state87(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state90(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (20, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state88(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state91(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (21, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state89(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state92(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (23, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state90(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state93(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (25, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state165(input, __lookbehind, __tokens, __sym0, __sym1, __sym2));
+                __result = try!(__state168(input, __lookbehind, __tokens, __sym0, __sym1, __sym2));
             }
             Some((_, (26, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state92(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state95(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (27, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state93(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state96(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (28, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state94(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state97(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (29, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state95(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state98(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (30, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state96(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state99(input, __lookbehind, __tokens, __sym2));
             }
             Some((_, (31, __tok0), __loc)) => {
                 let mut __lookbehind = Some(__loc);
                 let mut __sym2 = &mut Some((__tok0));
-                __result = try!(__state97(input, __lookbehind, __tokens, __sym2));
+                __result = try!(__state100(input, __lookbehind, __tokens, __sym2));
             }
             _ => {
                 return Err(__ParseError::UnrecognizedToken {
@@ -21744,19 +22013,19 @@ mod __parse__Yacc {
             match __nt {
                 __Nonterminal::Ident(__nt) => {
                     let __sym2 = &mut Some(__nt);
-                    __result = try!(__state78(input, __lookbehind, __tokens, __lookahead, __sym2));
+                    __result = try!(__state81(input, __lookbehind, __tokens, __lookahead, __sym2));
                 }
                 __Nonterminal::Integer(__nt) => {
                     let __sym2 = &mut Some(__nt);
-                    __result = try!(__state79(input, __lookbehind, __tokens, __lookahead, __sym2));
+                    __result = try!(__state82(input, __lookbehind, __tokens, __lookahead, __sym2));
                 }
                 __Nonterminal::TokenTree(__nt) => {
                     let __sym2 = &mut Some(__nt);
-                    __result = try!(__state99(input, __lookbehind, __tokens, __lookahead, __sym1, __sym2));
+                    __result = try!(__state102(input, __lookbehind, __tokens, __lookahead, __sym1, __sym2));
                 }
                 __Nonterminal::UnpairedToken(__nt) => {
                     let __sym2 = &mut Some(__nt);
-                    __result = try!(__state82(input, __lookbehind, __tokens, __lookahead, __sym2));
+                    __result = try!(__state85(input, __lookbehind, __tokens, __lookahead, __sym2));
                 }
                 _ => {
                     return Ok((__lookbehind, __lookahead, __nt));
@@ -21766,7 +22035,7 @@ mod __parse__Yacc {
         return Ok(__result);
     }
 
-    // State 158
+    // State 161
     //   TokenTree = "{" "}" (*) ["("]
     //   TokenTree = "{" "}" (*) ["*"]
     //   TokenTree = "{" "}" (*) [","]
@@ -21783,23 +22052,23 @@ mod __parse__Yacc {
     //   TokenTree = "{" "}" (*) [r#"[0-9]+"#]
     //   TokenTree = "{" "}" (*) [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
     //
-    //   "(" -> Reduce(TokenTree = "{", "}" => ActionFn(75);)
-    //   "*" -> Reduce(TokenTree = "{", "}" => ActionFn(75);)
-    //   "," -> Reduce(TokenTree = "{", "}" => ActionFn(75);)
-    //   "." -> Reduce(TokenTree = "{", "}" => ActionFn(75);)
-    //   ";" -> Reduce(TokenTree = "{", "}" => ActionFn(75);)
-    //   "=" -> Reduce(TokenTree = "{", "}" => ActionFn(75);)
-    //   "[" -> Reduce(TokenTree = "{", "}" => ActionFn(75);)
-    //   "]" -> Reduce(TokenTree = "{", "}" => ActionFn(75);)
-    //   "{" -> Reduce(TokenTree = "{", "}" => ActionFn(75);)
-    //   r#"\"[^\"]*\""# -> Reduce(TokenTree = "{", "}" => ActionFn(75);)
-    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "{", "}" => ActionFn(75);)
-    //   r#"$[$0-9]+"# -> Reduce(TokenTree = "{", "}" => ActionFn(75);)
-    //   r#"\'.\'"# -> Reduce(TokenTree = "{", "}" => ActionFn(75);)
-    //   r#"[0-9]+"# -> Reduce(TokenTree = "{", "}" => ActionFn(75);)
-    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "{", "}" => ActionFn(75);)
+    //   "(" -> Reduce(TokenTree = "{", "}" => ActionFn(81);)
+    //   "*" -> Reduce(TokenTree = "{", "}" => ActionFn(81);)
+    //   "," -> Reduce(TokenTree = "{", "}" => ActionFn(81);)
+    //   "." -> Reduce(TokenTree = "{", "}" => ActionFn(81);)
+    //   ";" -> Reduce(TokenTree = "{", "}" => ActionFn(81);)
+    //   "=" -> Reduce(TokenTree = "{", "}" => ActionFn(81);)
+    //   "[" -> Reduce(TokenTree = "{", "}" => ActionFn(81);)
+    //   "]" -> Reduce(TokenTree = "{", "}" => ActionFn(81);)
+    //   "{" -> Reduce(TokenTree = "{", "}" => ActionFn(81);)
+    //   r#"\"[^\"]*\""# -> Reduce(TokenTree = "{", "}" => ActionFn(81);)
+    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "{", "}" => ActionFn(81);)
+    //   r#"$[$0-9]+"# -> Reduce(TokenTree = "{", "}" => ActionFn(81);)
+    //   r#"\'.\'"# -> Reduce(TokenTree = "{", "}" => ActionFn(81);)
+    //   r#"[0-9]+"# -> Reduce(TokenTree = "{", "}" => ActionFn(81);)
+    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "{", "}" => ActionFn(81);)
     //
-    pub fn __state158<
+    pub fn __state161<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -21834,7 +22103,7 @@ mod __parse__Yacc {
             Some((_, (31, _), _)) => {
                 let __sym0 = __sym0.take().unwrap();
                 let __sym1 = __sym1.take().unwrap();
-                let __nt = super::__action75(input, __sym0, __sym1, &__lookbehind, &__lookahead);
+                let __nt = super::__action81(input, __sym0, __sym1, &__lookbehind, &__lookahead);
                 return Ok((__lookbehind, __lookahead, __Nonterminal::TokenTree(__nt)));
             }
             _ => {
@@ -21846,7 +22115,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 159
+    // State 162
     //   TokenTree = "{" TokenTree+ "}" (*) ["("]
     //   TokenTree = "{" TokenTree+ "}" (*) ["*"]
     //   TokenTree = "{" TokenTree+ "}" (*) [","]
@@ -21863,23 +22132,23 @@ mod __parse__Yacc {
     //   TokenTree = "{" TokenTree+ "}" (*) [r#"[0-9]+"#]
     //   TokenTree = "{" TokenTree+ "}" (*) [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
     //
-    //   "(" -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(76);)
-    //   "*" -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(76);)
-    //   "," -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(76);)
-    //   "." -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(76);)
-    //   ";" -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(76);)
-    //   "=" -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(76);)
-    //   "[" -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(76);)
-    //   "{" -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(76);)
-    //   "}" -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(76);)
-    //   r#"\"[^\"]*\""# -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(76);)
-    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(76);)
-    //   r#"$[$0-9]+"# -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(76);)
-    //   r#"\'.\'"# -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(76);)
-    //   r#"[0-9]+"# -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(76);)
-    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(76);)
+    //   "(" -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(82);)
+    //   "*" -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(82);)
+    //   "," -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(82);)
+    //   "." -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(82);)
+    //   ";" -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(82);)
+    //   "=" -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(82);)
+    //   "[" -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(82);)
+    //   "{" -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(82);)
+    //   "}" -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(82);)
+    //   r#"\"[^\"]*\""# -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(82);)
+    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(82);)
+    //   r#"$[$0-9]+"# -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(82);)
+    //   r#"\'.\'"# -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(82);)
+    //   r#"[0-9]+"# -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(82);)
+    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(82);)
     //
-    pub fn __state159<
+    pub fn __state162<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -21916,7 +22185,7 @@ mod __parse__Yacc {
                 let __sym0 = __sym0.take().unwrap();
                 let __sym1 = __sym1.take().unwrap();
                 let __sym2 = __sym2.take().unwrap();
-                let __nt = super::__action76(input, __sym0, __sym1, __sym2, &__lookbehind, &__lookahead);
+                let __nt = super::__action82(input, __sym0, __sym1, __sym2, &__lookbehind, &__lookahead);
                 return Ok((__lookbehind, __lookahead, __Nonterminal::TokenTree(__nt)));
             }
             _ => {
@@ -21928,7 +22197,7 @@ mod __parse__Yacc {
         }
     }
 
-    // State 160
+    // State 163
     //   TokenTree = "(" TokenTree+ ")" (*) ["("]
     //   TokenTree = "(" TokenTree+ ")" (*) [")"]
     //   TokenTree = "(" TokenTree+ ")" (*) ["*"]
@@ -21945,267 +22214,21 @@ mod __parse__Yacc {
     //   TokenTree = "(" TokenTree+ ")" (*) [r#"[0-9]+"#]
     //   TokenTree = "(" TokenTree+ ")" (*) [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
     //
-    //   "(" -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(78);)
-    //   ")" -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(78);)
-    //   "*" -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(78);)
-    //   "," -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(78);)
-    //   "." -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(78);)
-    //   ";" -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(78);)
-    //   "=" -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(78);)
-    //   "[" -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(78);)
-    //   "{" -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(78);)
-    //   r#"\"[^\"]*\""# -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(78);)
-    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(78);)
-    //   r#"$[$0-9]+"# -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(78);)
-    //   r#"\'.\'"# -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(78);)
-    //   r#"[0-9]+"# -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(78);)
-    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(78);)
-    //
-    pub fn __state160<
-        'input,
-        __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
-    >(
-        input: &'input str,
-        __lookbehind: Option<usize>,
-        __tokens: &mut __TOKENS,
-        __sym0: &mut Option<&'input str>,
-        __sym1: &mut Option<::std::vec::Vec<()>>,
-        __sym2: &mut Option<&'input str>,
-    ) -> Result<(Option<usize>, Option<(usize, (usize, &'input str), usize)>, __Nonterminal<'input>), __ParseError<usize,(usize, &'input str),()>>
-    {
-        let mut __result: (Option<usize>, Option<(usize, (usize, &'input str), usize)>, __Nonterminal<'input>);
-        let __lookahead = match __tokens.next() {
-            Some(Ok(v)) => Some(v),
-            None => None,
-            Some(Err(e)) => return Err(e),
-        };
-        match __lookahead {
-            Some((_, (13, _), _)) |
-            Some((_, (14, _), _)) |
-            Some((_, (15, _), _)) |
-            Some((_, (16, _), _)) |
-            Some((_, (17, _), _)) |
-            Some((_, (19, _), _)) |
-            Some((_, (20, _), _)) |
-            Some((_, (21, _), _)) |
-            Some((_, (23, _), _)) |
-            Some((_, (26, _), _)) |
-            Some((_, (27, _), _)) |
-            Some((_, (28, _), _)) |
-            Some((_, (29, _), _)) |
-            Some((_, (30, _), _)) |
-            Some((_, (31, _), _)) => {
-                let __sym0 = __sym0.take().unwrap();
-                let __sym1 = __sym1.take().unwrap();
-                let __sym2 = __sym2.take().unwrap();
-                let __nt = super::__action78(input, __sym0, __sym1, __sym2, &__lookbehind, &__lookahead);
-                return Ok((__lookbehind, __lookahead, __Nonterminal::TokenTree(__nt)));
-            }
-            _ => {
-                return Err(__ParseError::UnrecognizedToken {
-                    token: __lookahead,
-                    expected: vec![],
-                });
-            }
-        }
-    }
-
-    // State 161
-    //   TokenTree = "[" TokenTree+ "]" (*) ["("]
-    //   TokenTree = "[" TokenTree+ "]" (*) [")"]
-    //   TokenTree = "[" TokenTree+ "]" (*) ["*"]
-    //   TokenTree = "[" TokenTree+ "]" (*) [","]
-    //   TokenTree = "[" TokenTree+ "]" (*) ["."]
-    //   TokenTree = "[" TokenTree+ "]" (*) [";"]
-    //   TokenTree = "[" TokenTree+ "]" (*) ["="]
-    //   TokenTree = "[" TokenTree+ "]" (*) ["["]
-    //   TokenTree = "[" TokenTree+ "]" (*) ["{"]
-    //   TokenTree = "[" TokenTree+ "]" (*) [r#"\"[^\"]*\""#]
-    //   TokenTree = "[" TokenTree+ "]" (*) [r#"#[_a-zA-Z][_a-zA-Z0-9]*"#]
-    //   TokenTree = "[" TokenTree+ "]" (*) [r#"$[$0-9]+"#]
-    //   TokenTree = "[" TokenTree+ "]" (*) [r#"\'.\'"#]
-    //   TokenTree = "[" TokenTree+ "]" (*) [r#"[0-9]+"#]
-    //   TokenTree = "[" TokenTree+ "]" (*) [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
-    //
-    //   "(" -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(80);)
-    //   ")" -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(80);)
-    //   "*" -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(80);)
-    //   "," -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(80);)
-    //   "." -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(80);)
-    //   ";" -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(80);)
-    //   "=" -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(80);)
-    //   "[" -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(80);)
-    //   "{" -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(80);)
-    //   r#"\"[^\"]*\""# -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(80);)
-    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(80);)
-    //   r#"$[$0-9]+"# -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(80);)
-    //   r#"\'.\'"# -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(80);)
-    //   r#"[0-9]+"# -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(80);)
-    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(80);)
-    //
-    pub fn __state161<
-        'input,
-        __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
-    >(
-        input: &'input str,
-        __lookbehind: Option<usize>,
-        __tokens: &mut __TOKENS,
-        __sym0: &mut Option<&'input str>,
-        __sym1: &mut Option<::std::vec::Vec<()>>,
-        __sym2: &mut Option<&'input str>,
-    ) -> Result<(Option<usize>, Option<(usize, (usize, &'input str), usize)>, __Nonterminal<'input>), __ParseError<usize,(usize, &'input str),()>>
-    {
-        let mut __result: (Option<usize>, Option<(usize, (usize, &'input str), usize)>, __Nonterminal<'input>);
-        let __lookahead = match __tokens.next() {
-            Some(Ok(v)) => Some(v),
-            None => None,
-            Some(Err(e)) => return Err(e),
-        };
-        match __lookahead {
-            Some((_, (13, _), _)) |
-            Some((_, (14, _), _)) |
-            Some((_, (15, _), _)) |
-            Some((_, (16, _), _)) |
-            Some((_, (17, _), _)) |
-            Some((_, (19, _), _)) |
-            Some((_, (20, _), _)) |
-            Some((_, (21, _), _)) |
-            Some((_, (23, _), _)) |
-            Some((_, (26, _), _)) |
-            Some((_, (27, _), _)) |
-            Some((_, (28, _), _)) |
-            Some((_, (29, _), _)) |
-            Some((_, (30, _), _)) |
-            Some((_, (31, _), _)) => {
-                let __sym0 = __sym0.take().unwrap();
-                let __sym1 = __sym1.take().unwrap();
-                let __sym2 = __sym2.take().unwrap();
-                let __nt = super::__action80(input, __sym0, __sym1, __sym2, &__lookbehind, &__lookahead);
-                return Ok((__lookbehind, __lookahead, __Nonterminal::TokenTree(__nt)));
-            }
-            _ => {
-                return Err(__ParseError::UnrecognizedToken {
-                    token: __lookahead,
-                    expected: vec![],
-                });
-            }
-        }
-    }
-
-    // State 162
-    //   TokenTree = "{" TokenTree+ "}" (*) ["("]
-    //   TokenTree = "{" TokenTree+ "}" (*) [")"]
-    //   TokenTree = "{" TokenTree+ "}" (*) ["*"]
-    //   TokenTree = "{" TokenTree+ "}" (*) [","]
-    //   TokenTree = "{" TokenTree+ "}" (*) ["."]
-    //   TokenTree = "{" TokenTree+ "}" (*) [";"]
-    //   TokenTree = "{" TokenTree+ "}" (*) ["="]
-    //   TokenTree = "{" TokenTree+ "}" (*) ["["]
-    //   TokenTree = "{" TokenTree+ "}" (*) ["{"]
-    //   TokenTree = "{" TokenTree+ "}" (*) [r#"\"[^\"]*\""#]
-    //   TokenTree = "{" TokenTree+ "}" (*) [r#"#[_a-zA-Z][_a-zA-Z0-9]*"#]
-    //   TokenTree = "{" TokenTree+ "}" (*) [r#"$[$0-9]+"#]
-    //   TokenTree = "{" TokenTree+ "}" (*) [r#"\'.\'"#]
-    //   TokenTree = "{" TokenTree+ "}" (*) [r#"[0-9]+"#]
-    //   TokenTree = "{" TokenTree+ "}" (*) [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
-    //
-    //   "(" -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(76);)
-    //   ")" -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(76);)
-    //   "*" -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(76);)
-    //   "," -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(76);)
-    //   "." -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(76);)
-    //   ";" -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(76);)
-    //   "=" -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(76);)
-    //   "[" -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(76);)
-    //   "{" -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(76);)
-    //   r#"\"[^\"]*\""# -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(76);)
-    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(76);)
-    //   r#"$[$0-9]+"# -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(76);)
-    //   r#"\'.\'"# -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(76);)
-    //   r#"[0-9]+"# -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(76);)
-    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(76);)
-    //
-    pub fn __state162<
-        'input,
-        __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
-    >(
-        input: &'input str,
-        __lookbehind: Option<usize>,
-        __tokens: &mut __TOKENS,
-        __sym0: &mut Option<&'input str>,
-        __sym1: &mut Option<::std::vec::Vec<()>>,
-        __sym2: &mut Option<&'input str>,
-    ) -> Result<(Option<usize>, Option<(usize, (usize, &'input str), usize)>, __Nonterminal<'input>), __ParseError<usize,(usize, &'input str),()>>
-    {
-        let mut __result: (Option<usize>, Option<(usize, (usize, &'input str), usize)>, __Nonterminal<'input>);
-        let __lookahead = match __tokens.next() {
-            Some(Ok(v)) => Some(v),
-            None => None,
-            Some(Err(e)) => return Err(e),
-        };
-        match __lookahead {
-            Some((_, (13, _), _)) |
-            Some((_, (14, _), _)) |
-            Some((_, (15, _), _)) |
-            Some((_, (16, _), _)) |
-            Some((_, (17, _), _)) |
-            Some((_, (19, _), _)) |
-            Some((_, (20, _), _)) |
-            Some((_, (21, _), _)) |
-            Some((_, (23, _), _)) |
-            Some((_, (26, _), _)) |
-            Some((_, (27, _), _)) |
-            Some((_, (28, _), _)) |
-            Some((_, (29, _), _)) |
-            Some((_, (30, _), _)) |
-            Some((_, (31, _), _)) => {
-                let __sym0 = __sym0.take().unwrap();
-                let __sym1 = __sym1.take().unwrap();
-                let __sym2 = __sym2.take().unwrap();
-                let __nt = super::__action76(input, __sym0, __sym1, __sym2, &__lookbehind, &__lookahead);
-                return Ok((__lookbehind, __lookahead, __Nonterminal::TokenTree(__nt)));
-            }
-            _ => {
-                return Err(__ParseError::UnrecognizedToken {
-                    token: __lookahead,
-                    expected: vec![],
-                });
-            }
-        }
-    }
-
-    // State 163
-    //   TokenTree = "(" TokenTree+ ")" (*) ["("]
-    //   TokenTree = "(" TokenTree+ ")" (*) ["*"]
-    //   TokenTree = "(" TokenTree+ ")" (*) [","]
-    //   TokenTree = "(" TokenTree+ ")" (*) ["."]
-    //   TokenTree = "(" TokenTree+ ")" (*) [";"]
-    //   TokenTree = "(" TokenTree+ ")" (*) ["="]
-    //   TokenTree = "(" TokenTree+ ")" (*) ["["]
-    //   TokenTree = "(" TokenTree+ ")" (*) ["]"]
-    //   TokenTree = "(" TokenTree+ ")" (*) ["{"]
-    //   TokenTree = "(" TokenTree+ ")" (*) [r#"\"[^\"]*\""#]
-    //   TokenTree = "(" TokenTree+ ")" (*) [r#"#[_a-zA-Z][_a-zA-Z0-9]*"#]
-    //   TokenTree = "(" TokenTree+ ")" (*) [r#"$[$0-9]+"#]
-    //   TokenTree = "(" TokenTree+ ")" (*) [r#"\'.\'"#]
-    //   TokenTree = "(" TokenTree+ ")" (*) [r#"[0-9]+"#]
-    //   TokenTree = "(" TokenTree+ ")" (*) [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
-    //
-    //   "(" -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(78);)
-    //   "*" -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(78);)
-    //   "," -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(78);)
-    //   "." -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(78);)
-    //   ";" -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(78);)
-    //   "=" -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(78);)
-    //   "[" -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(78);)
-    //   "]" -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(78);)
-    //   "{" -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(78);)
-    //   r#"\"[^\"]*\""# -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(78);)
-    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(78);)
-    //   r#"$[$0-9]+"# -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(78);)
-    //   r#"\'.\'"# -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(78);)
-    //   r#"[0-9]+"# -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(78);)
-    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(78);)
+    //   "(" -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(84);)
+    //   ")" -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(84);)
+    //   "*" -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(84);)
+    //   "," -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(84);)
+    //   "." -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(84);)
+    //   ";" -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(84);)
+    //   "=" -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(84);)
+    //   "[" -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(84);)
+    //   "{" -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(84);)
+    //   r#"\"[^\"]*\""# -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(84);)
+    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(84);)
+    //   r#"$[$0-9]+"# -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(84);)
+    //   r#"\'.\'"# -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(84);)
+    //   r#"[0-9]+"# -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(84);)
+    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(84);)
     //
     pub fn __state163<
         'input,
@@ -22227,13 +22250,13 @@ mod __parse__Yacc {
         };
         match __lookahead {
             Some((_, (13, _), _)) |
+            Some((_, (14, _), _)) |
             Some((_, (15, _), _)) |
             Some((_, (16, _), _)) |
             Some((_, (17, _), _)) |
             Some((_, (19, _), _)) |
             Some((_, (20, _), _)) |
             Some((_, (21, _), _)) |
-            Some((_, (22, _), _)) |
             Some((_, (23, _), _)) |
             Some((_, (26, _), _)) |
             Some((_, (27, _), _)) |
@@ -22244,7 +22267,7 @@ mod __parse__Yacc {
                 let __sym0 = __sym0.take().unwrap();
                 let __sym1 = __sym1.take().unwrap();
                 let __sym2 = __sym2.take().unwrap();
-                let __nt = super::__action78(input, __sym0, __sym1, __sym2, &__lookbehind, &__lookahead);
+                let __nt = super::__action84(input, __sym0, __sym1, __sym2, &__lookbehind, &__lookahead);
                 return Ok((__lookbehind, __lookahead, __Nonterminal::TokenTree(__nt)));
             }
             _ => {
@@ -22258,13 +22281,13 @@ mod __parse__Yacc {
 
     // State 164
     //   TokenTree = "[" TokenTree+ "]" (*) ["("]
+    //   TokenTree = "[" TokenTree+ "]" (*) [")"]
     //   TokenTree = "[" TokenTree+ "]" (*) ["*"]
     //   TokenTree = "[" TokenTree+ "]" (*) [","]
     //   TokenTree = "[" TokenTree+ "]" (*) ["."]
     //   TokenTree = "[" TokenTree+ "]" (*) [";"]
     //   TokenTree = "[" TokenTree+ "]" (*) ["="]
     //   TokenTree = "[" TokenTree+ "]" (*) ["["]
-    //   TokenTree = "[" TokenTree+ "]" (*) ["]"]
     //   TokenTree = "[" TokenTree+ "]" (*) ["{"]
     //   TokenTree = "[" TokenTree+ "]" (*) [r#"\"[^\"]*\""#]
     //   TokenTree = "[" TokenTree+ "]" (*) [r#"#[_a-zA-Z][_a-zA-Z0-9]*"#]
@@ -22273,21 +22296,21 @@ mod __parse__Yacc {
     //   TokenTree = "[" TokenTree+ "]" (*) [r#"[0-9]+"#]
     //   TokenTree = "[" TokenTree+ "]" (*) [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
     //
-    //   "(" -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(80);)
-    //   "*" -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(80);)
-    //   "," -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(80);)
-    //   "." -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(80);)
-    //   ";" -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(80);)
-    //   "=" -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(80);)
-    //   "[" -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(80);)
-    //   "]" -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(80);)
-    //   "{" -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(80);)
-    //   r#"\"[^\"]*\""# -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(80);)
-    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(80);)
-    //   r#"$[$0-9]+"# -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(80);)
-    //   r#"\'.\'"# -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(80);)
-    //   r#"[0-9]+"# -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(80);)
-    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(80);)
+    //   "(" -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(86);)
+    //   ")" -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(86);)
+    //   "*" -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(86);)
+    //   "," -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(86);)
+    //   "." -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(86);)
+    //   ";" -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(86);)
+    //   "=" -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(86);)
+    //   "[" -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(86);)
+    //   "{" -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(86);)
+    //   r#"\"[^\"]*\""# -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(86);)
+    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(86);)
+    //   r#"$[$0-9]+"# -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(86);)
+    //   r#"\'.\'"# -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(86);)
+    //   r#"[0-9]+"# -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(86);)
+    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(86);)
     //
     pub fn __state164<
         'input,
@@ -22309,13 +22332,13 @@ mod __parse__Yacc {
         };
         match __lookahead {
             Some((_, (13, _), _)) |
+            Some((_, (14, _), _)) |
             Some((_, (15, _), _)) |
             Some((_, (16, _), _)) |
             Some((_, (17, _), _)) |
             Some((_, (19, _), _)) |
             Some((_, (20, _), _)) |
             Some((_, (21, _), _)) |
-            Some((_, (22, _), _)) |
             Some((_, (23, _), _)) |
             Some((_, (26, _), _)) |
             Some((_, (27, _), _)) |
@@ -22326,7 +22349,7 @@ mod __parse__Yacc {
                 let __sym0 = __sym0.take().unwrap();
                 let __sym1 = __sym1.take().unwrap();
                 let __sym2 = __sym2.take().unwrap();
-                let __nt = super::__action80(input, __sym0, __sym1, __sym2, &__lookbehind, &__lookahead);
+                let __nt = super::__action86(input, __sym0, __sym1, __sym2, &__lookbehind, &__lookahead);
                 return Ok((__lookbehind, __lookahead, __Nonterminal::TokenTree(__nt)));
             }
             _ => {
@@ -22340,13 +22363,13 @@ mod __parse__Yacc {
 
     // State 165
     //   TokenTree = "{" TokenTree+ "}" (*) ["("]
+    //   TokenTree = "{" TokenTree+ "}" (*) [")"]
     //   TokenTree = "{" TokenTree+ "}" (*) ["*"]
     //   TokenTree = "{" TokenTree+ "}" (*) [","]
     //   TokenTree = "{" TokenTree+ "}" (*) ["."]
     //   TokenTree = "{" TokenTree+ "}" (*) [";"]
     //   TokenTree = "{" TokenTree+ "}" (*) ["="]
     //   TokenTree = "{" TokenTree+ "}" (*) ["["]
-    //   TokenTree = "{" TokenTree+ "}" (*) ["]"]
     //   TokenTree = "{" TokenTree+ "}" (*) ["{"]
     //   TokenTree = "{" TokenTree+ "}" (*) [r#"\"[^\"]*\""#]
     //   TokenTree = "{" TokenTree+ "}" (*) [r#"#[_a-zA-Z][_a-zA-Z0-9]*"#]
@@ -22355,23 +22378,105 @@ mod __parse__Yacc {
     //   TokenTree = "{" TokenTree+ "}" (*) [r#"[0-9]+"#]
     //   TokenTree = "{" TokenTree+ "}" (*) [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
     //
-    //   "(" -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(76);)
-    //   "*" -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(76);)
-    //   "," -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(76);)
-    //   "." -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(76);)
-    //   ";" -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(76);)
-    //   "=" -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(76);)
-    //   "[" -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(76);)
-    //   "]" -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(76);)
-    //   "{" -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(76);)
-    //   r#"\"[^\"]*\""# -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(76);)
-    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(76);)
-    //   r#"$[$0-9]+"# -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(76);)
-    //   r#"\'.\'"# -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(76);)
-    //   r#"[0-9]+"# -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(76);)
-    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(76);)
+    //   "(" -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(82);)
+    //   ")" -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(82);)
+    //   "*" -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(82);)
+    //   "," -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(82);)
+    //   "." -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(82);)
+    //   ";" -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(82);)
+    //   "=" -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(82);)
+    //   "[" -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(82);)
+    //   "{" -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(82);)
+    //   r#"\"[^\"]*\""# -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(82);)
+    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(82);)
+    //   r#"$[$0-9]+"# -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(82);)
+    //   r#"\'.\'"# -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(82);)
+    //   r#"[0-9]+"# -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(82);)
+    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(82);)
     //
     pub fn __state165<
+        'input,
+        __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
+    >(
+        input: &'input str,
+        __lookbehind: Option<usize>,
+        __tokens: &mut __TOKENS,
+        __sym0: &mut Option<&'input str>,
+        __sym1: &mut Option<::std::vec::Vec<()>>,
+        __sym2: &mut Option<&'input str>,
+    ) -> Result<(Option<usize>, Option<(usize, (usize, &'input str), usize)>, __Nonterminal<'input>), __ParseError<usize,(usize, &'input str),()>>
+    {
+        let mut __result: (Option<usize>, Option<(usize, (usize, &'input str), usize)>, __Nonterminal<'input>);
+        let __lookahead = match __tokens.next() {
+            Some(Ok(v)) => Some(v),
+            None => None,
+            Some(Err(e)) => return Err(e),
+        };
+        match __lookahead {
+            Some((_, (13, _), _)) |
+            Some((_, (14, _), _)) |
+            Some((_, (15, _), _)) |
+            Some((_, (16, _), _)) |
+            Some((_, (17, _), _)) |
+            Some((_, (19, _), _)) |
+            Some((_, (20, _), _)) |
+            Some((_, (21, _), _)) |
+            Some((_, (23, _), _)) |
+            Some((_, (26, _), _)) |
+            Some((_, (27, _), _)) |
+            Some((_, (28, _), _)) |
+            Some((_, (29, _), _)) |
+            Some((_, (30, _), _)) |
+            Some((_, (31, _), _)) => {
+                let __sym0 = __sym0.take().unwrap();
+                let __sym1 = __sym1.take().unwrap();
+                let __sym2 = __sym2.take().unwrap();
+                let __nt = super::__action82(input, __sym0, __sym1, __sym2, &__lookbehind, &__lookahead);
+                return Ok((__lookbehind, __lookahead, __Nonterminal::TokenTree(__nt)));
+            }
+            _ => {
+                return Err(__ParseError::UnrecognizedToken {
+                    token: __lookahead,
+                    expected: vec![],
+                });
+            }
+        }
+    }
+
+    // State 166
+    //   TokenTree = "(" TokenTree+ ")" (*) ["("]
+    //   TokenTree = "(" TokenTree+ ")" (*) ["*"]
+    //   TokenTree = "(" TokenTree+ ")" (*) [","]
+    //   TokenTree = "(" TokenTree+ ")" (*) ["."]
+    //   TokenTree = "(" TokenTree+ ")" (*) [";"]
+    //   TokenTree = "(" TokenTree+ ")" (*) ["="]
+    //   TokenTree = "(" TokenTree+ ")" (*) ["["]
+    //   TokenTree = "(" TokenTree+ ")" (*) ["]"]
+    //   TokenTree = "(" TokenTree+ ")" (*) ["{"]
+    //   TokenTree = "(" TokenTree+ ")" (*) [r#"\"[^\"]*\""#]
+    //   TokenTree = "(" TokenTree+ ")" (*) [r#"#[_a-zA-Z][_a-zA-Z0-9]*"#]
+    //   TokenTree = "(" TokenTree+ ")" (*) [r#"$[$0-9]+"#]
+    //   TokenTree = "(" TokenTree+ ")" (*) [r#"\'.\'"#]
+    //   TokenTree = "(" TokenTree+ ")" (*) [r#"[0-9]+"#]
+    //   TokenTree = "(" TokenTree+ ")" (*) [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
+    //
+    //   "(" -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(84);)
+    //   "*" -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(84);)
+    //   "," -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(84);)
+    //   "." -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(84);)
+    //   ";" -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(84);)
+    //   "=" -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(84);)
+    //   "[" -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(84);)
+    //   "]" -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(84);)
+    //   "{" -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(84);)
+    //   r#"\"[^\"]*\""# -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(84);)
+    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(84);)
+    //   r#"$[$0-9]+"# -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(84);)
+    //   r#"\'.\'"# -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(84);)
+    //   r#"[0-9]+"# -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(84);)
+    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "(", TokenTree+, ")" => ActionFn(84);)
+    //
+    pub fn __state166<
         'input,
         __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
     >(
@@ -22408,7 +22513,171 @@ mod __parse__Yacc {
                 let __sym0 = __sym0.take().unwrap();
                 let __sym1 = __sym1.take().unwrap();
                 let __sym2 = __sym2.take().unwrap();
-                let __nt = super::__action76(input, __sym0, __sym1, __sym2, &__lookbehind, &__lookahead);
+                let __nt = super::__action84(input, __sym0, __sym1, __sym2, &__lookbehind, &__lookahead);
+                return Ok((__lookbehind, __lookahead, __Nonterminal::TokenTree(__nt)));
+            }
+            _ => {
+                return Err(__ParseError::UnrecognizedToken {
+                    token: __lookahead,
+                    expected: vec![],
+                });
+            }
+        }
+    }
+
+    // State 167
+    //   TokenTree = "[" TokenTree+ "]" (*) ["("]
+    //   TokenTree = "[" TokenTree+ "]" (*) ["*"]
+    //   TokenTree = "[" TokenTree+ "]" (*) [","]
+    //   TokenTree = "[" TokenTree+ "]" (*) ["."]
+    //   TokenTree = "[" TokenTree+ "]" (*) [";"]
+    //   TokenTree = "[" TokenTree+ "]" (*) ["="]
+    //   TokenTree = "[" TokenTree+ "]" (*) ["["]
+    //   TokenTree = "[" TokenTree+ "]" (*) ["]"]
+    //   TokenTree = "[" TokenTree+ "]" (*) ["{"]
+    //   TokenTree = "[" TokenTree+ "]" (*) [r#"\"[^\"]*\""#]
+    //   TokenTree = "[" TokenTree+ "]" (*) [r#"#[_a-zA-Z][_a-zA-Z0-9]*"#]
+    //   TokenTree = "[" TokenTree+ "]" (*) [r#"$[$0-9]+"#]
+    //   TokenTree = "[" TokenTree+ "]" (*) [r#"\'.\'"#]
+    //   TokenTree = "[" TokenTree+ "]" (*) [r#"[0-9]+"#]
+    //   TokenTree = "[" TokenTree+ "]" (*) [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
+    //
+    //   "(" -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(86);)
+    //   "*" -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(86);)
+    //   "," -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(86);)
+    //   "." -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(86);)
+    //   ";" -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(86);)
+    //   "=" -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(86);)
+    //   "[" -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(86);)
+    //   "]" -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(86);)
+    //   "{" -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(86);)
+    //   r#"\"[^\"]*\""# -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(86);)
+    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(86);)
+    //   r#"$[$0-9]+"# -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(86);)
+    //   r#"\'.\'"# -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(86);)
+    //   r#"[0-9]+"# -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(86);)
+    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "[", TokenTree+, "]" => ActionFn(86);)
+    //
+    pub fn __state167<
+        'input,
+        __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
+    >(
+        input: &'input str,
+        __lookbehind: Option<usize>,
+        __tokens: &mut __TOKENS,
+        __sym0: &mut Option<&'input str>,
+        __sym1: &mut Option<::std::vec::Vec<()>>,
+        __sym2: &mut Option<&'input str>,
+    ) -> Result<(Option<usize>, Option<(usize, (usize, &'input str), usize)>, __Nonterminal<'input>), __ParseError<usize,(usize, &'input str),()>>
+    {
+        let mut __result: (Option<usize>, Option<(usize, (usize, &'input str), usize)>, __Nonterminal<'input>);
+        let __lookahead = match __tokens.next() {
+            Some(Ok(v)) => Some(v),
+            None => None,
+            Some(Err(e)) => return Err(e),
+        };
+        match __lookahead {
+            Some((_, (13, _), _)) |
+            Some((_, (15, _), _)) |
+            Some((_, (16, _), _)) |
+            Some((_, (17, _), _)) |
+            Some((_, (19, _), _)) |
+            Some((_, (20, _), _)) |
+            Some((_, (21, _), _)) |
+            Some((_, (22, _), _)) |
+            Some((_, (23, _), _)) |
+            Some((_, (26, _), _)) |
+            Some((_, (27, _), _)) |
+            Some((_, (28, _), _)) |
+            Some((_, (29, _), _)) |
+            Some((_, (30, _), _)) |
+            Some((_, (31, _), _)) => {
+                let __sym0 = __sym0.take().unwrap();
+                let __sym1 = __sym1.take().unwrap();
+                let __sym2 = __sym2.take().unwrap();
+                let __nt = super::__action86(input, __sym0, __sym1, __sym2, &__lookbehind, &__lookahead);
+                return Ok((__lookbehind, __lookahead, __Nonterminal::TokenTree(__nt)));
+            }
+            _ => {
+                return Err(__ParseError::UnrecognizedToken {
+                    token: __lookahead,
+                    expected: vec![],
+                });
+            }
+        }
+    }
+
+    // State 168
+    //   TokenTree = "{" TokenTree+ "}" (*) ["("]
+    //   TokenTree = "{" TokenTree+ "}" (*) ["*"]
+    //   TokenTree = "{" TokenTree+ "}" (*) [","]
+    //   TokenTree = "{" TokenTree+ "}" (*) ["."]
+    //   TokenTree = "{" TokenTree+ "}" (*) [";"]
+    //   TokenTree = "{" TokenTree+ "}" (*) ["="]
+    //   TokenTree = "{" TokenTree+ "}" (*) ["["]
+    //   TokenTree = "{" TokenTree+ "}" (*) ["]"]
+    //   TokenTree = "{" TokenTree+ "}" (*) ["{"]
+    //   TokenTree = "{" TokenTree+ "}" (*) [r#"\"[^\"]*\""#]
+    //   TokenTree = "{" TokenTree+ "}" (*) [r#"#[_a-zA-Z][_a-zA-Z0-9]*"#]
+    //   TokenTree = "{" TokenTree+ "}" (*) [r#"$[$0-9]+"#]
+    //   TokenTree = "{" TokenTree+ "}" (*) [r#"\'.\'"#]
+    //   TokenTree = "{" TokenTree+ "}" (*) [r#"[0-9]+"#]
+    //   TokenTree = "{" TokenTree+ "}" (*) [r#"[_a-zA-Z][_a-zA-Z0-9]*"#]
+    //
+    //   "(" -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(82);)
+    //   "*" -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(82);)
+    //   "," -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(82);)
+    //   "." -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(82);)
+    //   ";" -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(82);)
+    //   "=" -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(82);)
+    //   "[" -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(82);)
+    //   "]" -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(82);)
+    //   "{" -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(82);)
+    //   r#"\"[^\"]*\""# -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(82);)
+    //   r#"#[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(82);)
+    //   r#"$[$0-9]+"# -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(82);)
+    //   r#"\'.\'"# -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(82);)
+    //   r#"[0-9]+"# -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(82);)
+    //   r#"[_a-zA-Z][_a-zA-Z0-9]*"# -> Reduce(TokenTree = "{", TokenTree+, "}" => ActionFn(82);)
+    //
+    pub fn __state168<
+        'input,
+        __TOKENS: Iterator<Item=Result<(usize, (usize, &'input str), usize),__ParseError<usize,(usize, &'input str),()>>>,
+    >(
+        input: &'input str,
+        __lookbehind: Option<usize>,
+        __tokens: &mut __TOKENS,
+        __sym0: &mut Option<&'input str>,
+        __sym1: &mut Option<::std::vec::Vec<()>>,
+        __sym2: &mut Option<&'input str>,
+    ) -> Result<(Option<usize>, Option<(usize, (usize, &'input str), usize)>, __Nonterminal<'input>), __ParseError<usize,(usize, &'input str),()>>
+    {
+        let mut __result: (Option<usize>, Option<(usize, (usize, &'input str), usize)>, __Nonterminal<'input>);
+        let __lookahead = match __tokens.next() {
+            Some(Ok(v)) => Some(v),
+            None => None,
+            Some(Err(e)) => return Err(e),
+        };
+        match __lookahead {
+            Some((_, (13, _), _)) |
+            Some((_, (15, _), _)) |
+            Some((_, (16, _), _)) |
+            Some((_, (17, _), _)) |
+            Some((_, (19, _), _)) |
+            Some((_, (20, _), _)) |
+            Some((_, (21, _), _)) |
+            Some((_, (22, _), _)) |
+            Some((_, (23, _), _)) |
+            Some((_, (26, _), _)) |
+            Some((_, (27, _), _)) |
+            Some((_, (28, _), _)) |
+            Some((_, (29, _), _)) |
+            Some((_, (30, _), _)) |
+            Some((_, (31, _), _)) => {
+                let __sym0 = __sym0.take().unwrap();
+                let __sym1 = __sym1.take().unwrap();
+                let __sym2 = __sym2.take().unwrap();
+                let __nt = super::__action82(input, __sym0, __sym1, __sym2, &__lookbehind, &__lookahead);
                 return Ok((__lookbehind, __lookahead, __Nonterminal::TokenTree(__nt)));
             }
             _ => {
@@ -24894,12 +25163,12 @@ pub fn __action3<
     'input,
 >(
     input: &'input str,
-    __0: ::std::vec::Vec<Option<BisonDecl<'input>>>,
+    __0: ::std::vec::Vec<Vec<BisonDecl<'input>>>,
     __lookbehind: &Option<usize>,
     __lookahead: &Option<(usize, (usize, &'input str), usize)>,
 ) -> Vec<BisonDecl<'input>>
 {
-    __0.into_iter().filter_map(|e| e).collect()
+    __0.into_iter().flat_map(|e| e).collect()
 }
 
 pub fn __action4<
@@ -24909,9 +25178,9 @@ pub fn __action4<
     __0: &'input str,
     __lookbehind: &Option<usize>,
     __lookahead: &Option<(usize, (usize, &'input str), usize)>,
-) -> Option<BisonDecl<'input>>
+) -> Vec<BisonDecl<'input>>
 {
-    None
+    vec![]
 }
 
 pub fn __action5<
@@ -24919,12 +25188,12 @@ pub fn __action5<
 >(
     input: &'input str,
     _: &'input str,
-    __0: Ident<'input>,
+    __0: ::std::vec::Vec<Ident<'input>>,
     __lookbehind: &Option<usize>,
     __lookahead: &Option<(usize, (usize, &'input str), usize)>,
-) -> Option<BisonDecl<'input>>
+) -> Vec<BisonDecl<'input>>
 {
-    Some(BisonDecl::Token(__0))
+    __0.into_iter().map(BisonDecl::Token).collect()
 }
 
 pub fn __action6<
@@ -24935,9 +25204,9 @@ pub fn __action6<
     __1: &'input str,
     __lookbehind: &Option<usize>,
     __lookahead: &Option<(usize, (usize, &'input str), usize)>,
-) -> Option<BisonDecl<'input>>
+) -> Vec<BisonDecl<'input>>
 {
-    None
+    vec![]
 }
 
 pub fn __action7<
@@ -24948,9 +25217,9 @@ pub fn __action7<
     __1: ::std::vec::Vec<Symbol<'input>>,
     __lookbehind: &Option<usize>,
     __lookahead: &Option<(usize, (usize, &'input str), usize)>,
-) -> Option<BisonDecl<'input>>
+) -> Vec<BisonDecl<'input>>
 {
-    None
+    vec![]
 }
 
 pub fn __action8<
@@ -24961,9 +25230,9 @@ pub fn __action8<
     __1: ::std::vec::Vec<Symbol<'input>>,
     __lookbehind: &Option<usize>,
     __lookahead: &Option<(usize, (usize, &'input str), usize)>,
-) -> Option<BisonDecl<'input>>
+) -> Vec<BisonDecl<'input>>
 {
-    None
+    vec![]
 }
 
 pub fn __action9<
@@ -24974,9 +25243,9 @@ pub fn __action9<
     __1: ::std::vec::Vec<Symbol<'input>>,
     __lookbehind: &Option<usize>,
     __lookahead: &Option<(usize, (usize, &'input str), usize)>,
-) -> Option<BisonDecl<'input>>
+) -> Vec<BisonDecl<'input>>
 {
-    None
+    vec![]
 }
 
 pub fn __action10<
@@ -24987,9 +25256,9 @@ pub fn __action10<
     __1: ::std::vec::Vec<Symbol<'input>>,
     __lookbehind: &Option<usize>,
     __lookahead: &Option<(usize, (usize, &'input str), usize)>,
-) -> Option<BisonDecl<'input>>
+) -> Vec<BisonDecl<'input>>
 {
-    None
+    vec![]
 }
 
 pub fn __action11<
@@ -25000,9 +25269,9 @@ pub fn __action11<
     __0: Ident<'input>,
     __lookbehind: &Option<usize>,
     __lookahead: &Option<(usize, (usize, &'input str), usize)>,
-) -> Option<BisonDecl<'input>>
+) -> Vec<BisonDecl<'input>>
 {
-    Some(BisonDecl::Start(__0))
+    vec![BisonDecl::Start(__0)]
 }
 
 pub fn __action12<
@@ -25469,12 +25738,11 @@ pub fn __action49<
     'input,
 >(
     input: &'input str,
-    __0: Option<Symbol<'input>>,
     __lookbehind: &Option<usize>,
     __lookahead: &Option<(usize, (usize, &'input str), usize)>,
 ) -> ::std::vec::Vec<Option<Symbol<'input>>>
 {
-    vec![__0]
+    vec![]
 }
 
 pub fn __action50<
@@ -25482,12 +25750,11 @@ pub fn __action50<
 >(
     input: &'input str,
     v: ::std::vec::Vec<Option<Symbol<'input>>>,
-    e: Option<Symbol<'input>>,
     __lookbehind: &Option<usize>,
     __lookahead: &Option<(usize, (usize, &'input str), usize)>,
 ) -> ::std::vec::Vec<Option<Symbol<'input>>>
 {
-    { let mut v = v; v.push(e); v }
+    v
 }
 
 pub fn __action51<
@@ -25519,26 +25786,51 @@ pub fn __action53<
     'input,
 >(
     input: &'input str,
+    __0: Ident<'input>,
     __lookbehind: &Option<usize>,
     __lookahead: &Option<(usize, (usize, &'input str), usize)>,
-) -> ::std::vec::Vec<Option<BisonDecl<'input>>>
+) -> ::std::vec::Vec<Ident<'input>>
 {
-    vec![]
+    vec![__0]
 }
 
 pub fn __action54<
     'input,
 >(
     input: &'input str,
-    v: ::std::vec::Vec<Option<BisonDecl<'input>>>,
+    v: ::std::vec::Vec<Ident<'input>>,
+    e: Ident<'input>,
     __lookbehind: &Option<usize>,
     __lookahead: &Option<(usize, (usize, &'input str), usize)>,
-) -> ::std::vec::Vec<Option<BisonDecl<'input>>>
+) -> ::std::vec::Vec<Ident<'input>>
+{
+    { let mut v = v; v.push(e); v }
+}
+
+pub fn __action55<
+    'input,
+>(
+    input: &'input str,
+    __lookbehind: &Option<usize>,
+    __lookahead: &Option<(usize, (usize, &'input str), usize)>,
+) -> ::std::vec::Vec<Vec<BisonDecl<'input>>>
+{
+    vec![]
+}
+
+pub fn __action56<
+    'input,
+>(
+    input: &'input str,
+    v: ::std::vec::Vec<Vec<BisonDecl<'input>>>,
+    __lookbehind: &Option<usize>,
+    __lookahead: &Option<(usize, (usize, &'input str), usize)>,
+) -> ::std::vec::Vec<Vec<BisonDecl<'input>>>
 {
     v
 }
 
-pub fn __action55<
+pub fn __action57<
     'input,
 >(
     input: &'input str,
@@ -25549,7 +25841,7 @@ pub fn __action55<
     vec![]
 }
 
-pub fn __action56<
+pub fn __action58<
     'input,
 >(
     input: &'input str,
@@ -25561,7 +25853,7 @@ pub fn __action56<
     v
 }
 
-pub fn __action57<
+pub fn __action59<
     'input,
 >(
     input: &'input str,
@@ -25572,7 +25864,7 @@ pub fn __action57<
     vec![]
 }
 
-pub fn __action58<
+pub fn __action60<
     'input,
 >(
     input: &'input str,
@@ -25584,7 +25876,7 @@ pub fn __action58<
     v
 }
 
-pub fn __action59<
+pub fn __action61<
     'input,
 >(
     input: &'input str,
@@ -25596,7 +25888,7 @@ pub fn __action59<
     vec![__0]
 }
 
-pub fn __action60<
+pub fn __action62<
     'input,
 >(
     input: &'input str,
@@ -25609,7 +25901,7 @@ pub fn __action60<
     { let mut v = v; v.push(e); v }
 }
 
-pub fn __action61<
+pub fn __action63<
     'input,
 >(
     input: &'input str,
@@ -25617,31 +25909,6 @@ pub fn __action61<
     __lookbehind: &Option<usize>,
     __lookahead: &Option<(usize, (usize, &'input str), usize)>,
 ) -> ::std::vec::Vec<()>
-{
-    vec![__0]
-}
-
-pub fn __action62<
-    'input,
->(
-    input: &'input str,
-    v: ::std::vec::Vec<()>,
-    e: (),
-    __lookbehind: &Option<usize>,
-    __lookahead: &Option<(usize, (usize, &'input str), usize)>,
-) -> ::std::vec::Vec<()>
-{
-    { let mut v = v; v.push(e); v }
-}
-
-pub fn __action63<
-    'input,
->(
-    input: &'input str,
-    __0: Option<BisonDecl<'input>>,
-    __lookbehind: &Option<usize>,
-    __lookahead: &Option<(usize, (usize, &'input str), usize)>,
-) -> ::std::vec::Vec<Option<BisonDecl<'input>>>
 {
     vec![__0]
 }
@@ -25650,16 +25917,66 @@ pub fn __action64<
     'input,
 >(
     input: &'input str,
-    v: ::std::vec::Vec<Option<BisonDecl<'input>>>,
-    e: Option<BisonDecl<'input>>,
+    v: ::std::vec::Vec<()>,
+    e: (),
     __lookbehind: &Option<usize>,
     __lookahead: &Option<(usize, (usize, &'input str), usize)>,
-) -> ::std::vec::Vec<Option<BisonDecl<'input>>>
+) -> ::std::vec::Vec<()>
 {
     { let mut v = v; v.push(e); v }
 }
 
 pub fn __action65<
+    'input,
+>(
+    input: &'input str,
+    __0: Vec<BisonDecl<'input>>,
+    __lookbehind: &Option<usize>,
+    __lookahead: &Option<(usize, (usize, &'input str), usize)>,
+) -> ::std::vec::Vec<Vec<BisonDecl<'input>>>
+{
+    vec![__0]
+}
+
+pub fn __action66<
+    'input,
+>(
+    input: &'input str,
+    v: ::std::vec::Vec<Vec<BisonDecl<'input>>>,
+    e: Vec<BisonDecl<'input>>,
+    __lookbehind: &Option<usize>,
+    __lookahead: &Option<(usize, (usize, &'input str), usize)>,
+) -> ::std::vec::Vec<Vec<BisonDecl<'input>>>
+{
+    { let mut v = v; v.push(e); v }
+}
+
+pub fn __action67<
+    'input,
+>(
+    input: &'input str,
+    __0: Option<Symbol<'input>>,
+    __lookbehind: &Option<usize>,
+    __lookahead: &Option<(usize, (usize, &'input str), usize)>,
+) -> ::std::vec::Vec<Option<Symbol<'input>>>
+{
+    vec![__0]
+}
+
+pub fn __action68<
+    'input,
+>(
+    input: &'input str,
+    v: ::std::vec::Vec<Option<Symbol<'input>>>,
+    e: Option<Symbol<'input>>,
+    __lookbehind: &Option<usize>,
+    __lookahead: &Option<(usize, (usize, &'input str), usize)>,
+) -> ::std::vec::Vec<Option<Symbol<'input>>>
+{
+    { let mut v = v; v.push(e); v }
+}
+
+pub fn __action69<
     'input,
 >(
     input: &'input str,
@@ -25671,7 +25988,7 @@ pub fn __action65<
     vec![__0]
 }
 
-pub fn __action66<
+pub fn __action70<
     'input,
 >(
     input: &'input str,
@@ -25684,7 +26001,7 @@ pub fn __action66<
     { let mut v = v; v.push(e); v }
 }
 
-pub fn __action67<
+pub fn __action71<
     'input,
 >(
     input: &'input str,
@@ -25694,7 +26011,7 @@ pub fn __action67<
     __lookahead: &Option<(usize, (usize, &'input str), usize)>,
 ) -> ()
 {
-    let __temp0 = __action55(
+    let __temp0 = __action57(
         input,
         __lookbehind,
         __lookahead,
@@ -25709,7 +26026,7 @@ pub fn __action67<
     )
 }
 
-pub fn __action68<
+pub fn __action72<
     'input,
 >(
     input: &'input str,
@@ -25720,7 +26037,7 @@ pub fn __action68<
     __lookahead: &Option<(usize, (usize, &'input str), usize)>,
 ) -> ()
 {
-    let __temp0 = __action56(
+    let __temp0 = __action58(
         input,
         __1,
         __lookbehind,
@@ -25736,7 +26053,7 @@ pub fn __action68<
     )
 }
 
-pub fn __action69<
+pub fn __action73<
     'input,
 >(
     input: &'input str,
@@ -25744,7 +26061,7 @@ pub fn __action69<
     __lookahead: &Option<(usize, (usize, &'input str), usize)>,
 ) -> Vec<BisonDecl<'input>>
 {
-    let __temp0 = __action53(
+    let __temp0 = __action55(
         input,
         __lookbehind,
         __lookahead,
@@ -25757,16 +26074,16 @@ pub fn __action69<
     )
 }
 
-pub fn __action70<
+pub fn __action74<
     'input,
 >(
     input: &'input str,
-    __0: ::std::vec::Vec<Option<BisonDecl<'input>>>,
+    __0: ::std::vec::Vec<Vec<BisonDecl<'input>>>,
     __lookbehind: &Option<usize>,
     __lookahead: &Option<(usize, (usize, &'input str), usize)>,
 ) -> Vec<BisonDecl<'input>>
 {
-    let __temp0 = __action54(
+    let __temp0 = __action56(
         input,
         __0,
         __lookbehind,
@@ -25780,7 +26097,51 @@ pub fn __action70<
     )
 }
 
-pub fn __action71<
+pub fn __action75<
+    'input,
+>(
+    input: &'input str,
+    __lookbehind: &Option<usize>,
+    __lookahead: &Option<(usize, (usize, &'input str), usize)>,
+) -> Alternative<'input>
+{
+    let __temp0 = __action49(
+        input,
+        __lookbehind,
+        __lookahead,
+    );
+    __action19(
+        input,
+        __temp0,
+        __lookbehind,
+        __lookahead,
+    )
+}
+
+pub fn __action76<
+    'input,
+>(
+    input: &'input str,
+    __0: ::std::vec::Vec<Option<Symbol<'input>>>,
+    __lookbehind: &Option<usize>,
+    __lookahead: &Option<(usize, (usize, &'input str), usize)>,
+) -> Alternative<'input>
+{
+    let __temp0 = __action50(
+        input,
+        __0,
+        __lookbehind,
+        __lookahead,
+    );
+    __action19(
+        input,
+        __temp0,
+        __lookbehind,
+        __lookahead,
+    )
+}
+
+pub fn __action77<
     'input,
 >(
     input: &'input str,
@@ -25791,7 +26152,7 @@ pub fn __action71<
     __lookahead: &Option<(usize, (usize, &'input str), usize)>,
 ) -> Yacc<'input>
 {
-    let __temp0 = __action57(
+    let __temp0 = __action59(
         input,
         __lookbehind,
         __lookahead,
@@ -25807,7 +26168,7 @@ pub fn __action71<
     )
 }
 
-pub fn __action72<
+pub fn __action78<
     'input,
 >(
     input: &'input str,
@@ -25819,7 +26180,7 @@ pub fn __action72<
     __lookahead: &Option<(usize, (usize, &'input str), usize)>,
 ) -> Yacc<'input>
 {
-    let __temp0 = __action58(
+    let __temp0 = __action60(
         input,
         __3,
         __lookbehind,
@@ -25836,163 +26197,163 @@ pub fn __action72<
     )
 }
 
-pub fn __action73<
-    'input,
->(
-    input: &'input str,
-    __0: &'input str,
-    __1: &'input str,
-    __lookbehind: &Option<usize>,
-    __lookahead: &Option<(usize, (usize, &'input str), usize)>,
-) -> ()
-{
-    let __temp0 = __action47(
-        input,
-        __lookbehind,
-        __lookahead,
-    );
-    __action24(
-        input,
-        __0,
-        __temp0,
-        __1,
-        __lookbehind,
-        __lookahead,
-    )
-}
-
-pub fn __action74<
-    'input,
->(
-    input: &'input str,
-    __0: &'input str,
-    __1: ::std::vec::Vec<()>,
-    __2: &'input str,
-    __lookbehind: &Option<usize>,
-    __lookahead: &Option<(usize, (usize, &'input str), usize)>,
-) -> ()
-{
-    let __temp0 = __action48(
-        input,
-        __1,
-        __lookbehind,
-        __lookahead,
-    );
-    __action24(
-        input,
-        __0,
-        __temp0,
-        __2,
-        __lookbehind,
-        __lookahead,
-    )
-}
-
-pub fn __action75<
-    'input,
->(
-    input: &'input str,
-    __0: &'input str,
-    __1: &'input str,
-    __lookbehind: &Option<usize>,
-    __lookahead: &Option<(usize, (usize, &'input str), usize)>,
-) -> ()
-{
-    let __temp0 = __action47(
-        input,
-        __lookbehind,
-        __lookahead,
-    );
-    __action25(
-        input,
-        __0,
-        __temp0,
-        __1,
-        __lookbehind,
-        __lookahead,
-    )
-}
-
-pub fn __action76<
-    'input,
->(
-    input: &'input str,
-    __0: &'input str,
-    __1: ::std::vec::Vec<()>,
-    __2: &'input str,
-    __lookbehind: &Option<usize>,
-    __lookahead: &Option<(usize, (usize, &'input str), usize)>,
-) -> ()
-{
-    let __temp0 = __action48(
-        input,
-        __1,
-        __lookbehind,
-        __lookahead,
-    );
-    __action25(
-        input,
-        __0,
-        __temp0,
-        __2,
-        __lookbehind,
-        __lookahead,
-    )
-}
-
-pub fn __action77<
-    'input,
->(
-    input: &'input str,
-    __0: &'input str,
-    __1: &'input str,
-    __lookbehind: &Option<usize>,
-    __lookahead: &Option<(usize, (usize, &'input str), usize)>,
-) -> ()
-{
-    let __temp0 = __action47(
-        input,
-        __lookbehind,
-        __lookahead,
-    );
-    __action26(
-        input,
-        __0,
-        __temp0,
-        __1,
-        __lookbehind,
-        __lookahead,
-    )
-}
-
-pub fn __action78<
-    'input,
->(
-    input: &'input str,
-    __0: &'input str,
-    __1: ::std::vec::Vec<()>,
-    __2: &'input str,
-    __lookbehind: &Option<usize>,
-    __lookahead: &Option<(usize, (usize, &'input str), usize)>,
-) -> ()
-{
-    let __temp0 = __action48(
-        input,
-        __1,
-        __lookbehind,
-        __lookahead,
-    );
-    __action26(
-        input,
-        __0,
-        __temp0,
-        __2,
-        __lookbehind,
-        __lookahead,
-    )
-}
-
 pub fn __action79<
+    'input,
+>(
+    input: &'input str,
+    __0: &'input str,
+    __1: &'input str,
+    __lookbehind: &Option<usize>,
+    __lookahead: &Option<(usize, (usize, &'input str), usize)>,
+) -> ()
+{
+    let __temp0 = __action47(
+        input,
+        __lookbehind,
+        __lookahead,
+    );
+    __action24(
+        input,
+        __0,
+        __temp0,
+        __1,
+        __lookbehind,
+        __lookahead,
+    )
+}
+
+pub fn __action80<
+    'input,
+>(
+    input: &'input str,
+    __0: &'input str,
+    __1: ::std::vec::Vec<()>,
+    __2: &'input str,
+    __lookbehind: &Option<usize>,
+    __lookahead: &Option<(usize, (usize, &'input str), usize)>,
+) -> ()
+{
+    let __temp0 = __action48(
+        input,
+        __1,
+        __lookbehind,
+        __lookahead,
+    );
+    __action24(
+        input,
+        __0,
+        __temp0,
+        __2,
+        __lookbehind,
+        __lookahead,
+    )
+}
+
+pub fn __action81<
+    'input,
+>(
+    input: &'input str,
+    __0: &'input str,
+    __1: &'input str,
+    __lookbehind: &Option<usize>,
+    __lookahead: &Option<(usize, (usize, &'input str), usize)>,
+) -> ()
+{
+    let __temp0 = __action47(
+        input,
+        __lookbehind,
+        __lookahead,
+    );
+    __action25(
+        input,
+        __0,
+        __temp0,
+        __1,
+        __lookbehind,
+        __lookahead,
+    )
+}
+
+pub fn __action82<
+    'input,
+>(
+    input: &'input str,
+    __0: &'input str,
+    __1: ::std::vec::Vec<()>,
+    __2: &'input str,
+    __lookbehind: &Option<usize>,
+    __lookahead: &Option<(usize, (usize, &'input str), usize)>,
+) -> ()
+{
+    let __temp0 = __action48(
+        input,
+        __1,
+        __lookbehind,
+        __lookahead,
+    );
+    __action25(
+        input,
+        __0,
+        __temp0,
+        __2,
+        __lookbehind,
+        __lookahead,
+    )
+}
+
+pub fn __action83<
+    'input,
+>(
+    input: &'input str,
+    __0: &'input str,
+    __1: &'input str,
+    __lookbehind: &Option<usize>,
+    __lookahead: &Option<(usize, (usize, &'input str), usize)>,
+) -> ()
+{
+    let __temp0 = __action47(
+        input,
+        __lookbehind,
+        __lookahead,
+    );
+    __action26(
+        input,
+        __0,
+        __temp0,
+        __1,
+        __lookbehind,
+        __lookahead,
+    )
+}
+
+pub fn __action84<
+    'input,
+>(
+    input: &'input str,
+    __0: &'input str,
+    __1: ::std::vec::Vec<()>,
+    __2: &'input str,
+    __lookbehind: &Option<usize>,
+    __lookahead: &Option<(usize, (usize, &'input str), usize)>,
+) -> ()
+{
+    let __temp0 = __action48(
+        input,
+        __1,
+        __lookbehind,
+        __lookahead,
+    );
+    __action26(
+        input,
+        __0,
+        __temp0,
+        __2,
+        __lookbehind,
+        __lookahead,
+    )
+}
+
+pub fn __action85<
     'input,
 >(
     input: &'input str,
@@ -26017,7 +26378,7 @@ pub fn __action79<
     )
 }
 
-pub fn __action80<
+pub fn __action86<
     'input,
 >(
     input: &'input str,

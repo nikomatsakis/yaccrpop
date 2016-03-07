@@ -10,18 +10,18 @@ pub Yacc: Yacc<'input> = CDeclarations <d:BisonDeclarations> "%%" <r:GrammarRule
 CDeclarations: () = "%{" AnyToken* "%}" => ();
 
 BisonDeclarations: Vec<BisonDecl<'input>> = {
-    BisonDeclaration* => <>.into_iter().filter_map(|e| e).collect()
+    BisonDeclaration* => <>.into_iter().flat_map(|e| e).collect()
 };
 
-BisonDeclaration: Option<BisonDecl<'input>> = {
-    "%debug" => None,
-    "%token" <Ident> => Some(BisonDecl::Token(<>)),
-    "%expect" Integer => None,
-    "%precedence" Symbol+ => None,
-    "%right" Symbol+ => None,
-    "%left" Symbol+ => None,
-    "%nonassoc" Symbol+ => None,
-    "%start" <Ident> => Some(BisonDecl::Start(<>)),
+BisonDeclaration: Vec<BisonDecl<'input>> = {
+    "%debug" => vec![],
+    "%token" <Ident+> => <>.into_iter().map(BisonDecl::Token).collect(),
+    "%expect" Integer => vec![],
+    "%precedence" Symbol+ => vec![],
+    "%right" Symbol+ => vec![],
+    "%left" Symbol+ => vec![],
+    "%nonassoc" Symbol+ => vec![],
+    "%start" <Ident> => vec![BisonDecl::Start(<>)],
 };
 
 Symbol: Symbol<'input> = {
@@ -46,7 +46,7 @@ Alternatives: Vec<Alternative<'input>> = {
 };
 
 Alternative: Alternative<'input> = {
-    GrammarRhs+ => Alternative { symbols: <>.into_iter().filter_map(|x| x).collect() },
+    GrammarRhs* => Alternative { symbols: <>.into_iter().filter_map(|x| x).collect() },
 };
 
 GrammarRhs: Option<Symbol<'input>> = {
