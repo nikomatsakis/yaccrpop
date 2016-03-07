@@ -3,11 +3,17 @@ use std::env;
 use std::fs::File;
 use std::io;
 use std::io::Read;
+use std::process;
 
 mod bison;
 mod yacc;
 
 fn main() {
+    if env::args().len() == 0 {
+        println!("Usage: yaccrpop [file.y]");
+        process::exit(1);
+    }
+
     let input = env::args().skip(1).next().unwrap();
     let yacctext = read_file(&input).unwrap();
     let yacc = yacc::parse_Yacc(&yacctext).unwrap();
@@ -25,11 +31,15 @@ fn main() {
 
     for rule in &yacc.rules {
         let is_pub = start_symbol == Some(rule.nonterminal);
+        println!("");
         println!("{}{}: () = {{", if is_pub {"pub "} else {""}, rule.nonterminal.text);
 
         for alternative in &rule.alternatives {
-            let mut string = String::from("  ");
-            for symbol in &alternative.symbols {
+            let mut string = String::from("    ");
+            for (index, symbol) in alternative.symbols.iter().enumerate() {
+                if index > 0 {
+                    string.push_str(" ");
+                }
                 match *symbol {
                     Symbol::Ident(ref i) => string.push_str(i.text),
                     Symbol::Character(i) => {
@@ -40,12 +50,11 @@ fn main() {
                         all_chars.push(ch);
                     }
                 }
-                string.push_str(" ");
             }
             if alternative.symbols.is_empty() {
                 string.push_str("() ");
             }
-            string.push_str("=> (),");
+            string.push_str(",");
             println!("{}", string);
         }
 
